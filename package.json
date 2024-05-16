@@ -4,8 +4,8 @@
 	"description": "Test project for Modsen Company",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server ./src/",
-		"build": "webpack ./src/",
+		"start": "tsc && webpack-dev-server ./src/",
+		"build": "tsc && webpack ./src/",
 		"lint": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
 		"format": "prettier --write 'src/**/*.{js,jsx,json,md,css,html}'",
 		"prepare": "husky install",
