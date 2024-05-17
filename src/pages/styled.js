@@ -117,7 +117,7 @@ export const MainPageSectionGallery = () => {
   const artsList = useSelector(state => state.artsList);
   return (
     <GalleryWrapper>
-      {artsList.slice(9, 12).map((artInfo, index) => (
+      {artsList.map((artInfo, index) => (
         <ArtCard key={index} artInfo={artInfo} />
       ))}
     </GalleryWrapper>

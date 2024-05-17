@@ -19,7 +19,17 @@ const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: black;
+  background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+  border: 1px solid black;
+`;
+
+const Photo = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const Description = styled.figcaption`
@@ -88,11 +98,10 @@ const DescriptionTextFavoriteButton = styled.button`
 
 function StyledArtCard(props) {
   const { title, artistName, isPublicDomain, imageUrl } = props.artInfo;
-  console.log(imageUrl);
   return (
     <Wrapper>
       <PhotoWrapper>
-        <PlaceholderArtImage />
+        {imageUrl ? <Photo src={imageUrl} alt={title} /> : <PlaceholderArtImage />}
       </PhotoWrapper>
       <Description>
         <DescriptionTextWrapper>

@@ -139,7 +139,7 @@ var useArtService = function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase))];
+            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=3&has_image=true'))];
           case 1:
             result = _a.sent();
             return [2 /*return*/, result.data.map(_transformArt)];
@@ -168,6 +168,7 @@ var useArtService = function () {
   // 	return result.data.map(_transformArt);
   // };
   var _transformArt = function (art) {
+    console.log(art.image_id);
     return {
       id: art.id,
       title: art.title,

@@ -26,7 +26,7 @@ const useArtService = () => {
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
   const getAllArts = async (): Promise<IArtInfo[]> => {
-    const result: IResponseArtsBody = await request(`${_apiBase}`);
+    const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=3&has_image=true`);
     return result.data.map(_transformArt);
   };
 
@@ -43,6 +43,7 @@ const useArtService = () => {
   // };
 
   const _transformArt = (art: IResponseArtInfo): IArtInfo => {
+    console.log(art.image_id);
     return {
       id: art.id,
       title: art.title,
