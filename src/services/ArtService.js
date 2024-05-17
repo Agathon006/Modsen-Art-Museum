@@ -131,22 +131,18 @@ var __generator =
   };
 import { useHttp } from '../hooks/http.hook';
 var useArtService = function () {
-  var _a = useHttp(),
-    request = _a.request,
-    clearError = _a.clearError,
-    process = _a.process,
-    setProcess = _a.setProcess;
-  var _apiBase = 'https://api.artic.edu/api/v1/';
+  var request = useHttp().request;
+  var _apiBase = 'https://api.artic.edu/api/v1/artworks';
   var getAllArts = function () {
     return __awaiter(void 0, void 0, void 0, function () {
       var result;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase, 'artworks'))];
+            return [4 /*yield*/, request(''.concat(_apiBase))];
           case 1:
             result = _a.sent();
-            return [2 /*return*/, result.data.results.map(_transformArt)];
+            return [2 /*return*/, result.data.map(_transformArt)];
         }
       });
     });
@@ -157,46 +153,35 @@ var useArtService = function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase, 'artworks/').concat(id, '?'))];
+            return [4 /*yield*/, request(''.concat(_apiBase, '/').concat(id, '?'))];
           case 1:
             result = _a.sent();
-            return [2 /*return*/, _transformArt(result.data.results[0])];
+            return [2 /*return*/, _transformArt(result.data[0])];
         }
       });
     });
   };
-  var getArtByName = function (name) {
-    return __awaiter(void 0, void 0, void 0, function () {
-      var result;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase, 'artworks?name=').concat(name))];
-          case 1:
-            result = _a.sent();
-            return [2 /*return*/, result.data.results.map(_transformArt)];
-        }
-      });
-    });
-  };
-  var _transformArt = function (char) {
+  // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
+  // 	const result: IResponseCharsBody = await request(
+  // 		`${_apiBase}?name=${title}`
+  // 	);
+  // 	return result.data.map(_transformArt);
+  // };
+  var _transformArt = function (art) {
     return {
-      id: char.id,
-      name: char.name,
-      description: char.description,
-      thumbnail: ''.concat(char.thumbnail.path, '.').concat(char.thumbnail.extension),
-      homepage: char.urls[0].url,
-      wiki: char.urls[1].url,
-      comics: char.comics.items,
+      id: art.id,
+      title: art.title,
+      artistName: art.artist_title,
+      isPublicDomain: art.is_public_domain,
+      imageUrl: art.image_id
+        ? 'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
+        : '',
     };
   };
   return {
-    clearError: clearError,
-    process: process,
-    setProcess: setProcess,
     getAllArts: getAllArts,
     getArt: getArt,
-    getArtByName: getArtByName,
+    // getArtByTitle
   };
 };
 export default useArtService;

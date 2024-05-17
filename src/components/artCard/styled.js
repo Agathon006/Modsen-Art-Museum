@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Bookmark from '../../assets/bookmark.svg';
+import PlaceholderArtImage from '../../assets/placeholderArt.svg';
 
 const Wrapper = styled.figure`
   position: relative;
@@ -15,7 +16,10 @@ const PhotoWrapper = styled.div`
   left: 0;
   width: 387px;
   height: 444px;
-  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
 `;
 
 const Description = styled.figcaption`
@@ -40,6 +44,9 @@ const DescriptionTextWrapper = styled.div`
 `;
 
 const DescriptionTextArtName = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-top: 4px;
   font-family: 'Lexend Deca';
   font-style: normal;
@@ -79,15 +86,21 @@ const DescriptionTextFavoriteButton = styled.button`
   border-radius: 100px;
 `;
 
-function StyledArtCard() {
+function StyledArtCard(props) {
+  const { title, artistName, isPublicDomain, imageUrl } = props.artInfo;
+  console.log(imageUrl);
   return (
     <Wrapper>
-      <PhotoWrapper></PhotoWrapper>
+      <PhotoWrapper>
+        <PlaceholderArtImage />
+      </PhotoWrapper>
       <Description>
         <DescriptionTextWrapper>
-          <DescriptionTextArtName>Charles V, bust length...</DescriptionTextArtName>
-          <DescriptionTextAuthorName>Giovanni Britto</DescriptionTextAuthorName>
-          <DescriptionTextVisibilityStatus>Public</DescriptionTextVisibilityStatus>
+          <DescriptionTextArtName>{title}</DescriptionTextArtName>
+          <DescriptionTextAuthorName>{artistName}</DescriptionTextAuthorName>
+          <DescriptionTextVisibilityStatus>
+            {isPublicDomain ? 'public' : 'private'}
+          </DescriptionTextVisibilityStatus>
         </DescriptionTextWrapper>
         <DescriptionTextFavoriteButton>
           <Bookmark />

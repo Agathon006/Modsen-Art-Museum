@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import ArtCard from '../components/artCard/ArtCard.js';
@@ -110,15 +111,15 @@ const GalleryWrapper = styled.section`
   align-items: center;
   width: 1280px;
   height: 514px;
-  background-color: green;
 `;
 
 export const MainPageSectionGallery = () => {
+  const artsList = useSelector(state => state.artsList);
   return (
     <GalleryWrapper>
-      <ArtCard />
-      <ArtCard />
-      <ArtCard />
+      {artsList.slice(9, 12).map((artInfo, index) => (
+        <ArtCard key={index} artInfo={artInfo} />
+      ))}
     </GalleryWrapper>
   );
 };

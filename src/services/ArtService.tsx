@@ -1,55 +1,37 @@
 import { useHttp } from '../hooks/http.hook';
 
-interface ICharComicDetails {
-  resourceURI: string;
-  name: string;
-}
-
-interface IResponseCharInfo {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: { path: string; extension: string };
-  urls: { url: string }[];
-  comics: { items: ICharComicDetails[] };
-}
-
-interface IResponseCharsBody {
-  data: IResponseCharInfo[];
-}
-
-export interface ICharInfo {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: string;
-  homepage: string;
-  wiki: string;
-  comics: ICharComicDetails[];
-}
-
-export interface IComic {
+interface IResponseArtInfo {
   id: number;
   title: string;
-  description: string;
-  pageCount: string;
-  thumbnail: string;
-  language: string;
-  price: string;
+  artist_title: string;
+  is_public_domain: boolean;
+  image_id: string;
+}
+
+interface IResponseArtsBody {
+  data: IResponseArtInfo[];
+}
+
+export interface IArtInfo {
+  id: number;
+  title: string;
+  artistName: string;
+  isPublicDomain: boolean;
+  imageUrl: string;
 }
 
 const useArtService = () => {
-  const { request, clearError, process, setProcess } = useHttp();
+  const { request } = useHttp();
 
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
-  const getAllArts = async (): Promise<ICharInfo[]> => {
-    const result: IResponseCharsBody = await request(`${_apiBase}`);
+  const getAllArts = async (): Promise<IArtInfo[]> => {
+    const result: IResponseArtsBody = await request(`${_apiBase}`);
     return result.data.map(_transformArt);
   };
 
-  const getArt = async (id: string): Promise<ICharInfo> => {
-    const result: IResponseCharsBody = await request(`${_apiBase}/${id}?`);
+  const getArt = async (id: string): Promise<IArtInfo> => {
+    const result: IResponseArtsBody = await request(`${_apiBase}/${id}?`);
     return _transformArt(result.data[0]);
   };
 
@@ -60,22 +42,19 @@ const useArtService = () => {
   // 	return result.data.map(_transformArt);
   // };
 
-  const _transformArt = (char: IResponseCharInfo): ICharInfo => {
+  const _transformArt = (art: IResponseArtInfo): IArtInfo => {
     return {
-      id: char.id,
-      name: char.name,
-      description: char.description,
-      thumbnail: `${char.thumbnail.path}.${char.thumbnail.extension}`,
-      homepage: char.urls[0].url,
-      wiki: char.urls[1].url,
-      comics: char.comics.items,
+      id: art.id,
+      title: art.title,
+      artistName: art.artist_title,
+      isPublicDomain: art.is_public_domain,
+      imageUrl: art.image_id
+        ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+        : '',
     };
   };
 
   return {
-    clearError,
-    process,
-    setProcess,
     getAllArts,
     getArt,
     // getArtByTitle

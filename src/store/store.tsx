@@ -1,36 +1,27 @@
-// import { createStore } from 'redux';
+import { createStore } from 'redux';
 
-// const initialState = {
-//     process: '',
-// };
+const initialState = {
+  process: '',
+  artsList: [],
+};
 
-// const reducer = (state = initialState, action: any) => {
-//     switch (action.type) {
-//         case 'SET_EMAILS_GROUP_NAME':
-//             return {
-//                 ...state,
-//                 emailsGroupName: action.payload,
-//             };
-//         case 'SET_EMAIL_TEMPLATE_NAME':
-//             return {
-//                 ...state,
-//                 emailTemplateName: action.payload,
-//             };
-//         case 'SET_EMAIL_SUBJECT_NAME':
-//             return {
-//                 ...state,
-//                 emailSubjectName: action.payload,
-//             };
-//         case 'SET_EMAIL_CONTENT':
-//             return {
-//                 ...state,
-//                 emailContent: action.payload,
-//             };
-//         default:
-//             return state;
-//     }
-// };
+const reducer = (state = initialState, action: any) => {
+  switch (action.type) {
+    case 'SET_PROCESS':
+      return {
+        ...state,
+        process: action.payload,
+      };
+    case 'SET_ARTS_LIST':
+      return {
+        ...state,
+        artsList: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-// const store = createStore(reducer);
+const store = createStore(reducer);
 
-// export default store;
+export default store;

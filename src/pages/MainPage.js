@@ -9,6 +9,9 @@ var __makeTemplateObject =
     return cooked;
   };
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import useArtService from './../services/ArtService';
 import styled from 'styled-components';
 import {
   MainPageTitle,
@@ -34,6 +37,21 @@ var Wrapper = styled.main(
     ))
 );
 var MainPage = function () {
+  var getAllArts = useArtService().getAllArts;
+  var dispatch = useDispatch();
+  useEffect(function () {
+    onRequest();
+  }, []);
+  var onRequest = function () {
+    getAllArts()
+      .then(onArtGalleryLoaded)
+      .then(function () {
+        return dispatch({ type: 'SET_PROCESS', payload: 'confirmed' });
+      });
+  };
+  var onArtGalleryLoaded = function (ArtsList) {
+    dispatch({ type: 'SET_ARTS_LIST', payload: ArtsList });
+  };
   return _jsxs(Wrapper, {
     children: [
       _jsx(MainPageTitle, {}),

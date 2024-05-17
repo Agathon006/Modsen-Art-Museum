@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const useHttp = () => {
-  const [process, setProcess] = useState<string>('waiting');
+  const dispatch = useDispatch();
 
   const request = useCallback(
     async (
@@ -12,7 +13,7 @@ export const useHttp = () => {
         'Content-type': 'application/json',
       }
     ) => {
-      setProcess('loading');
+      dispatch({ type: 'SET_PROCESS', payload: 'loading' });
       try {
         const response = await fetch(url, { method, body, headers });
         if (!response.ok) {
@@ -21,16 +22,12 @@ export const useHttp = () => {
         const data = await response.json(); // If we don't trust our server, we can add here "unknown" and additional checks later
         return data;
       } catch (e) {
-        setProcess('error');
+        dispatch({ type: 'SET_PROCESS', payload: 'error' });
         throw e;
       }
     },
     []
   );
 
-  const clearError = useCallback(() => {
-    setProcess('loading');
-  }, []);
-
-  return { request, clearError, process, setProcess };
+  return { request };
 };

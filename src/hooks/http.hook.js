@@ -141,11 +141,10 @@ var __spreadArray =
       }
     return to.concat(ar || Array.prototype.slice.call(from));
   };
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 export var useHttp = function () {
-  var _a = useState('waiting'),
-    process = _a[0],
-    setProcess = _a[1];
+  var dispatch = useDispatch();
   var request = useCallback(function (url_1) {
     var args_1 = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -171,7 +170,7 @@ export var useHttp = function () {
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
-              setProcess('loading');
+              dispatch({ type: 'SET_PROCESS', payload: 'loading' });
               _a.label = 1;
             case 1:
               _a.trys.push([1, 4, , 5]);
@@ -189,7 +188,7 @@ export var useHttp = function () {
               return [2 /*return*/, data];
             case 4:
               e_1 = _a.sent();
-              setProcess('error');
+              dispatch({ type: 'SET_PROCESS', payload: 'error' });
               throw e_1;
             case 5:
               return [2 /*return*/];
@@ -198,8 +197,5 @@ export var useHttp = function () {
       }
     );
   }, []);
-  var clearError = useCallback(function () {
-    setProcess('loading');
-  }, []);
-  return { request: request, clearError: clearError, process: process, setProcess: setProcess };
+  return { request: request };
 };

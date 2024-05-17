@@ -1,8 +1,8 @@
 import Spinner from '../components/spinner/Spinner';
 
-import { ICharInfo, IComic } from '../services/ArtService';
+import { IArtInfo } from '../services/ArtService';
 
-const setContent = <T extends ICharInfo | IComic>(
+const setContent = <T extends IArtInfo>(
   process: string,
   Component: React.FC<{ data: T }>,
   data: T

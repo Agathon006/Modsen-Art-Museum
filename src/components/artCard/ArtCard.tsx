@@ -1,26 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import useArtService from '../../services/ArtService';
+import { IArtInfo } from '../../services/ArtService';
+
+interface PropsWithArtInfo {
+  artInfo: IArtInfo[];
+}
 
 // @ts-ignore
 import StyledArtCard from './styled.js';
 
-const { getAllArts, process, setProcess } = useArtService();
-
-useEffect(() => {
-  onRequest();
-}, []);
-
-const onRequest = () => {
-  getAllArts()
-    .then(onArtGalleryLoaded)
-    .then(() => setProcess('confirmed'));
-};
-
-const onArtGalleryLoaded = () => {};
-
-const ArtCard = () => {
-  return <StyledArtCard />;
+const ArtCard = (props: PropsWithArtInfo) => {
+  return <StyledArtCard artInfo={props.artInfo} />;
 };
 
 export default ArtCard;

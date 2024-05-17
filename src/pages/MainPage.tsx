@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { IArtInfo } from './../services/ArtService';
+import useArtService from './../services/ArtService';
+
 import styled from 'styled-components';
 
 import {
@@ -23,6 +28,23 @@ const Wrapper = styled.main`
 `;
 
 const MainPage = () => {
+  const { getAllArts } = useArtService();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onRequest();
+  }, []);
+
+  const onRequest = () => {
+    getAllArts()
+      .then(onArtGalleryLoaded)
+      .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));
+  };
+
+  const onArtGalleryLoaded = (ArtsList: IArtInfo[]) => {
+    dispatch({ type: 'SET_ARTS_LIST', payload: ArtsList });
+  };
+
   return (
     <Wrapper>
       <MainPageTitle />

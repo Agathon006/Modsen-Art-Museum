@@ -1,6 +1,8 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import styled from 'styled-components';
 
+import store from '../../store/store.js';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
@@ -15,11 +17,13 @@ const Wrapper = styled.div`
 
 const App = () => {
   return (
-    <Wrapper>
-      <Header />
-      <MainPage />
-      <Footer />
-    </Wrapper>
+    <Provider store={store}>
+      <Wrapper>
+        <Header />
+        <MainPage />
+        <Footer />
+      </Wrapper>
+    </Provider>
   );
 };
 

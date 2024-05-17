@@ -9,7 +9,9 @@ var __makeTemplateObject =
     return cooked;
   };
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import store from '../../store/store.js';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
@@ -25,7 +27,12 @@ var Wrapper = styled.div(
     ))
 );
 var App = function () {
-  return _jsxs(Wrapper, { children: [_jsx(Header, {}), _jsx(MainPage, {}), _jsx(Footer, {})] });
+  return _jsx(Provider, {
+    store: store,
+    children: _jsxs(Wrapper, {
+      children: [_jsx(Header, {}), _jsx(MainPage, {}), _jsx(Footer, {})],
+    }),
+  });
 };
 export default App;
 var templateObject_1;
