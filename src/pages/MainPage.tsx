@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { IArtInfo } from './../services/ArtService';
 import useArtService from './../services/ArtService';
@@ -28,21 +28,131 @@ const Wrapper = styled.main`
 `;
 
 const MainPage = () => {
-  const { getAllArts } = useArtService();
+  const { getGalleryArts } = useArtService();
   const dispatch = useDispatch();
+  // @ts-ignore
+  const galleryArtsList = useSelector(state => state.artsGalleryList);
+
+  // @ts-ignore
+  const artsGalleryPage = useSelector(state => state.artsGalleryPage);
+  // @ts-ignore
+  const artsGalleryAllPages = useSelector(state => state.artsGalleryAllPages);
 
   useEffect(() => {
     onRequest();
-  }, []);
+  }, [artsGalleryPage]);
 
   const onRequest = () => {
-    getAllArts()
+    getGalleryArts(artsGalleryPage)
       .then(onArtGalleryLoaded)
       .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));
   };
 
-  const onArtGalleryLoaded = (ArtsList: IArtInfo[]) => {
-    dispatch({ type: 'SET_ARTS_LIST', payload: ArtsList });
+  const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+  };
+
+  const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {
+    if (!artsGalleryAllPages) return [];
+    if (artsGalleryAllPages === 1) return [[1, true]];
+
+    const paginationArray = [];
+
+    if (artsGalleryAllPages < 8) {
+      switch (artsGalleryAllPages) {
+        case 2:
+          paginationArray.push([1, 1 === artsGalleryPage]);
+          paginationArray.push([2, 2 === artsGalleryPage]);
+          break;
+        case 3:
+          for (let i = 1; i <= 3; i++) {
+            paginationArray.push([i, i === artsGalleryPage]);
+          }
+          break;
+        case 4:
+          for (let i = 1; i <= 4; i++) {
+            paginationArray.push([i, i === artsGalleryPage]);
+          }
+          break;
+        case 5:
+          for (let i = 1; i <= 5; i++) {
+            paginationArray.push([i, i === artsGalleryPage]);
+          }
+          break;
+        case 6:
+          for (let i = 1; i <= 6; i++) {
+            paginationArray.push([i, i === artsGalleryPage]);
+          }
+          break;
+        case 7:
+          for (let i = 1; i <= 7; i++) {
+            paginationArray.push([i, i === artsGalleryPage]);
+          }
+          break;
+        default:
+          break;
+      }
+    } else {
+      if (artsGalleryPage < 5) {
+        paginationArray.push([1, 1 === artsGalleryPage]);
+        paginationArray.push([2, 2 === artsGalleryPage]);
+        paginationArray.push([3, 3 === artsGalleryPage]);
+        paginationArray.push([4, 4 === artsGalleryPage]);
+        paginationArray.push([5, false]);
+        paginationArray.push(['...', false]);
+        paginationArray.push([artsGalleryAllPages, false]);
+      } else if (artsGalleryPage > artsGalleryAllPages - 4) {
+        paginationArray.push([1, false]);
+        paginationArray.push(['...', false]);
+        paginationArray.push([artsGalleryAllPages - 4, false]);
+        paginationArray.push([
+          artsGalleryAllPages - 3,
+          artsGalleryAllPages - 3 === artsGalleryPage,
+        ]);
+        paginationArray.push([
+          artsGalleryAllPages - 2,
+          artsGalleryAllPages - 2 === artsGalleryPage,
+        ]);
+        paginationArray.push([
+          artsGalleryAllPages - 1,
+          artsGalleryAllPages - 1 === artsGalleryPage,
+        ]);
+        paginationArray.push([artsGalleryAllPages, artsGalleryAllPages === artsGalleryPage]);
+      } else {
+        paginationArray.push([1, false]);
+        paginationArray.push(['...', false]);
+        paginationArray.push([artsGalleryPage - 1, false]);
+        paginationArray.push([artsGalleryPage, true]);
+        paginationArray.push([artsGalleryPage + 1, false]);
+        paginationArray.push(['...', false]);
+        paginationArray.push([artsGalleryAllPages, false]);
+      }
+    }
+
+    if (artsGalleryPage === 1) {
+      paginationArray.push(['>', false]);
+    } else if (artsGalleryPage === artsGalleryAllPages) {
+      paginationArray.unshift(['<', false]);
+    } else {
+      paginationArray.unshift(['<', false]);
+      paginationArray.push(['>', false]);
+    }
+
+    return paginationArray;
+  };
+
+  const onPaginationClick = (event: React.MouseEvent<HTMLElement>) => {
+    const targetElement = event.target as HTMLElement;
+    if (targetElement.tagName === 'BUTTON') {
+      console.log(targetElement.textContent);
+      if (targetElement.textContent === '>') {
+        dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage + 1 });
+      } else if (targetElement.textContent === '<') {
+        dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage - 1 });
+      } else {
+        dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: Number(targetElement.textContent) });
+      }
+    }
   };
 
   return (
@@ -51,8 +161,11 @@ const MainPage = () => {
       <MainPageSearchBar />
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />
-      <MainPageSectionGallery />
-      <MainPageSectionGalleryNavigation />
+      <MainPageSectionGallery artsGalleryList={galleryArtsList} />
+      <MainPageSectionGalleryNavigation
+        paginationClicked={onPaginationClick}
+        paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}
+      />
       <MainPageCollectionSubtitle />
       <MainPageCollectionTitle />
       <MainPageArtCollection />

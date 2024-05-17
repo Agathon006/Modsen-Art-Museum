@@ -1,3 +1,4 @@
+import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
 
 interface IResponseArtInfo {
@@ -9,6 +10,14 @@ interface IResponseArtInfo {
 }
 
 interface IResponseArtsBody {
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string;
+  };
   data: IResponseArtInfo[];
 }
 
@@ -22,18 +31,25 @@ export interface IArtInfo {
 
 const useArtService = () => {
   const { request } = useHttp();
+  const dispatch = useDispatch();
 
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
-  const getAllArts = async (): Promise<IArtInfo[]> => {
-    const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=3&has_image=true`);
+  const getGalleryArts = async (page?: number): Promise<IArtInfo[]> => {
+    const result: IResponseArtsBody = await request(
+      `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
+    );
+    if (!page) {
+      dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
+      dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
+    }
     return result.data.map(_transformArt);
   };
 
-  const getArt = async (id: string): Promise<IArtInfo> => {
-    const result: IResponseArtsBody = await request(`${_apiBase}/${id}?`);
-    return _transformArt(result.data[0]);
-  };
+  // const getArt = async (id: string): Promise<IArtInfo> => {
+  //   const result: IResponseArtsBody = await request(`${_apiBase}/${id}?`);
+  //   return _transformArt(result.data[0]);
+  // };
 
   // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
   // 	const result: IResponseCharsBody = await request(
@@ -43,7 +59,6 @@ const useArtService = () => {
   // };
 
   const _transformArt = (art: IResponseArtInfo): IArtInfo => {
-    console.log(art.image_id);
     return {
       id: art.id,
       title: art.title,
@@ -56,8 +71,8 @@ const useArtService = () => {
   };
 
   return {
-    getAllArts,
-    getArt,
+    getGalleryArts,
+    // getArt,
     // getArtByTitle
   };
 };

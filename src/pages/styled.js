@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import ArtCard from '../components/artCard/ArtCard.js';
@@ -113,11 +112,10 @@ const GalleryWrapper = styled.section`
   height: 514px;
 `;
 
-export const MainPageSectionGallery = () => {
-  const artsList = useSelector(state => state.artsList);
+export const MainPageSectionGallery = ({ artsGalleryList }) => {
   return (
     <GalleryWrapper>
-      {artsList.map((artInfo, index) => (
+      {artsGalleryList.map((artInfo, index) => (
         <ArtCard key={index} artInfo={artInfo} />
       ))}
     </GalleryWrapper>
@@ -134,8 +132,23 @@ const GalleryNavigationWrapper = styled.nav`
   height: 30px;
 `;
 
+const GalleryNavigationSpan = styled.span`
+  padding: 0 10px;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: #f9f9f9;
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  color: #393939;
+`;
+
 const GalleryNavigationButtonInactive = styled.button`
-  width: 30px;
+  padding: 0 10px;
+  min-width: 30px;
   height: 30px;
   border-radius: 4px;
   background: #f9f9f9;
@@ -148,7 +161,8 @@ const GalleryNavigationButtonInactive = styled.button`
 `;
 
 const GalleryNavigationButtonActive = styled.button`
-  width: 30px;
+  padding: 0 10px;
+  min-width: 30px;
   height: 30px;
   background: #f17900;
   border-radius: 4px;
@@ -160,15 +174,34 @@ const GalleryNavigationButtonActive = styled.button`
   color: #ffffff;
 `;
 
-export const MainPageSectionGalleryNavigation = () => {
+export const MainPageSectionGalleryNavigation = ({ paginationClicked, paginationArray }) => {
+  if (!paginationArray.length) return null;
+  const paginationElements = paginationArray.map((element, index) => {
+    switch (element[0]) {
+      case '<':
+        return <GalleryNavigationButtonInactive key={index}>{'<'}</GalleryNavigationButtonInactive>;
+      case '>':
+        return <GalleryNavigationButtonInactive key={index}>{'>'}</GalleryNavigationButtonInactive>;
+      case '...':
+        return <GalleryNavigationSpan key={index}>{'...'}</GalleryNavigationSpan>;
+      default:
+        if (element[1]) {
+          return (
+            <GalleryNavigationButtonActive key={index}>{element[0]}</GalleryNavigationButtonActive>
+          );
+        } else {
+          return (
+            <GalleryNavigationButtonInactive key={index}>
+              {element[0]}
+            </GalleryNavigationButtonInactive>
+          );
+        }
+    }
+  });
+
   return (
-    <GalleryNavigationWrapper>
-      <GalleryNavigationButtonInactive>{'<'}</GalleryNavigationButtonInactive>
-      <GalleryNavigationButtonActive>1</GalleryNavigationButtonActive>
-      <GalleryNavigationButtonInactive>2</GalleryNavigationButtonInactive>
-      <GalleryNavigationButtonInactive>3</GalleryNavigationButtonInactive>
-      <GalleryNavigationButtonInactive>4</GalleryNavigationButtonInactive>
-      <GalleryNavigationButtonInactive>{'>'}</GalleryNavigationButtonInactive>
+    <GalleryNavigationWrapper onClick={paginationClicked}>
+      {paginationElements}
     </GalleryNavigationWrapper>
   );
 };

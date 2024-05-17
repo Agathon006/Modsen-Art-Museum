@@ -129,38 +129,42 @@ var __generator =
       return { value: op[0] ? op[1] : void 0, done: true };
     }
   };
+import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
 var useArtService = function () {
   var request = useHttp().request;
+  var dispatch = useDispatch();
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
-  var getAllArts = function () {
+  var getGalleryArts = function (page) {
     return __awaiter(void 0, void 0, void 0, function () {
       var result;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=3&has_image=true'))];
+            return [
+              4 /*yield*/,
+              request(
+                ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3&has_image=true')
+              ),
+            ];
           case 1:
             result = _a.sent();
+            if (!page) {
+              dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
+              dispatch({
+                type: 'SET_ARTS_GALLERY_ALL_PAGES',
+                payload: result.pagination.total_pages,
+              });
+            }
             return [2 /*return*/, result.data.map(_transformArt)];
         }
       });
     });
   };
-  var getArt = function (id) {
-    return __awaiter(void 0, void 0, void 0, function () {
-      var result;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            return [4 /*yield*/, request(''.concat(_apiBase, '/').concat(id, '?'))];
-          case 1:
-            result = _a.sent();
-            return [2 /*return*/, _transformArt(result.data[0])];
-        }
-      });
-    });
-  };
+  // const getArt = async (id: string): Promise<IArtInfo> => {
+  //   const result: IResponseArtsBody = await request(`${_apiBase}/${id}?`);
+  //   return _transformArt(result.data[0]);
+  // };
   // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
   // 	const result: IResponseCharsBody = await request(
   // 		`${_apiBase}?name=${title}`
@@ -168,7 +172,6 @@ var useArtService = function () {
   // 	return result.data.map(_transformArt);
   // };
   var _transformArt = function (art) {
-    console.log(art.image_id);
     return {
       id: art.id,
       title: art.title,
@@ -180,8 +183,8 @@ var useArtService = function () {
     };
   };
   return {
-    getAllArts: getAllArts,
-    getArt: getArt,
+    getGalleryArts: getGalleryArts,
+    // getArt,
     // getArtByTitle
   };
 };

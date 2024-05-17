@@ -2,7 +2,9 @@ import { createStore } from 'redux';
 
 const initialState = {
   process: '',
-  artsList: [],
+  artsGalleryList: [],
+  artsGalleryPage: 0,
+  artsGalleryAllPages: 0,
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -12,10 +14,20 @@ const reducer = (state = initialState, action: any) => {
         ...state,
         process: action.payload,
       };
-    case 'SET_ARTS_LIST':
+    case 'SET_ARTS_GALLERY_LIST':
       return {
         ...state,
-        artsList: action.payload,
+        artsGalleryList: action.payload,
+      };
+    case 'SET_ARTS_GALLERY_PAGE':
+      return {
+        ...state,
+        artsGalleryPage: action.payload,
+      };
+    case 'SET_ARTS_GALLERY_ALL_PAGES':
+      return {
+        ...state,
+        artsGalleryAllPages: action.payload,
       };
     default:
       return state;
