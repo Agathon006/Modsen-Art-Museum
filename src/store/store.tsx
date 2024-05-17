@@ -5,6 +5,7 @@ const initialState = {
   artsGalleryList: [],
   artsGalleryPage: 0,
   artsGalleryAllPages: 0,
+  artsCollectionList: [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -28,6 +29,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         artsGalleryAllPages: action.payload,
+      };
+    case 'SET_ARTS_COLLECTION_LIST':
+      return {
+        ...state,
+        artsCollectionList: action.payload,
       };
     default:
       return state;

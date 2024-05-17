@@ -161,10 +161,20 @@ var useArtService = function () {
       });
     });
   };
-  // const getArt = async (id: string): Promise<IArtInfo> => {
-  //   const result: IResponseArtsBody = await request(`${_apiBase}/${id}?`);
-  //   return _transformArt(result.data[0]);
-  // };
+  var getCollectionArts = function () {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9&has_image=true'))];
+          case 1:
+            result = _a.sent();
+            return [2 /*return*/, result.data.map(_transformArt)];
+        }
+      });
+    });
+  };
   // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
   // 	const result: IResponseCharsBody = await request(
   // 		`${_apiBase}?name=${title}`
@@ -184,7 +194,7 @@ var useArtService = function () {
   };
   return {
     getGalleryArts: getGalleryArts,
-    // getArt,
+    getCollectionArts: getCollectionArts,
     // getArtByTitle
   };
 };

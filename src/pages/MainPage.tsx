@@ -28,7 +28,7 @@ const Wrapper = styled.main`
 `;
 
 const MainPage = () => {
-  const { getGalleryArts } = useArtService();
+  const { getGalleryArts, getCollectionArts } = useArtService();
   const dispatch = useDispatch();
   // @ts-ignore
   const galleryArtsList = useSelector(state => state.artsGalleryList);
@@ -39,10 +39,24 @@ const MainPage = () => {
   const artsGalleryAllPages = useSelector(state => state.artsGalleryAllPages);
 
   useEffect(() => {
-    onRequest();
+    onCollectionArtsRequest();
+  }, []);
+
+  const onCollectionArtsRequest = () => {
+    getCollectionArts()
+      .then(onArtCollectionLoaded)
+      .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));
+  };
+
+  const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
+    dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
+  };
+
+  useEffect(() => {
+    onGalleryArtsRequest();
   }, [artsGalleryPage]);
 
-  const onRequest = () => {
+  const onGalleryArtsRequest = () => {
     getGalleryArts(artsGalleryPage)
       .then(onArtGalleryLoaded)
       .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import PlaceholderArtImage from '../../../assets/placeholderArt.svg';
 import Bookmark from '../../../assets/bookmark.svg';
 
 const Wrapper = styled.figure`
@@ -13,11 +14,17 @@ const Wrapper = styled.figure`
   background: #ffffff;
   border: 1px solid #f0f1f1;
 `;
-//figcaption
+
 const PhotoWrapper = styled.div`
   width: 80px;
   height: 80px;
-  background-color: blue;
+  background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+`;
+
+const Photo = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const DescriptionTextWrapper = styled.div`
@@ -27,6 +34,9 @@ const DescriptionTextWrapper = styled.div`
 `;
 
 const DescriptionTextArtName = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-top: 4px;
   font-family: 'Inter';
   font-style: normal;
@@ -66,14 +76,19 @@ const DescriptionTextFavoriteButton = styled.button`
   border-radius: 100px;
 `;
 
-function StyledArtCollectionItem() {
+function StyledArtCollectionItem(props) {
+  const { title, artistName, isPublicDomain, imageUrl } = props.artInfo;
   return (
     <Wrapper>
-      <PhotoWrapper></PhotoWrapper>
+      <PhotoWrapper>
+        {imageUrl ? <Photo src={imageUrl} alt={title} /> : <PlaceholderArtImage />}
+      </PhotoWrapper>
       <DescriptionTextWrapper>
-        <DescriptionTextArtName>Charles V, bust length...</DescriptionTextArtName>
-        <DescriptionTextAuthorName>Giovanni Britto</DescriptionTextAuthorName>
-        <DescriptionTextVisibilityStatus>Public</DescriptionTextVisibilityStatus>
+        <DescriptionTextArtName>{title}</DescriptionTextArtName>
+        <DescriptionTextAuthorName>{artistName}</DescriptionTextAuthorName>
+        <DescriptionTextVisibilityStatus>
+          {isPublicDomain ? 'public' : 'private'}
+        </DescriptionTextVisibilityStatus>
       </DescriptionTextWrapper>
       <DescriptionTextFavoriteButton>
         <Bookmark />

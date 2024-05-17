@@ -37,7 +37,9 @@ var Wrapper = styled.main(
     ))
 );
 var MainPage = function () {
-  var getGalleryArts = useArtService().getGalleryArts;
+  var _a = useArtService(),
+    getGalleryArts = _a.getGalleryArts,
+    getCollectionArts = _a.getCollectionArts;
   var dispatch = useDispatch();
   // @ts-ignore
   var galleryArtsList = useSelector(function (state) {
@@ -51,13 +53,26 @@ var MainPage = function () {
   var artsGalleryAllPages = useSelector(function (state) {
     return state.artsGalleryAllPages;
   });
+  useEffect(function () {
+    onCollectionArtsRequest();
+  }, []);
+  var onCollectionArtsRequest = function () {
+    getCollectionArts()
+      .then(onArtCollectionLoaded)
+      .then(function () {
+        return dispatch({ type: 'SET_PROCESS', payload: 'confirmed' });
+      });
+  };
+  var onArtCollectionLoaded = function (ArtsCollectionList) {
+    dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
+  };
   useEffect(
     function () {
-      onRequest();
+      onGalleryArtsRequest();
     },
     [artsGalleryPage]
   );
-  var onRequest = function () {
+  var onGalleryArtsRequest = function () {
     getGalleryArts(artsGalleryPage)
       .then(onArtGalleryLoaded)
       .then(function () {

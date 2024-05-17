@@ -10,20 +10,14 @@ const Wrapper = styled.div`
   gap: 16px;
 `;
 
-function StyledArtCollection() {
-  return (
-    <Wrapper>
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-      <ArtCollectionItem />
-    </Wrapper>
-  );
+function StyledArtCollection({ artsCollectionArray }) {
+  let content = null;
+  if (artsCollectionArray.length) {
+    content = artsCollectionArray.map((art, index) => {
+      return <ArtCollectionItem key={index} artInfo={art} />;
+    });
+  }
+  return <Wrapper>{content}</Wrapper>;
 }
 
 export default StyledArtCollection;
