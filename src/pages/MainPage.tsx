@@ -1,8 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// @ts-ignore
-import { MainPageTitle, MainPageSearchBar } from './styled.js';
+import {
+  MainPageTitle,
+  MainPageSearchBar,
+  MainPageGallerySubTitle,
+  MainPageGalleryTitle,
+  MainPageSectionGallery,
+  MainPageSectionGalleryNavigation,
+  MainPageCollectionSubtitle,
+  MainPageCollectionTitle,
+  MainPageArtCollection,
+  // @ts-ignore
+} from './styled.js';
 
 const Wrapper = styled.main`
   width: 1280px;
@@ -17,6 +27,13 @@ const MainPage = () => {
     <Wrapper>
       <MainPageTitle />
       <MainPageSearchBar />
+      <MainPageGallerySubTitle />
+      <MainPageGalleryTitle />
+      <MainPageSectionGallery />
+      <MainPageSectionGalleryNavigation />
+      <MainPageCollectionSubtitle />
+      <MainPageCollectionTitle />
+      <MainPageArtCollection />
     </Wrapper>
   );
 };

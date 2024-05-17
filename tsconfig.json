@@ -10,7 +10,7 @@
     "allowJs": false,
     "skipLibCheck": true
   },
-  "files": [
-    "./src/index.tsx"
-  ],
+  "include": [
+    "./src/**/*.tsx"
+  ]
 }

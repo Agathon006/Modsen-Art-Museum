@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import ArtCard from '../components/artCard/ArtCard.js';
+import ArtCollection from '../components/artCollection/ArtCollection.js';
+
 import SearchIcon from './../assets/search.svg';
 
 const Title = styled.h1`
@@ -71,4 +74,112 @@ export const MainPageSearchBar = () => {
       </SearchButton>
     </SearchBarContainer>
   );
+};
+
+const SectionSubtitle = styled.span`
+  margin-top: 120px;
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #e0a449;
+`;
+
+export const MainPageGallerySubTitle = () => {
+  return <SectionSubtitle>Topics for you</SectionSubtitle>;
+};
+
+const SectionTitle = styled.span`
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  color: #393939;
+`;
+
+export const MainPageGalleryTitle = () => {
+  return <SectionTitle>Our special gallery</SectionTitle>;
+};
+
+const GalleryWrapper = styled.section`
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1280px;
+  height: 514px;
+  background-color: green;
+`;
+
+export const MainPageSectionGallery = () => {
+  return (
+    <GalleryWrapper>
+      <ArtCard />
+      <ArtCard />
+      <ArtCard />
+    </GalleryWrapper>
+  );
+};
+
+const GalleryNavigationWrapper = styled.nav`
+  align-self: flex-end;
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+`;
+
+const GalleryNavigationButtonInactive = styled.button`
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: #f9f9f9;
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 24px;
+  color: #393939;
+`;
+
+const GalleryNavigationButtonActive = styled.button`
+  width: 30px;
+  height: 30px;
+  background: #f17900;
+  border-radius: 4px;
+  font-family: 'Lexend Deca';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ffffff;
+`;
+
+export const MainPageSectionGalleryNavigation = () => {
+  return (
+    <GalleryNavigationWrapper>
+      <GalleryNavigationButtonInactive>{'<'}</GalleryNavigationButtonInactive>
+      <GalleryNavigationButtonActive>1</GalleryNavigationButtonActive>
+      <GalleryNavigationButtonInactive>2</GalleryNavigationButtonInactive>
+      <GalleryNavigationButtonInactive>3</GalleryNavigationButtonInactive>
+      <GalleryNavigationButtonInactive>4</GalleryNavigationButtonInactive>
+      <GalleryNavigationButtonInactive>{'>'}</GalleryNavigationButtonInactive>
+    </GalleryNavigationWrapper>
+  );
+};
+
+export const MainPageCollectionSubtitle = () => {
+  return <SectionSubtitle>Here some more</SectionSubtitle>;
+};
+
+export const MainPageCollectionTitle = () => {
+  return <SectionTitle>Other works for you</SectionTitle>;
+};
+
+export const MainPageArtCollection = () => {
+  return <ArtCollection />;
 };
