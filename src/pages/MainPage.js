@@ -12,6 +12,7 @@ import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import useArtService from './../services/ArtService';
+import ArtCollection from '../components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
 import {
   MainPageTitle,
@@ -22,7 +23,6 @@ import {
   MainPageSectionGalleryNavigation,
   MainPageCollectionSubtitle,
   MainPageCollectionTitle,
-  MainPageArtCollection,
   // @ts-ignore
 } from './styled.js';
 var Wrapper = styled.main(
@@ -50,12 +50,24 @@ var MainPage = function () {
     return state.artsGalleryList;
   });
   // @ts-ignore
+  var artsGalleryListProcess = useSelector(function (state) {
+    return state.artsGalleryListProcess;
+  });
+  // @ts-ignore
   var artsGalleryPage = useSelector(function (state) {
     return state.artsGalleryPage;
   });
   // @ts-ignore
   var artsGalleryAllPages = useSelector(function (state) {
     return state.artsGalleryAllPages;
+  });
+  // @ts-ignore
+  var artsCollectionListProcess = useSelector(function (state) {
+    return state.artsCollectionListProcess;
+  });
+  // @ts-ignore
+  var artsCollectionList = useSelector(function (state) {
+    return state.artsCollectionList;
   });
   useEffect(function () {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
@@ -186,10 +198,6 @@ var MainPage = function () {
       }
     }
   };
-  // @ts-ignore
-  var artsGalleryListProcess = useSelector(function (state) {
-    return state.artsGalleryListProcess;
-  });
   return _jsxs(Wrapper, {
     children: [
       _jsx(MainPageTitle, {}),
@@ -203,7 +211,12 @@ var MainPage = function () {
       }),
       _jsx(MainPageCollectionSubtitle, {}),
       _jsx(MainPageCollectionTitle, {}),
-      _jsx(MainPageArtCollection, {}),
+      _jsx(ArtCollection, {
+        itemsNumber: 9,
+        // @ts-ignore
+        process: artsCollectionListProcess,
+        artsList: artsCollectionList,
+      }),
     ],
   });
 };

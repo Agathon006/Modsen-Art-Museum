@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { IArtInfo } from './../services/ArtService';
 import useArtService from './../services/ArtService';
+import ArtCollection from '../components/artCollection/ArtCollection.js';
 
 import styled from 'styled-components';
 
@@ -15,7 +16,6 @@ import {
   MainPageSectionGalleryNavigation,
   MainPageCollectionSubtitle,
   MainPageCollectionTitle,
-  MainPageArtCollection,
   // @ts-ignore
 } from './styled.js';
 
@@ -33,14 +33,18 @@ const MainPage = () => {
 
   // @ts-ignore
   const artsGallerySearch = useSelector(state => state.artsGallerySearch);
-
   // @ts-ignore
   const galleryArtsList = useSelector(state => state.artsGalleryList);
-
+  // @ts-ignore
+  const artsGalleryListProcess = useSelector(state => state.artsGalleryListProcess);
   // @ts-ignore
   const artsGalleryPage = useSelector(state => state.artsGalleryPage);
   // @ts-ignore
   const artsGalleryAllPages = useSelector(state => state.artsGalleryAllPages);
+  // @ts-ignore
+  const artsCollectionListProcess = useSelector(state => state.artsCollectionListProcess);
+  // @ts-ignore
+  const artsCollectionList = useSelector(state => state.artsCollectionList);
 
   useEffect(() => {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
@@ -181,9 +185,6 @@ const MainPage = () => {
     }
   };
 
-  // @ts-ignore
-  const artsGalleryListProcess = useSelector(state => state.artsGalleryListProcess);
-
   return (
     <Wrapper>
       <MainPageTitle />
@@ -197,7 +198,12 @@ const MainPage = () => {
       />
       <MainPageCollectionSubtitle />
       <MainPageCollectionTitle />
-      <MainPageArtCollection />
+      <ArtCollection
+        itemsNumber={9}
+        // @ts-ignore
+        process={artsCollectionListProcess}
+        artsList={artsCollectionList}
+      />
     </Wrapper>
   );
 };

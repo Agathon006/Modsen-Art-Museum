@@ -17,7 +17,7 @@ const SkeletonWrapper = styled.div`
   height: 130px;
 `;
 
-function StyledArtCollection({ process, artsCollectionArray }) {
+function StyledArtCollection({ itemsNumber, process, artsCollectionArray }) {
   const renderArt = i => {
     if (artsCollectionArray[i]) {
       return <ArtCollectionItem artInfo={artsCollectionArray[i]} />;
@@ -26,21 +26,15 @@ function StyledArtCollection({ process, artsCollectionArray }) {
     }
   };
 
-  let content = (
-    <>
-      <SkeletonWrapper>{setContent(process, () => renderArt(0))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(1))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(2))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(3))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(4))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(5))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(6))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(7))}</SkeletonWrapper>
-      <SkeletonWrapper>{setContent(process, () => renderArt(8))}</SkeletonWrapper>
-    </>
-  );
+  let contentArray = [];
 
-  return <Wrapper>{content}</Wrapper>;
+  for (let i = 0; i < itemsNumber; i++) {
+    contentArray.push(
+      <SkeletonWrapper key={i}>{setContent(process, () => renderArt(i))}</SkeletonWrapper>
+    );
+  }
+
+  return <Wrapper>{contentArray}</Wrapper>;
 }
 
 export default StyledArtCollection;

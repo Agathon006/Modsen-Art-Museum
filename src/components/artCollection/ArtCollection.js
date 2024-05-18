@@ -1,19 +1,15 @@
 import { jsx as _jsx } from 'react/jsx-runtime';
-import { useSelector } from 'react-redux';
 // @ts-ignore
 import StyledArtCollection from './styled.js';
-var ArtCollection = function () {
-  // @ts-ignore
-  var artsCollectionListProcess = useSelector(function (state) {
-    return state.artsCollectionListProcess;
-  });
-  // @ts-ignore
-  var artsCollectionList = useSelector(function (state) {
-    return state.artsCollectionList;
-  });
+// @ts-ignore
+var ArtCollection = function (_a) {
+  var itemsNumber = _a.itemsNumber,
+    process = _a.process,
+    artsList = _a.artsList;
   return _jsx(StyledArtCollection, {
-    process: artsCollectionListProcess,
-    artsCollectionArray: artsCollectionList,
+    itemsNumber: itemsNumber,
+    process: process,
+    artsCollectionArray: artsList,
   });
 };
 export default ArtCollection;

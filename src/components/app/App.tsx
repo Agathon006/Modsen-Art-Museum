@@ -6,6 +6,7 @@ import store from '../../store/store.js';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
+import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -21,6 +22,7 @@ const App = () => {
       <Wrapper>
         <Header />
         <MainPage />
+        {/* <FavouriteArtsPage /> */}
         <Footer />
       </Wrapper>
     </Provider>

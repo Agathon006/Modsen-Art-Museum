@@ -1,19 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 // @ts-ignore
 import StyledArtCollection from './styled.js';
 
-const ArtCollection = () => {
-  // @ts-ignore
-  const artsCollectionListProcess = useSelector(state => state.artsCollectionListProcess);
-  // @ts-ignore
-  const artsCollectionList = useSelector(state => state.artsCollectionList);
-
+// @ts-ignore
+const ArtCollection = ({ itemsNumber, process, artsList }) => {
   return (
     <StyledArtCollection
-      process={artsCollectionListProcess}
-      artsCollectionArray={artsCollectionList}
+      itemsNumber={itemsNumber}
+      process={process}
+      artsCollectionArray={artsList}
     />
   );
 };

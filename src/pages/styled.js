@@ -6,10 +6,8 @@ import * as Yup from 'yup';
 import setContent from '../utils/setContent.js';
 
 import ArtCard from '../components/artCard/ArtCard.js';
-import ArtCollection from '../components/artCollection/ArtCollection.js';
 
 import SearchIcon from './../assets/search.svg';
-import { render } from '@testing-library/react';
 
 const Title = styled.h1`
   width: 684px;
@@ -289,8 +287,4 @@ export const MainPageCollectionSubtitle = () => {
 
 export const MainPageCollectionTitle = () => {
   return <SectionTitle>Other works for you</SectionTitle>;
-};
-
-export const MainPageArtCollection = () => {
-  return <ArtCollection />;
 };
