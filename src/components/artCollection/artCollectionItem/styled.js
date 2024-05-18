@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import setContent from '../../../utils/setContent';
+
 import PlaceholderArtImage from '../../../assets/placeholderArt.svg';
 import Bookmark from '../../../assets/bookmark.svg';
 
@@ -77,24 +79,27 @@ const DescriptionTextFavoriteButton = styled.button`
 `;
 
 function StyledArtCollectionItem(props) {
-  const { title, artistName, isPublicDomain, imageUrl } = props.artInfo;
-  return (
-    <Wrapper>
-      <PhotoWrapper>
-        {imageUrl ? <Photo src={imageUrl} alt={title} /> : <PlaceholderArtImage />}
-      </PhotoWrapper>
-      <DescriptionTextWrapper>
-        <DescriptionTextArtName>{title}</DescriptionTextArtName>
-        <DescriptionTextAuthorName>{artistName}</DescriptionTextAuthorName>
-        <DescriptionTextVisibilityStatus>
-          {isPublicDomain ? 'public' : 'private'}
-        </DescriptionTextVisibilityStatus>
-      </DescriptionTextWrapper>
-      <DescriptionTextFavoriteButton>
-        <Bookmark />
-      </DescriptionTextFavoriteButton>
-    </Wrapper>
-  );
+  const renderItems = data => {
+    return (
+      <>
+        <PhotoWrapper>
+          {data.imageUrl ? <Photo src={data.imageUrl} alt={data.title} /> : <PlaceholderArtImage />}
+        </PhotoWrapper>
+        <DescriptionTextWrapper>
+          <DescriptionTextArtName>{data.title}</DescriptionTextArtName>
+          <DescriptionTextAuthorName>{data.artistName}</DescriptionTextAuthorName>
+          <DescriptionTextVisibilityStatus>
+            {data.isPublicDomain ? 'public' : 'private'}
+          </DescriptionTextVisibilityStatus>
+        </DescriptionTextWrapper>
+        <DescriptionTextFavoriteButton>
+          <Bookmark />
+        </DescriptionTextFavoriteButton>
+      </>
+    );
+  };
+
+  return <Wrapper>{setContent(props.process, () => renderItems(props.artInfo))}</Wrapper>;
 }
 
 export default StyledArtCollectionItem;

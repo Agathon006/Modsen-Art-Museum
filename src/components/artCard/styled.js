@@ -99,22 +99,7 @@ const DescriptionTextFavoriteButton = styled.button`
 `;
 
 function StyledArtCard(props) {
-  let component = `
-  <PhotoWrapper>
-    {data.imageUrl ? <Photo src={data.imageUrl} alt={data.title} /> : <PlaceholderArtImage />}
-  </PhotoWrapper>
-  <Description>
-    <DescriptionTextWrapper>
-      <DescriptionTextArtName>{data.title}</DescriptionTextArtName>
-      <DescriptionTextAuthorName>{data.artistName}</DescriptionTextAuthorName>
-      <DescriptionTextVisibilityStatus>
-        {data.isPublicDomain ? 'public' : 'private'}
-      </DescriptionTextVisibilityStatus>
-    </DescriptionTextWrapper>
-    <DescriptionTextFavoriteButton>
-      <Bookmark />
-    </DescriptionTextFavoriteButton>
-  </Description>`;
+  console.log(props.process);
 
   const renderItems = data => {
     return (

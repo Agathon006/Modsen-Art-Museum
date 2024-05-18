@@ -6,6 +6,7 @@ const initialState = {
   artsGalleryPage: 0,
   artsGalleryAllPages: 0,
   artsCollectionList: [],
+  artsCollectionListProcess: 'loading',
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -34,6 +35,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         artsCollectionList: action.payload,
+      };
+    case 'SET_ARTS_COLLECTION_LIST_PROCESS':
+      return {
+        ...state,
+        artsCollectionListProcess: action.payload,
       };
     default:
       return state;

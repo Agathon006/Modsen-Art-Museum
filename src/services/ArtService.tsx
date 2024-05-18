@@ -29,6 +29,14 @@ export interface IArtInfo {
   imageUrl: string | Promise<string>;
 }
 
+const emtyArtInfo = {
+  id: null,
+  title: null,
+  artistName: null,
+  isPublicDomain: null,
+  imageUrl: null,
+};
+
 const useArtService = () => {
   const { request } = useHttp();
   const dispatch = useDispatch();
@@ -36,19 +44,44 @@ const useArtService = () => {
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
   const getGalleryArts = async (page: number): Promise<IArtInfo[]> => {
-    const result: IResponseArtsBody = await request(
-      `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
-    );
-    if (!page) {
-      dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
-      dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
+    try {
+      const result: IResponseArtsBody = await request(
+        `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
+      );
+      if (!page) {
+        dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
+        dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
+      }
+      dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
+      return result.data.map(_transformArt);
+    } catch {
+      dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
+      // @ts-ignore
+      return [emtyArtInfo, emtyArtInfo, emtyArtInfo];
     }
-    return result.data.map(_transformArt);
   };
 
+  // @ts-ignore
   const getCollectionArts = async (): Promise<IArtInfo[]> => {
-    const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9&has_image=true`);
-    return result.data.map(_transformArt);
+    try {
+      const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9&has_image=true`);
+      dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
+      return result.data.map(_transformArt);
+    } catch {
+      dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
+      // @ts-ignore
+      return [
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+        emtyArtInfo,
+      ];
+    }
   };
 
   // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {

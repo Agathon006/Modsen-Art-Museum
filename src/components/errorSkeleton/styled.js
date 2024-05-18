@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ItemSkeleton = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #ffc8c9;
+  background-color: #fdecee;
   display: flex;
   justify-content: center;
   align-items: center;

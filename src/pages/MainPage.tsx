@@ -61,7 +61,6 @@ const MainPage = () => {
 
   const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
 
   const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {

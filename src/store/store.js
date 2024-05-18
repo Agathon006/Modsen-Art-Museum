@@ -19,6 +19,7 @@ var initialState = {
   artsGalleryPage: 0,
   artsGalleryAllPages: 0,
   artsCollectionList: [],
+  artsCollectionListProcess: 'loading',
 };
 var reducer = function (state, action) {
   if (state === void 0) {
@@ -35,6 +36,8 @@ var reducer = function (state, action) {
       return __assign(__assign({}, state), { artsGalleryAllPages: action.payload });
     case 'SET_ARTS_COLLECTION_LIST':
       return __assign(__assign({}, state), { artsCollectionList: action.payload });
+    case 'SET_ARTS_COLLECTION_LIST_PROCESS':
+      return __assign(__assign({}, state), { artsCollectionListProcess: action.payload });
     default:
       return state;
   }

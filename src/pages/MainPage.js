@@ -73,7 +73,6 @@ var MainPage = function () {
   };
   var onArtGalleryLoaded = function (ArtsGalleryList) {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
   var compileNewPaginationNavigation = function (artsGalleryPage, artsGalleryAllPages) {
     if (!artsGalleryAllPages) return [];

@@ -131,16 +131,24 @@ var __generator =
   };
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
+var emtyArtInfo = {
+  id: null,
+  title: null,
+  artistName: null,
+  isPublicDomain: null,
+  imageUrl: null,
+};
 var useArtService = function () {
   var request = useHttp().request;
   var dispatch = useDispatch();
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
   var getGalleryArts = function (page) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
+      var result, _a;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
           case 0:
+            _b.trys.push([0, 2, , 3]);
             return [
               4 /*yield*/,
               request(
@@ -148,7 +156,7 @@ var useArtService = function () {
               ),
             ];
           case 1:
-            result = _a.sent();
+            result = _b.sent();
             if (!page) {
               dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
               dispatch({
@@ -156,21 +164,52 @@ var useArtService = function () {
                 payload: result.pagination.total_pages,
               });
             }
+            dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
             return [2 /*return*/, result.data.map(_transformArt)];
+          case 2:
+            _a = _b.sent();
+            dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
+            // @ts-ignore
+            return [2 /*return*/, [emtyArtInfo, emtyArtInfo, emtyArtInfo]];
+          case 3:
+            return [2 /*return*/];
         }
       });
     });
   };
+  // @ts-ignore
   var getCollectionArts = function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
+      var result, _a;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
           case 0:
+            _b.trys.push([0, 2, , 3]);
             return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9&has_image=true'))];
           case 1:
-            result = _a.sent();
+            result = _b.sent();
+            dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
             return [2 /*return*/, result.data.map(_transformArt)];
+          case 2:
+            _a = _b.sent();
+            dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
+            // @ts-ignore
+            return [
+              2 /*return*/,
+              [
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+                emtyArtInfo,
+              ],
+            ];
+          case 3:
+            return [2 /*return*/];
         }
       });
     });
