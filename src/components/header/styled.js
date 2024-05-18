@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logo.svg';
 import Bookmark from '../../assets/bookmark.svg';
@@ -21,7 +22,7 @@ const Navigation = styled.nav`
   align-items: center;
 `;
 
-const FavoritesPageLink = styled.a`
+const FavoritesPageLinkWrapper = styled.div`
   height: 24px;
   display: flex;
   justify-content: space-between;
@@ -42,13 +43,15 @@ function StyledHeader() {
   return (
     <Wrapper>
       <Navigation>
-        <a href="./">
+        <Link to="/">
           <Logo />
-        </a>
-        <FavoritesPageLink href="#">
-          <Bookmark />
-          <FavoritesPageLinkSpan>Your favorites</FavoritesPageLinkSpan>
-        </FavoritesPageLink>
+        </Link>
+        <Link to="/favorites">
+          <FavoritesPageLinkWrapper>
+            <Bookmark />
+            <FavoritesPageLinkSpan>Your favorites</FavoritesPageLinkSpan>
+          </FavoritesPageLinkWrapper>
+        </Link>
       </Navigation>
     </Wrapper>
   );

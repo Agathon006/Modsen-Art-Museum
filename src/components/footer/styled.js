@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/footer_logo.svg';
 import ModsenLogo from '../../assets/modsen_logo.svg';
@@ -25,9 +26,9 @@ function StyledFooter() {
   return (
     <Wrapper>
       <Navigation>
-        <a href="./">
+        <Link to="/">
           <Logo />
-        </a>
+        </Link>
         <a href="https://www.modsen-software.com/" target="_blank">
           <ModsenLogo />
         </a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import store from '../../store/store.js';
 import Header from '../header/index.js';
@@ -19,12 +20,17 @@ const Wrapper = styled.div`
 const App = () => {
   return (
     <Provider store={store}>
-      <Wrapper>
-        <Header />
-        <MainPage />
-        {/* <FavouriteArtsPage /> */}
-        <Footer />
-      </Wrapper>
+      <Router>
+        <Wrapper>
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/favorites" element={<FavouriteArtsPage />} />
+            <Route path="*" element={<span>page not found</span>} />
+          </Routes>
+          <Footer />
+        </Wrapper>
+      </Router>
     </Provider>
   );
 };

@@ -11,10 +11,12 @@ var __makeTemplateObject =
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import store from '../../store/store.js';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
+import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
 var Wrapper = styled.div(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(
@@ -29,8 +31,20 @@ var Wrapper = styled.div(
 var App = function () {
   return _jsx(Provider, {
     store: store,
-    children: _jsxs(Wrapper, {
-      children: [_jsx(Header, {}), _jsx(MainPage, {}), _jsx(Footer, {})],
+    children: _jsx(Router, {
+      children: _jsxs(Wrapper, {
+        children: [
+          _jsx(Header, {}),
+          _jsxs(Routes, {
+            children: [
+              _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
+              _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
+              _jsx(Route, { path: '*', element: _jsx('span', { children: 'page not found' }) }),
+            ],
+          }),
+          _jsx(Footer, {}),
+        ],
+      }),
     }),
   });
 };
