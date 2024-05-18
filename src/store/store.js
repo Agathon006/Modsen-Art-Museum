@@ -14,6 +14,7 @@ var __assign =
   };
 import { createStore } from 'redux';
 var initialState = {
+  artsGallerySearch: '',
   artsGalleryList: [],
   artsGalleryListProcess: 'loading',
   artsGalleryPage: 0,
@@ -26,6 +27,8 @@ var reducer = function (state, action) {
     state = initialState;
   }
   switch (action.type) {
+    case 'SET_ARTS_GALLERY_SEARCH':
+      return __assign(__assign({}, state), { artsGallerySearch: action.payload });
     case 'SET_ARTS_GALLERY_LIST':
       return __assign(__assign({}, state), { artsGalleryList: action.payload });
     case 'SET_ARTS_GALLERY_LIST_PROCESS':

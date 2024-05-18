@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import setContent from '../../utils/setContent';
-
 import Bookmark from '../../assets/bookmark.svg';
 import PlaceholderArtImage from '../../assets/placeholderArt.svg';
 
@@ -23,6 +21,7 @@ const PhotoWrapper = styled.div`
   justify-content: center;
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
   border: 1px solid black;
+  cursor: pointer;
 `;
 
 const Photo = styled.img`
@@ -98,32 +97,30 @@ const DescriptionTextFavoriteButton = styled.button`
   border-radius: 100px;
 `;
 
-function StyledArtCard(props) {
-  console.log(props.process);
-
-  const renderItems = data => {
-    return (
-      <>
-        <PhotoWrapper>
-          {data.imageUrl ? <Photo src={data.imageUrl} alt={data.title} /> : <PlaceholderArtImage />}
-        </PhotoWrapper>
-        <Description>
-          <DescriptionTextWrapper>
-            <DescriptionTextArtName>{data.title}</DescriptionTextArtName>
-            <DescriptionTextAuthorName>{data.artistName}</DescriptionTextAuthorName>
-            <DescriptionTextVisibilityStatus>
-              {data.isPublicDomain ? 'public' : 'private'}
-            </DescriptionTextVisibilityStatus>
-          </DescriptionTextWrapper>
-          <DescriptionTextFavoriteButton>
-            <Bookmark />
-          </DescriptionTextFavoriteButton>
-        </Description>
-      </>
-    );
-  };
-
-  return <Wrapper>{setContent(props.process, () => renderItems(props.artInfo))}</Wrapper>;
+function StyledArtCard({ artInfo }) {
+  return (
+    <Wrapper>
+      <PhotoWrapper>
+        {artInfo.imageUrl ? (
+          <Photo src={artInfo.imageUrl} alt={artInfo.title} />
+        ) : (
+          <PlaceholderArtImage />
+        )}
+      </PhotoWrapper>
+      <Description>
+        <DescriptionTextWrapper>
+          <DescriptionTextArtName>{artInfo.title}</DescriptionTextArtName>
+          <DescriptionTextAuthorName>{artInfo.artistName}</DescriptionTextAuthorName>
+          <DescriptionTextVisibilityStatus>
+            {artInfo.isPublicDomain ? 'public' : 'private'}
+          </DescriptionTextVisibilityStatus>
+        </DescriptionTextWrapper>
+        <DescriptionTextFavoriteButton>
+          <Bookmark />
+        </DescriptionTextFavoriteButton>
+      </Description>
+    </Wrapper>
+  );
 }
 
 export default StyledArtCard;

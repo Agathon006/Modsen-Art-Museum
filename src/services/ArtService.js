@@ -142,7 +142,7 @@ var useArtService = function () {
   var request = useHttp().request;
   var dispatch = useDispatch();
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
-  var getGalleryArts = function (page) {
+  var getGalleryArts = function (page, search) {
     return __awaiter(void 0, void 0, void 0, function () {
       var result, _a;
       return __generator(this, function (_b) {
@@ -152,7 +152,12 @@ var useArtService = function () {
             return [
               4 /*yield*/,
               request(
-                ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3&has_image=true')
+                search
+                  ? ''
+                      .concat(_apiBase, '/search?q=')
+                      .concat(search, '&page=')
+                      .concat(page ? page : 1, '&limit=3')
+                  : ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3&has_image=true')
               ),
             ];
           case 1:
@@ -164,7 +169,6 @@ var useArtService = function () {
                 payload: result.pagination.total_pages,
               });
             }
-            dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
             return [2 /*return*/, result.data.map(_transformArt)];
           case 2:
             _a = _b.sent();
@@ -188,23 +192,30 @@ var useArtService = function () {
             return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9&has_image=true'))];
           case 1:
             result = _b.sent();
-            dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
             return [2 /*return*/, result.data.map(_transformArt)];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
-            // @ts-ignore
             return [
               2 /*return*/,
               [
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
+                // @ts-ignore
                 emtyArtInfo,
               ],
             ];
@@ -214,12 +225,6 @@ var useArtService = function () {
       });
     });
   };
-  // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
-  // 	const result: IResponseCharsBody = await request(
-  // 		`${_apiBase}?name=${title}`
-  // 	);
-  // 	return result.data.map(_transformArt);
-  // };
   var _transformArt = function (art) {
     return {
       id: art.id,
@@ -234,7 +239,6 @@ var useArtService = function () {
   return {
     getGalleryArts: getGalleryArts,
     getCollectionArts: getCollectionArts,
-    // getArtByTitle
   };
 };
 export default useArtService;

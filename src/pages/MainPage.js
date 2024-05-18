@@ -42,6 +42,10 @@ var MainPage = function () {
     getCollectionArts = _a.getCollectionArts;
   var dispatch = useDispatch();
   // @ts-ignore
+  var artsGallerySearch = useSelector(function (state) {
+    return state.artsGallerySearch;
+  });
+  // @ts-ignore
   var galleryArtsList = useSelector(function (state) {
     return state.artsGalleryList;
   });
@@ -54,6 +58,7 @@ var MainPage = function () {
     return state.artsGalleryAllPages;
   });
   useEffect(function () {
+    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
     onCollectionArtsRequest();
   }, []);
   var onCollectionArtsRequest = function () {
@@ -61,6 +66,7 @@ var MainPage = function () {
   };
   var onArtCollectionLoaded = function (ArtsCollectionList) {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
+    dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
   useEffect(
     function () {
@@ -69,10 +75,17 @@ var MainPage = function () {
     [artsGalleryPage]
   );
   var onGalleryArtsRequest = function () {
-    getGalleryArts(artsGalleryPage).then(onArtGalleryLoaded);
+    getGalleryArts(artsGalleryPage, artsGallerySearch).then(onArtGalleryLoaded);
+  };
+  var onGalleryArtsSearchRequest = function (searchInput) {
+    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
+    dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
+    dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
   var onArtGalleryLoaded = function (ArtsGalleryList) {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
   var compileNewPaginationNavigation = function (artsGalleryPage, artsGalleryAllPages) {
     if (!artsGalleryAllPages) return [];
@@ -161,7 +174,6 @@ var MainPage = function () {
   var onPaginationClick = function (event) {
     var targetElement = event.target;
     if (targetElement.tagName === 'BUTTON') {
-      console.log(targetElement.textContent);
       if (targetElement.textContent === '>') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage + 1 });
         dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
@@ -174,13 +186,17 @@ var MainPage = function () {
       }
     }
   };
+  // @ts-ignore
+  var artsGalleryListProcess = useSelector(function (state) {
+    return state.artsGalleryListProcess;
+  });
   return _jsxs(Wrapper, {
     children: [
       _jsx(MainPageTitle, {}),
-      _jsx(MainPageSearchBar, {}),
+      _jsx(MainPageSearchBar, { onSubmit: onGalleryArtsSearchRequest }),
       _jsx(MainPageGallerySubTitle, {}),
       _jsx(MainPageGalleryTitle, {}),
-      _jsx(MainPageSectionGallery, { data: galleryArtsList }),
+      _jsx(MainPageSectionGallery, { process: artsGalleryListProcess, data: galleryArtsList }),
       _jsx(MainPageSectionGalleryNavigation, {
         paginationClicked: onPaginationClick,
         paginationArray: compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages),

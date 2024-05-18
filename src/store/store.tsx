@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 
 const initialState = {
+  artsGallerySearch: '',
   artsGalleryList: [],
   artsGalleryListProcess: 'loading',
   artsGalleryPage: 0,
@@ -11,6 +12,11 @@ const initialState = {
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case 'SET_ARTS_GALLERY_SEARCH':
+      return {
+        ...state,
+        artsGallerySearch: action.payload,
+      };
     case 'SET_ARTS_GALLERY_LIST':
       return {
         ...state,

@@ -43,16 +43,17 @@ const useArtService = () => {
 
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
-  const getGalleryArts = async (page: number): Promise<IArtInfo[]> => {
+  const getGalleryArts = async (page: number, search: string): Promise<IArtInfo[]> => {
     try {
       const result: IResponseArtsBody = await request(
-        `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
+        search
+          ? `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3`
+          : `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
       );
       if (!page) {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
         dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
       }
-      dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
       return result.data.map(_transformArt);
     } catch {
       dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
@@ -65,31 +66,31 @@ const useArtService = () => {
   const getCollectionArts = async (): Promise<IArtInfo[]> => {
     try {
       const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9&has_image=true`);
-      dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
       return result.data.map(_transformArt);
     } catch {
       dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
-      // @ts-ignore
       return [
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
+        // @ts-ignore
         emtyArtInfo,
       ];
     }
   };
-
-  // const getArtByTitle = async (title: string): Promise<ICharInfo[]> => {
-  // 	const result: IResponseCharsBody = await request(
-  // 		`${_apiBase}?name=${title}`
-  // 	);
-  // 	return result.data.map(_transformArt);
-  // };
 
   const _transformArt = (art: IResponseArtInfo): IArtInfo => {
     return {
@@ -106,7 +107,6 @@ const useArtService = () => {
   return {
     getGalleryArts,
     getCollectionArts,
-    // getArtByTitle
   };
 };
 

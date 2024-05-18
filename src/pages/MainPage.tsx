@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { IArtInfo } from './../services/ArtService';
@@ -32,6 +32,9 @@ const MainPage = () => {
   const dispatch = useDispatch();
 
   // @ts-ignore
+  const artsGallerySearch = useSelector(state => state.artsGallerySearch);
+
+  // @ts-ignore
   const galleryArtsList = useSelector(state => state.artsGalleryList);
 
   // @ts-ignore
@@ -40,6 +43,7 @@ const MainPage = () => {
   const artsGalleryAllPages = useSelector(state => state.artsGalleryAllPages);
 
   useEffect(() => {
+    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
     onCollectionArtsRequest();
   }, []);
 
@@ -49,6 +53,7 @@ const MainPage = () => {
 
   const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
+    dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
 
   useEffect(() => {
@@ -56,11 +61,19 @@ const MainPage = () => {
   }, [artsGalleryPage]);
 
   const onGalleryArtsRequest = () => {
-    getGalleryArts(artsGalleryPage).then(onArtGalleryLoaded);
+    getGalleryArts(artsGalleryPage, artsGallerySearch).then(onArtGalleryLoaded);
+  };
+
+  const onGalleryArtsSearchRequest = (searchInput: string) => {
+    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
+    dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
+    dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
 
   const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
 
   const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {
@@ -155,7 +168,6 @@ const MainPage = () => {
   const onPaginationClick = (event: React.MouseEvent<HTMLElement>) => {
     const targetElement = event.target as HTMLElement;
     if (targetElement.tagName === 'BUTTON') {
-      console.log(targetElement.textContent);
       if (targetElement.textContent === '>') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage + 1 });
         dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
@@ -169,13 +181,16 @@ const MainPage = () => {
     }
   };
 
+  // @ts-ignore
+  const artsGalleryListProcess = useSelector(state => state.artsGalleryListProcess);
+
   return (
     <Wrapper>
       <MainPageTitle />
-      <MainPageSearchBar />
+      <MainPageSearchBar onSubmit={onGalleryArtsSearchRequest} />
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />
-      <MainPageSectionGallery data={galleryArtsList} />
+      <MainPageSectionGallery process={artsGalleryListProcess} data={galleryArtsList} />
       <MainPageSectionGalleryNavigation
         paginationClicked={onPaginationClick}
         paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}

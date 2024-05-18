@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+import setContent from '../utils/setContent.js';
 
 import ArtCard from '../components/artCard/ArtCard.js';
 import ArtCollection from '../components/artCollection/ArtCollection.js';
 
 import SearchIcon from './../assets/search.svg';
+import { render } from '@testing-library/react';
 
 const Title = styled.h1`
   width: 684px;
@@ -37,10 +42,10 @@ const SearchBarContainer = styled.div`
 
 const SearchBarInput = styled.input`
   width: 762px;
-  padding: 23.5px 16px;
+  padding: 23.5px 48px 23.5px 16px;
   background: rgba(57, 57, 57, 0.05);
   border-radius: 16px;
-  border: none; /* Remove default input border */
+  border: none;
 
   font-family: 'Inter';
   font-style: normal;
@@ -48,7 +53,6 @@ const SearchBarInput = styled.input`
   font-size: 14px;
   line-height: 17px;
   text-transform: capitalize;
-  color: rgba(57, 57, 57, 0.5);
 
   &:focus {
     outline: none;
@@ -65,13 +69,41 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-export const MainPageSearchBar = () => {
+const searchSchema = Yup.object().shape({
+  searchQuery: Yup.string().matches(
+    /^[A-Za-z0-9\s]+$/,
+    'Only latin letters, numbers, and spaces are allowed'
+  ),
+});
+
+export const MainPageSearchBar = ({ onSubmit }) => {
   return (
     <SearchBarContainer>
-      <SearchBarInput type="text" placeholder="Search art, artist, work..." />
-      <SearchButton>
-        <SearchIcon />
-      </SearchButton>
+      <Formik
+        initialValues={{ searchQuery: '' }}
+        validationSchema={searchSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          await onSubmit(values.searchQuery);
+          setSubmitting(false);
+        }}
+      >
+        {({ isSubmitting, handleChange }) => (
+          <Form>
+            <Field
+              id="searchQuery"
+              name="searchQuery"
+              type="text"
+              placeholder="Search art, artist, work..."
+              component={SearchBarInput}
+              onChange={handleChange}
+            />
+            <ErrorMessage style={{ color: 'red' }} name="searchQuery" component="div" />
+            <SearchButton type="submit" disabled={isSubmitting}>
+              <SearchIcon />
+            </SearchButton>
+          </Form>
+        )}
+      </Formik>
     </SearchBarContainer>
   );
 };
@@ -112,12 +144,55 @@ const GalleryWrapper = styled.section`
   height: 514px;
 `;
 
-export const MainPageSectionGallery = ({ data }) => {
+const GallerySkeletonWrapper = styled.div`
+  position: relative;
+  width: 387px;
+  height: 514px;
+`;
+
+const GalleryPlaceholderWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+`;
+
+const GalleryPlaceholder = styled.span`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+`;
+
+export const MainPageSectionGallery = ({ process, data }) => {
+  const renderArt = i => {
+    if (data[i]) {
+      return <ArtCard artInfo={data[i]} />;
+    } else {
+      return null;
+    }
+  };
+
+  let noArtsPlaceholder = (
+    <GalleryPlaceholderWrapper>
+      <GalleryPlaceholder>No such arts</GalleryPlaceholder>
+    </GalleryPlaceholderWrapper>
+  );
+  let content = (
+    <>
+      <GallerySkeletonWrapper>{setContent(process, () => renderArt(0))}</GallerySkeletonWrapper>
+      <GallerySkeletonWrapper>{setContent(process, () => renderArt(1))}</GallerySkeletonWrapper>
+      <GallerySkeletonWrapper>{setContent(process, () => renderArt(2))}</GallerySkeletonWrapper>
+    </>
+  );
+
   return (
     <GalleryWrapper>
-      {data.map((artInfo, index) => (
-        <ArtCard key={index} artInfo={artInfo} />
-      ))}
+      {!data.length && process !== 'loading' ? noArtsPlaceholder : content}
     </GalleryWrapper>
   );
 };
@@ -187,7 +262,9 @@ export const MainPageSectionGalleryNavigation = ({ paginationClicked, pagination
       default:
         if (element[1]) {
           return (
-            <GalleryNavigationButtonActive key={index}>{element[0]}</GalleryNavigationButtonActive>
+            <GalleryNavigationButtonActive disabled key={index}>
+              {element[0]}
+            </GalleryNavigationButtonActive>
           );
         } else {
           return (
