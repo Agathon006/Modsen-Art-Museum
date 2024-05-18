@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import setContent from '../../utils/setContent.js';
+
 import ArtCollectionItem from './artCollectionItem/artCollectionItem.js';
 
 const Wrapper = styled.div`
@@ -10,13 +12,34 @@ const Wrapper = styled.div`
   gap: 16px;
 `;
 
-function StyledArtCollection({ artsCollectionArray }) {
-  let content = null;
-  if (artsCollectionArray.length) {
-    content = artsCollectionArray.map((art, index) => {
-      return <ArtCollectionItem key={index} artInfo={art} />;
-    });
-  }
+const SkeletonWrapper = styled.div`
+  width: 416px;
+  height: 130px;
+`;
+
+function StyledArtCollection({ process, artsCollectionArray }) {
+  const renderArt = i => {
+    if (artsCollectionArray[i]) {
+      return <ArtCollectionItem artInfo={artsCollectionArray[i]} />;
+    } else {
+      return null;
+    }
+  };
+
+  let content = (
+    <>
+      <SkeletonWrapper>{setContent(process, () => renderArt(0))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(1))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(2))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(3))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(4))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(5))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(6))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(7))}</SkeletonWrapper>
+      <SkeletonWrapper>{setContent(process, () => renderArt(8))}</SkeletonWrapper>
+    </>
+  );
+
   return <Wrapper>{content}</Wrapper>;
 }
 
