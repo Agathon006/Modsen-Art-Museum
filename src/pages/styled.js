@@ -112,10 +112,10 @@ const GalleryWrapper = styled.section`
   height: 514px;
 `;
 
-export const MainPageSectionGallery = ({ artsGalleryList }) => {
+export const MainPageSectionGallery = ({ data }) => {
   return (
     <GalleryWrapper>
-      {artsGalleryList.map((artInfo, index) => (
+      {data.map((artInfo, index) => (
         <ArtCard key={index} artInfo={artInfo} />
       ))}
     </GalleryWrapper>

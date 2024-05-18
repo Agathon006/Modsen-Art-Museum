@@ -57,11 +57,7 @@ var MainPage = function () {
     onCollectionArtsRequest();
   }, []);
   var onCollectionArtsRequest = function () {
-    getCollectionArts()
-      .then(onArtCollectionLoaded)
-      .then(function () {
-        return dispatch({ type: 'SET_PROCESS', payload: 'confirmed' });
-      });
+    getCollectionArts().then(onArtCollectionLoaded);
   };
   var onArtCollectionLoaded = function (ArtsCollectionList) {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
@@ -73,14 +69,11 @@ var MainPage = function () {
     [artsGalleryPage]
   );
   var onGalleryArtsRequest = function () {
-    getGalleryArts(artsGalleryPage)
-      .then(onArtGalleryLoaded)
-      .then(function () {
-        return dispatch({ type: 'SET_PROCESS', payload: 'confirmed' });
-      });
+    getGalleryArts(artsGalleryPage).then(onArtGalleryLoaded);
   };
   var onArtGalleryLoaded = function (ArtsGalleryList) {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
   var compileNewPaginationNavigation = function (artsGalleryPage, artsGalleryAllPages) {
     if (!artsGalleryAllPages) return [];
@@ -172,10 +165,13 @@ var MainPage = function () {
       console.log(targetElement.textContent);
       if (targetElement.textContent === '>') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage + 1 });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       } else if (targetElement.textContent === '<') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage - 1 });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       } else {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: Number(targetElement.textContent) });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       }
     }
   };
@@ -185,7 +181,7 @@ var MainPage = function () {
       _jsx(MainPageSearchBar, {}),
       _jsx(MainPageGallerySubTitle, {}),
       _jsx(MainPageGalleryTitle, {}),
-      _jsx(MainPageSectionGallery, { artsGalleryList: galleryArtsList }),
+      _jsx(MainPageSectionGallery, { data: galleryArtsList }),
       _jsx(MainPageSectionGalleryNavigation, {
         paginationClicked: onPaginationClick,
         paginationArray: compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages),

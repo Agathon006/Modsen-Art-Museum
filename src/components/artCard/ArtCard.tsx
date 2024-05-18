@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { IArtInfo } from '../../services/ArtService';
 
@@ -10,7 +11,10 @@ interface PropsWithArtInfo {
 import StyledArtCard from './styled.js';
 
 const ArtCard = (props: PropsWithArtInfo) => {
-  return <StyledArtCard artInfo={props.artInfo} />;
+  // @ts-ignore
+  const galleryArtsListProcess = useSelector(state => state.artsGalleryListProcess);
+
+  return <StyledArtCard process={galleryArtsListProcess} artInfo={props.artInfo} />;
 };
 
 export default ArtCard;

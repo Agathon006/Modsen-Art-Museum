@@ -26,7 +26,7 @@ export interface IArtInfo {
   title: string;
   artistName: string;
   isPublicDomain: boolean;
-  imageUrl: string;
+  imageUrl: string | Promise<string>;
 }
 
 const useArtService = () => {

@@ -30,6 +30,7 @@ const Wrapper = styled.main`
 const MainPage = () => {
   const { getGalleryArts, getCollectionArts } = useArtService();
   const dispatch = useDispatch();
+
   // @ts-ignore
   const galleryArtsList = useSelector(state => state.artsGalleryList);
 
@@ -43,9 +44,7 @@ const MainPage = () => {
   }, []);
 
   const onCollectionArtsRequest = () => {
-    getCollectionArts()
-      .then(onArtCollectionLoaded)
-      .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));
+    getCollectionArts().then(onArtCollectionLoaded);
   };
 
   const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
@@ -57,13 +56,12 @@ const MainPage = () => {
   }, [artsGalleryPage]);
 
   const onGalleryArtsRequest = () => {
-    getGalleryArts(artsGalleryPage)
-      .then(onArtGalleryLoaded)
-      .then(() => dispatch({ type: 'SET_PROCESS', payload: 'confirmed' }));
+    getGalleryArts(artsGalleryPage).then(onArtGalleryLoaded);
   };
 
   const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
 
   const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {
@@ -161,10 +159,13 @@ const MainPage = () => {
       console.log(targetElement.textContent);
       if (targetElement.textContent === '>') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage + 1 });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       } else if (targetElement.textContent === '<') {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: artsGalleryPage - 1 });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       } else {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: Number(targetElement.textContent) });
+        dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
       }
     }
   };
@@ -175,7 +176,7 @@ const MainPage = () => {
       <MainPageSearchBar />
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />
-      <MainPageSectionGallery artsGalleryList={galleryArtsList} />
+      <MainPageSectionGallery data={galleryArtsList} />
       <MainPageSectionGalleryNavigation
         paginationClicked={onPaginationClick}
         paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}

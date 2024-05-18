@@ -1,15 +1,14 @@
 import { jsx as _jsx } from 'react/jsx-runtime';
-import Spinner from '../components/spinner/Spinner';
-var setContent = function (process, Component, data) {
+import Skeleton from '../components/skeleton/Skeleton';
+import ErrorSkeleton from '../components/errorSkeleton/ErrorSkeleton';
+var setContent = function (process, Component) {
   switch (process) {
-    case 'waiting':
-      return _jsx('span', { children: 'Waiting...' });
     case 'loading':
-      return _jsx(Spinner, {});
+      return _jsx(Skeleton, {});
     case 'confirmed':
-      return _jsx(Component, { data: data });
+      return _jsx(Component, {});
     case 'error':
-      return _jsx('span', { children: 'Some error...' });
+      return _jsx(ErrorSkeleton, {});
     default:
       throw new Error('Unexpected process state');
   }

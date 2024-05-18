@@ -1,21 +1,16 @@
-import Spinner from '../components/spinner/Spinner';
+import Skeleton from '../components/skeleton/Skeleton';
+import ErrorSkeleton from '../components/errorSkeleton/ErrorSkeleton';
 
 import { IArtInfo } from '../services/ArtService';
 
-const setContent = <T extends IArtInfo>(
-  process: string,
-  Component: React.FC<{ data: T }>,
-  data: T
-) => {
+const setContent = <T extends IArtInfo>(process: string, Component: React.FC) => {
   switch (process) {
-    case 'waiting':
-      return <span>Waiting...</span>;
     case 'loading':
-      return <Spinner />;
+      return <Skeleton />;
     case 'confirmed':
-      return <Component data={data} />;
+      return <Component />;
     case 'error':
-      return <span>Some error...</span>;
+      return <ErrorSkeleton />;
     default:
       throw new Error('Unexpected process state');
   }
