@@ -31,7 +31,7 @@ const PhotoFavoriteButton = styled.button`
   border-radius: 100px;
 `;
 
-export const StyledPicture = ({ artInfo, process }) => {
+export const StyledPicture = ({ artInfo }) => {
   return (
     <PhotoWrapper>
       {artInfo.imageUrl ? (
@@ -48,6 +48,7 @@ export const StyledPicture = ({ artInfo, process }) => {
 
 const DescriptionWrapper = styled.section`
   width: 703px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -102,34 +103,34 @@ const OverviewSpecialText = styled.span`
   color: #e0a449;
 `;
 
-export const StyledDescription = ({ artInfo, process }) => {
+export const StyledDescription = ({ artInfo }) => {
   return (
     <DescriptionWrapper>
       <div>
-        <Title>{artInfo.title}</Title>
-        <ArtistName>{artInfo.artistName}</ArtistName>
-        <ArtDate>{artInfo.date}</ArtDate>
+        <Title>{artInfo.title ? artInfo.title : 'Unknown'}</Title>
+        <ArtistName>{artInfo.artistName ? artInfo.artistName : 'Unknown'}</ArtistName>
+        <ArtDate>{artInfo.date ? artInfo.date : 'Unknown'}</ArtDate>
       </div>
       <div>
         <Title>Overview</Title>
         <OverviewWrapper>
           <OverviewText>
             <OverviewSpecialText>Artist nacionality: </OverviewSpecialText>
-            {artInfo.artistNationality}
+            {artInfo.artistNationality ? artInfo.artistNationality : 'Unknown'}
           </OverviewText>
           <OverviewText>
             <OverviewSpecialText>Dimensions: Sheet: </OverviewSpecialText>
-            {artInfo.artDimensions}
+            {artInfo.artDimensions ? artInfo.artDimensions : 'Unknown'}
           </OverviewText>
           <OverviewText>
             <OverviewSpecialText>Credit Line: </OverviewSpecialText>
-            {artInfo.creditLine}
+            {artInfo.creditLine ? artInfo.creditLine : 'Unknown'}
           </OverviewText>
           <OverviewText>
             <OverviewSpecialText>Repository: </OverviewSpecialText>Metropolitan Museum of Art, New
             York, NY
           </OverviewText>
-          <OverviewText>{artInfo.isPublicDomain}</OverviewText>
+          <OverviewText>{artInfo.isPublicDomain ? 'Public' : 'Private'}</OverviewText>
         </OverviewWrapper>
       </div>
     </DescriptionWrapper>

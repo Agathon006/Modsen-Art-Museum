@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
 import styled from 'styled-components';
 
@@ -16,6 +17,15 @@ const Wrapper = styled.main`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+`;
+
+const PhotoSkeletonWrapper = styled.div`
+  width: 497px;
+  height: 570px;
+`;
+
+const DescriptionSkeletonWrapper = styled.div`
+  width: 703px;
 `;
 
 const SingleArtPage = () => {
@@ -44,10 +54,21 @@ const SingleArtPage = () => {
   // @ts-ignore
   const artByIDProcess = useSelector(state => state.artByIDProcess);
 
+  const renderPicture = () => {
+    return <StyledPicture artInfo={artByID} />;
+  };
+
+  const renderDescription = () => {
+    return <StyledDescription artInfo={artByID} />;
+  };
   return (
     <Wrapper>
-      <StyledPicture artInfo={artByID} process={artByIDProcess} />
-      <StyledDescription artInfo={artByID} process={artByIDProcess} />
+      <PhotoSkeletonWrapper>
+        {setContent(artByIDProcess, () => renderPicture())}
+      </PhotoSkeletonWrapper>
+      <DescriptionSkeletonWrapper>
+        {setContent(artByIDProcess, () => renderDescription())}
+      </DescriptionSkeletonWrapper>
     </Wrapper>
   );
 };

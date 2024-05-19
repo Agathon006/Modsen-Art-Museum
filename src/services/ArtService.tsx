@@ -175,10 +175,31 @@ const useArtService = () => {
         ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
         : '',
       date: art.date_display,
-      artistNationality: art.artist_display.match(/\n(.+?),/)?.[1] || null,
+      artistNationality: _NationalityIdentifier(art.artist_display),
       artDimensions: art.dimensions,
       creditLine: art.credit_line,
     };
+  };
+
+  const _NationalityIdentifier = (str: string) => {
+    const nationalitiesDictionary = [
+      `French`,
+      `American`,
+      `Norwegian`,
+      `Guatemala`,
+      `Japanese`,
+      `English`,
+      `Italian`,
+    ];
+
+    for (const nationality of nationalitiesDictionary) {
+      if (str.includes(nationality)) {
+        return nationality;
+      }
+    }
+    let result = str.replace(/\n/g, '');
+
+    return result;
   };
 
   return {

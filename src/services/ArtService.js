@@ -271,7 +271,6 @@ var useArtService = function () {
     };
   };
   var _DetailTransformArt = function (art) {
-    var _a;
     return {
       id: art.id,
       title: art.title,
@@ -281,12 +280,33 @@ var useArtService = function () {
         ? 'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
         : '',
       date: art.date_display,
-      artistNationality:
-        ((_a = art.artist_display.match(/\n(.+?),/)) === null || _a === void 0 ? void 0 : _a[1]) ||
-        null,
+      artistNationality: _NationalityIdentifier(art.artist_display),
       artDimensions: art.dimensions,
       creditLine: art.credit_line,
     };
+  };
+  var _NationalityIdentifier = function (str) {
+    var nationalitiesDictionary = [
+      'French',
+      'American',
+      'Norwegian',
+      'Guatemala',
+      'Japanese',
+      'English',
+      'Italian',
+    ];
+    for (
+      var _i = 0, nationalitiesDictionary_1 = nationalitiesDictionary;
+      _i < nationalitiesDictionary_1.length;
+      _i++
+    ) {
+      var nationality = nationalitiesDictionary_1[_i];
+      if (str.includes(nationality)) {
+        return nationality;
+      }
+    }
+    var result = str.replace(/\n/g, '');
+    return result;
   };
   return {
     getGalleryArts: getGalleryArts,

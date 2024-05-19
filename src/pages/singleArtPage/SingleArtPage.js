@@ -12,6 +12,7 @@ import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
 import styled from 'styled-components';
 import {
@@ -30,6 +31,17 @@ var Wrapper = styled.main(
       ]
     ))
 );
+var PhotoSkeletonWrapper = styled.div(
+  templateObject_2 ||
+    (templateObject_2 = __makeTemplateObject(
+      ['\nwidth: 497px;\nheight: 570px;\n'],
+      ['\nwidth: 497px;\nheight: 570px;\n']
+    ))
+);
+var DescriptionSkeletonWrapper = styled.div(
+  templateObject_3 ||
+    (templateObject_3 = __makeTemplateObject(['\nwidth: 703px;\n'], ['\nwidth: 703px;\n']))
+);
 var SingleArtPage = function () {
   var getArtById = useArtService().getArtById;
   var dispatch = useDispatch();
@@ -47,8 +59,6 @@ var SingleArtPage = function () {
   };
   // @ts-ignore
   var onDataLoaded = function (data) {
-    console.log(id);
-    console.log(data);
     dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_ART_BY_ID', payload: data });
   };
@@ -60,12 +70,26 @@ var SingleArtPage = function () {
   var artByIDProcess = useSelector(function (state) {
     return state.artByIDProcess;
   });
+  var renderPicture = function () {
+    return _jsx(StyledPicture, { artInfo: artByID });
+  };
+  var renderDescription = function () {
+    return _jsx(StyledDescription, { artInfo: artByID });
+  };
   return _jsxs(Wrapper, {
     children: [
-      _jsx(StyledPicture, { artInfo: artByID, process: artByIDProcess }),
-      _jsx(StyledDescription, { artInfo: artByID, process: artByIDProcess }),
+      _jsx(PhotoSkeletonWrapper, {
+        children: setContent(artByIDProcess, function () {
+          return renderPicture();
+        }),
+      }),
+      _jsx(DescriptionSkeletonWrapper, {
+        children: setContent(artByIDProcess, function () {
+          return renderDescription();
+        }),
+      }),
     ],
   });
 };
 export default SingleArtPage;
-var templateObject_1;
+var templateObject_1, templateObject_2, templateObject_3;
