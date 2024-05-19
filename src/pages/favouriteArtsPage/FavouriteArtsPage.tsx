@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import useArtService from '../../services/ArtService';
+import ArtCollection from '../../components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
 
 import {
@@ -19,11 +21,44 @@ const Wrapper = styled.main`
 `;
 
 const FavouriteArtsPage = () => {
+  const { getArtsByIdArray } = useArtService();
+  const dispatch = useDispatch();
+  // @ts-ignore
+  const artsFavoriteCollectionList = useSelector(state => state.artsFavoriteCollectionList);
+  // @ts-ignore
+  const artsFavoriteCollectionListProcess = useSelector(
+    state => state.artsFavoriteCollectionListProcess
+  );
+  // @ts-ignore
+  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
+
+  useEffect(() => {
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'loading' });
+    updateData();
+  }, []);
+
+  const updateData = () => {
+    // @ts-ignore
+    getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
+  };
+
+  // @ts-ignore
+  const onDataLoaded = data => {
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
+  };
+
   return (
     <Wrapper>
       <FavouriteArtsPageTitle />
       <FavouriteArtsPageCollectionSubTitle />
       <FavouriteArtsPageCollectionTitle />
+      <ArtCollection
+        itemsNumber={18}
+        // @ts-ignore
+        process={artsFavoriteCollectionListProcess}
+        artsList={artsFavoriteCollectionList}
+      />
     </Wrapper>
   );
 };

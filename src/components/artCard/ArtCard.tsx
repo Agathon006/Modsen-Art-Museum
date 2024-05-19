@@ -13,9 +13,9 @@ import StyledArtCard from './styled.js';
 const ArtCard = (props: PropsWithArtInfo) => {
   const dispatch = useDispatch();
   // @ts-ignore
-  const favoriteArts = useSelector(state => state.favoriteArts);
+  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
   // @ts-ignore
-  let isFavorite = favoriteArts.includes(props.artInfo.id);
+  let isFavorite = favoriteArtsIdList.includes(props.artInfo.id);
 
   return <StyledArtCard dispatch={dispatch} isFavorite={isFavorite} artInfo={props.artInfo} />;
 };

@@ -23,8 +23,10 @@ var initialState = {
   artsCollectionListProcess: 'loading',
   artByID: {},
   artByIDProcess: 'confirmed',
+  artsFavoriteCollectionList: [],
+  artsFavoriteCollectionListProcess: 'loading',
   // @ts-ignore
-  favoriteArts: JSON.parse(localStorage.getItem('favoriteArts')) || [],
+  favoriteArtsIdList: JSON.parse(localStorage.getItem('favoriteArtsIdList')) || [],
 };
 var reducer = function (state, action) {
   if (state === void 0) {
@@ -49,8 +51,12 @@ var reducer = function (state, action) {
       return __assign(__assign({}, state), { artByID: action.payload });
     case 'SET_ART_BY_ID_PROCESS':
       return __assign(__assign({}, state), { artByIDProcess: action.payload });
-    case 'SET_FAVORITE_ARTS':
-      return __assign(__assign({}, state), { favoriteArts: action.payload });
+    case 'SET_FAVORITE_COLLECTION_LIST':
+      return __assign(__assign({}, state), { artsFavoriteCollectionList: action.payload });
+    case 'SET_FAVORITE_COLLECTION_LIST_PROCESS':
+      return __assign(__assign({}, state), { artsFavoriteCollectionListProcess: action.payload });
+    case 'SET_FAVORITE_ARTS_ID_LIST':
+      return __assign(__assign({}, state), { favoriteArtsIdList: action.payload });
     default:
       return state;
   }

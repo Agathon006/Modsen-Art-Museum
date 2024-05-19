@@ -110,8 +110,12 @@ function StyledArtCard({ dispatch, isFavorite, artInfo }) {
       </Link>
       <Description>
         <DescriptionTextWrapper>
-          <DescriptionTextArtName>{artInfo.title}</DescriptionTextArtName>
-          <DescriptionTextAuthorName>{artInfo.artistName}</DescriptionTextAuthorName>
+          <DescriptionTextArtName>
+            {artInfo.title ? artInfo.title : 'Unknown title'}
+          </DescriptionTextArtName>
+          <DescriptionTextAuthorName>
+            {artInfo.artistName ? artInfo.artistName : 'Unknown artist'}
+          </DescriptionTextAuthorName>
           <DescriptionTextVisibilityStatus>
             {artInfo.isPublicDomain ? 'public' : 'private'}
           </DescriptionTextVisibilityStatus>

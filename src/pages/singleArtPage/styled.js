@@ -111,9 +111,9 @@ export const StyledDescription = ({ artInfo }) => {
   return (
     <DescriptionWrapper>
       <div>
-        <Title>{artInfo.title ? artInfo.title : 'Unknown'}</Title>
-        <ArtistName>{artInfo.artistName ? artInfo.artistName : 'Unknown'}</ArtistName>
-        <ArtDate>{artInfo.date ? artInfo.date : 'Unknown'}</ArtDate>
+        <Title>{artInfo.title ? artInfo.title : 'Unknown title'}</Title>
+        <ArtistName>{artInfo.artistName ? artInfo.artistName : 'Unknown artist'}</ArtistName>
+        <ArtDate>{artInfo.date ? artInfo.date : 'Unknown date'}</ArtDate>
       </div>
       <div>
         <Title>Overview</Title>

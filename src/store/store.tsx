@@ -10,8 +10,10 @@ const initialState = {
   artsCollectionListProcess: 'loading',
   artByID: {},
   artByIDProcess: 'confirmed',
+  artsFavoriteCollectionList: [],
+  artsFavoriteCollectionListProcess: 'loading',
   // @ts-ignore
-  favoriteArts: JSON.parse(localStorage.getItem('favoriteArts')) || [],
+  favoriteArtsIdList: JSON.parse(localStorage.getItem('favoriteArtsIdList')) || [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -61,10 +63,20 @@ const reducer = (state = initialState, action: any) => {
         ...state,
         artByIDProcess: action.payload,
       };
-    case 'SET_FAVORITE_ARTS':
+    case 'SET_FAVORITE_COLLECTION_LIST':
       return {
         ...state,
-        favoriteArts: action.payload,
+        artsFavoriteCollectionList: action.payload,
+      };
+    case 'SET_FAVORITE_COLLECTION_LIST_PROCESS':
+      return {
+        ...state,
+        artsFavoriteCollectionListProcess: action.payload,
+      };
+    case 'SET_FAVORITE_ARTS_ID_LIST':
+      return {
+        ...state,
+        favoriteArtsIdList: action.payload,
       };
     default:
       return state;

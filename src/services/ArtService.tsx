@@ -153,6 +153,57 @@ const useArtService = () => {
     }
   };
 
+  const getArtsByIdArray = async (idArray: number[]): Promise<IArtInfo> => {
+    try {
+      const result: any[] = await Promise.all(
+        idArray.map(artId => request(`${_apiBase}/${artId}`))
+      );
+      // @ts-ignore
+      return result.map(itemArt => _transformArt(itemArt.data));
+    } catch {
+      dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
+      // @ts-ignore
+      return [
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+        // @ts-ignore
+        emtyArtInfo,
+      ];
+    }
+  };
+
   const _transformArt = (art: IResponseArtInfo): IArtInfo => {
     return {
       id: art.id,
@@ -206,6 +257,7 @@ const useArtService = () => {
     getGalleryArts,
     getCollectionArts,
     getArtById,
+    getArtsByIdArray,
   };
 };
 

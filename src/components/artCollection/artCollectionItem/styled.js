@@ -92,8 +92,12 @@ function StyledArtCollectionItem({ dispatch, isFavorite, artInfo }) {
         </PhotoWrapper>
       </Link>
       <DescriptionTextWrapper>
-        <DescriptionTextArtName>{artInfo.title}</DescriptionTextArtName>
-        <DescriptionTextAuthorName>{artInfo.artistName}</DescriptionTextAuthorName>
+        <DescriptionTextArtName>
+          {artInfo.title ? artInfo.title : 'Unknown title'}
+        </DescriptionTextArtName>
+        <DescriptionTextAuthorName>
+          {artInfo.artistName ? artInfo.artistName : 'Unknown artist'}
+        </DescriptionTextAuthorName>
         <DescriptionTextVisibilityStatus>
           {artInfo.isPublicDomain ? 'public' : 'private'}
         </DescriptionTextVisibilityStatus>

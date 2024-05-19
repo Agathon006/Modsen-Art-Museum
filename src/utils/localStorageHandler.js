@@ -1,17 +1,17 @@
 // @ts-ignore
 export var changeInStorage = function (dispatch, id) {
   // @ts-ignore
-  var favoriteArts = JSON.parse(localStorage.getItem('favoriteArts')) || [];
-  var existingIndex = favoriteArts.indexOf(id);
+  var favoriteArtsIdList = JSON.parse(localStorage.getItem('favoriteArtsIdList')) || [];
+  var existingIndex = favoriteArtsIdList.indexOf(id);
   if (existingIndex !== -1) {
-    favoriteArts.splice(existingIndex, 1);
-    dispatch({ type: 'SET_FAVORITE_ARTS', payload: favoriteArts });
-    localStorage.setItem('favoriteArts', JSON.stringify(favoriteArts));
+    favoriteArtsIdList.splice(existingIndex, 1);
+    dispatch({ type: 'SET_FAVORITE_ARTS_ID_LIST', payload: favoriteArtsIdList });
+    localStorage.setItem('favoriteArtsIdList', JSON.stringify(favoriteArtsIdList));
     return false;
   } else {
-    favoriteArts.push(id);
-    dispatch({ type: 'SET_FAVORITE_ARTS', payload: favoriteArts });
-    localStorage.setItem('favoriteArts', JSON.stringify(favoriteArts));
+    favoriteArtsIdList.push(id);
+    dispatch({ type: 'SET_FAVORITE_ARTS_ID_LIST', payload: favoriteArtsIdList });
+    localStorage.setItem('favoriteArtsIdList', JSON.stringify(favoriteArtsIdList));
     return true;
   }
 };

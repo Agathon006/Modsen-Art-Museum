@@ -6,11 +6,11 @@ var ArtCollectionItem = function (_a) {
   var artInfo = _a.artInfo;
   var dispatch = useDispatch();
   // @ts-ignore
-  var favoriteArts = useSelector(function (state) {
-    return state.favoriteArts;
+  var favoriteArtsIdList = useSelector(function (state) {
+    return state.favoriteArtsIdList;
   });
   // @ts-ignore
-  var isFavorite = favoriteArts.includes(artInfo.id);
+  var isFavorite = favoriteArtsIdList.includes(artInfo.id);
   return _jsx(StyledArtCollectionItem, {
     dispatch: dispatch,
     isFavorite: isFavorite,

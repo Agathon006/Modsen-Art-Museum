@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import setContent from '../../utils/setContent.js';
@@ -28,10 +28,16 @@ function StyledArtCollection({ itemsNumber, process, artsCollectionArray }) {
 
   let contentArray = [];
 
-  for (let i = 0; i < itemsNumber; i++) {
-    contentArray.push(
-      <SkeletonWrapper key={i}>{setContent(process, () => renderArt(i))}</SkeletonWrapper>
-    );
+  if (process === 'loading') {
+    for (let i = 0; i < itemsNumber; i++) {
+      contentArray.push(
+        <SkeletonWrapper key={i}>{setContent(process, () => renderArt(i))}</SkeletonWrapper>
+      );
+    }
+  } else {
+    for (let i = 0; i < artsCollectionArray.length; i++) {
+      contentArray.push(<Fragment key={i}>{setContent(process, () => renderArt(i))}</Fragment>);
+    }
   }
 
   return <Wrapper>{contentArray}</Wrapper>;

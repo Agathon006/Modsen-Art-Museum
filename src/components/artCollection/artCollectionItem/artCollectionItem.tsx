@@ -7,9 +7,9 @@ import StyledArtCollectionItem from './styled.js';
 const ArtCollectionItem = ({ artInfo }: any) => {
   const dispatch = useDispatch();
   // @ts-ignore
-  const favoriteArts = useSelector(state => state.favoriteArts);
+  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
   // @ts-ignore
-  let isFavorite = favoriteArts.includes(artInfo.id);
+  let isFavorite = favoriteArtsIdList.includes(artInfo.id);
 
   return <StyledArtCollectionItem dispatch={dispatch} isFavorite={isFavorite} artInfo={artInfo} />;
 };

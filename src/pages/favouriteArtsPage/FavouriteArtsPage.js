@@ -9,6 +9,10 @@ var __makeTemplateObject =
     return cooked;
   };
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import useArtService from '../../services/ArtService';
+import ArtCollection from '../../components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
 import {
   FavouriteArtsPageTitle,
@@ -28,11 +32,44 @@ var Wrapper = styled.main(
     ))
 );
 var FavouriteArtsPage = function () {
+  var getArtsByIdArray = useArtService().getArtsByIdArray;
+  var dispatch = useDispatch();
+  // @ts-ignore
+  var artsFavoriteCollectionList = useSelector(function (state) {
+    return state.artsFavoriteCollectionList;
+  });
+  // @ts-ignore
+  var artsFavoriteCollectionListProcess = useSelector(function (state) {
+    return state.artsFavoriteCollectionListProcess;
+  });
+  // @ts-ignore
+  var favoriteArtsIdList = useSelector(function (state) {
+    return state.favoriteArtsIdList;
+  });
+  useEffect(function () {
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'loading' });
+    updateData();
+  }, []);
+  var updateData = function () {
+    // @ts-ignore
+    getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
+  };
+  // @ts-ignore
+  var onDataLoaded = function (data) {
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
+  };
   return _jsxs(Wrapper, {
     children: [
       _jsx(FavouriteArtsPageTitle, {}),
       _jsx(FavouriteArtsPageCollectionSubTitle, {}),
       _jsx(FavouriteArtsPageCollectionTitle, {}),
+      _jsx(ArtCollection, {
+        itemsNumber: 18,
+        // @ts-ignore
+        process: artsFavoriteCollectionListProcess,
+        artsList: artsFavoriteCollectionList,
+      }),
     ],
   });
 };

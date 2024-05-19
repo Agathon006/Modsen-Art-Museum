@@ -5,11 +5,11 @@ import StyledArtCard from './styled.js';
 var ArtCard = function (props) {
   var dispatch = useDispatch();
   // @ts-ignore
-  var favoriteArts = useSelector(function (state) {
-    return state.favoriteArts;
+  var favoriteArtsIdList = useSelector(function (state) {
+    return state.favoriteArtsIdList;
   });
   // @ts-ignore
-  var isFavorite = favoriteArts.includes(props.artInfo.id);
+  var isFavorite = favoriteArtsIdList.includes(props.artInfo.id);
   return _jsx(StyledArtCard, {
     dispatch: dispatch,
     isFavorite: isFavorite,

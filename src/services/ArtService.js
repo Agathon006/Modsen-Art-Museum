@@ -259,6 +259,81 @@ var useArtService = function () {
       });
     });
   };
+  var getArtsByIdArray = function (idArray) {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result, _a;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            _b.trys.push([0, 2, , 3]);
+            return [
+              4 /*yield*/,
+              Promise.all(
+                idArray.map(function (artId) {
+                  return request(''.concat(_apiBase, '/').concat(artId));
+                })
+              ),
+            ];
+          case 1:
+            result = _b.sent();
+            // @ts-ignore
+            return [
+              2 /*return*/,
+              result.map(function (itemArt) {
+                return _transformArt(itemArt.data);
+              }),
+            ];
+          case 2:
+            _a = _b.sent();
+            dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
+            // @ts-ignore
+            return [
+              2 /*return*/,
+              [
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+                // @ts-ignore
+                emtyArtInfo,
+              ],
+            ];
+          case 3:
+            return [2 /*return*/];
+        }
+      });
+    });
+  };
   var _transformArt = function (art) {
     return {
       id: art.id,
@@ -312,6 +387,7 @@ var useArtService = function () {
     getGalleryArts: getGalleryArts,
     getCollectionArts: getCollectionArts,
     getArtById: getArtById,
+    getArtsByIdArray: getArtsByIdArray,
   };
 };
 export default useArtService;

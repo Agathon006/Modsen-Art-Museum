@@ -71,11 +71,11 @@ var SingleArtPage = function () {
     return state.artByIDProcess;
   });
   // @ts-ignore
-  var favoriteArts = useSelector(function (state) {
-    return state.favoriteArts;
+  var favoriteArtsIdList = useSelector(function (state) {
+    return state.favoriteArtsIdList;
   });
   // @ts-ignore
-  var isFavorite = favoriteArts.includes(artByID.id);
+  var isFavorite = favoriteArtsIdList.includes(artByID.id);
   var renderPicture = function () {
     return _jsx(StyledPicture, { dispatch: dispatch, isFavorite: isFavorite, artInfo: artByID });
   };
