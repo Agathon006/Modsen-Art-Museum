@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
+import { date } from 'yup';
 
 interface IResponseArtInfo {
   id: number;
@@ -140,10 +141,11 @@ const useArtService = () => {
     }
   };
 
-  const getArtById = async (id: number): Promise<IDetaildArtInfo[]> => {
+  const getArtById = async (id: number): Promise<IDetaildArtInfo> => {
     try {
       const result: IResponseDetailedArtBody = await request(`${_apiBase}/${id}`);
-      return result.data.map(_DetailTransformArt);
+      // @ts-ignore
+      return _DetailTransformArt(result.data);
     } catch {
       dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
       // @ts-ignore
@@ -182,6 +184,7 @@ const useArtService = () => {
   return {
     getGalleryArts,
     getCollectionArts,
+    getArtById,
   };
 };
 

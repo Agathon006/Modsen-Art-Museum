@@ -138,6 +138,17 @@ var emtyArtInfo = {
   isPublicDomain: null,
   imageUrl: null,
 };
+var emtyDetailedArtInfo = {
+  id: null,
+  title: null,
+  artistName: null,
+  isPublicDomain: null,
+  imageUrl: null,
+  date: null,
+  artistNationality: null,
+  artDimensions: null,
+  creditLine: null,
+};
 var useArtService = function () {
   var request = useHttp().request;
   var dispatch = useDispatch();
@@ -225,6 +236,29 @@ var useArtService = function () {
       });
     });
   };
+  var getArtById = function (id) {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result, _a;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            _b.trys.push([0, 2, , 3]);
+            return [4 /*yield*/, request(''.concat(_apiBase, '/').concat(id))];
+          case 1:
+            result = _b.sent();
+            // @ts-ignore
+            return [2 /*return*/, _DetailTransformArt(result.data)];
+          case 2:
+            _a = _b.sent();
+            dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
+            // @ts-ignore
+            return [2 /*return*/, [emtyDetailedArtInfo]];
+          case 3:
+            return [2 /*return*/];
+        }
+      });
+    });
+  };
   var _transformArt = function (art) {
     return {
       id: art.id,
@@ -236,9 +270,28 @@ var useArtService = function () {
         : '',
     };
   };
+  var _DetailTransformArt = function (art) {
+    var _a;
+    return {
+      id: art.id,
+      title: art.title,
+      artistName: art.artist_title,
+      isPublicDomain: art.is_public_domain,
+      imageUrl: art.image_id
+        ? 'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
+        : '',
+      date: art.date_display,
+      artistNationality:
+        ((_a = art.artist_display.match(/\n(.+?),/)) === null || _a === void 0 ? void 0 : _a[1]) ||
+        null,
+      artDimensions: art.dimensions,
+      creditLine: art.credit_line,
+    };
+  };
   return {
     getGalleryArts: getGalleryArts,
     getCollectionArts: getCollectionArts,
+    getArtById: getArtById,
   };
 };
 export default useArtService;

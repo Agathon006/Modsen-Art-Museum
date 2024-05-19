@@ -31,11 +31,7 @@ const PhotoFavoriteButton = styled.button`
   border-radius: 100px;
 `;
 
-export const StyledPicture = () => {
-  let artInfo = {
-    imageUrl: '',
-    title: '',
-  };
+export const StyledPicture = ({ artInfo, process }) => {
   return (
     <PhotoWrapper>
       {artInfo.imageUrl ? (
@@ -106,32 +102,34 @@ const OverviewSpecialText = styled.span`
   color: #e0a449;
 `;
 
-export const StyledDescription = () => {
+export const StyledDescription = ({ artInfo, process }) => {
   return (
     <DescriptionWrapper>
       <div>
-        <Title>Charles V, bust length, holding a sword, facing right</Title>
-        <ArtistName>Giovanni Britto</ArtistName>
-        <ArtDate>1535–45</ArtDate>
+        <Title>{artInfo.title}</Title>
+        <ArtistName>{artInfo.artistName}</ArtistName>
+        <ArtDate>{artInfo.date}</ArtDate>
       </div>
       <div>
         <Title>Overview</Title>
         <OverviewWrapper>
           <OverviewText>
-            <OverviewSpecialText>Artist nacionality: </OverviewSpecialText>German
+            <OverviewSpecialText>Artist nacionality: </OverviewSpecialText>
+            {artInfo.artistNationality}
           </OverviewText>
           <OverviewText>
             <OverviewSpecialText>Dimensions: Sheet: </OverviewSpecialText>
-            {'19 3/8 × 13 11/16 in. (49.2 × 34.8 cm)'}
+            {artInfo.artDimensions}
           </OverviewText>
           <OverviewText>
-            <OverviewSpecialText>Credit Line: </OverviewSpecialText>Rogers Fund, 1917
+            <OverviewSpecialText>Credit Line: </OverviewSpecialText>
+            {artInfo.creditLine}
           </OverviewText>
           <OverviewText>
             <OverviewSpecialText>Repository: </OverviewSpecialText>Metropolitan Museum of Art, New
             York, NY
           </OverviewText>
-          <OverviewText>Public</OverviewText>
+          <OverviewText>{artInfo.isPublicDomain}</OverviewText>
         </OverviewWrapper>
       </div>
     </DescriptionWrapper>

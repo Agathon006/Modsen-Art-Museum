@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Bookmark from '../../assets/bookmark.svg';
@@ -97,13 +98,15 @@ const DescriptionTextFavoriteButton = styled.button`
 function StyledArtCard({ artInfo }) {
   return (
     <Wrapper>
-      <PhotoWrapper>
-        {artInfo.imageUrl ? (
-          <Photo src={artInfo.imageUrl} alt={artInfo.title} />
-        ) : (
-          <PlaceholderArtImage />
-        )}
-      </PhotoWrapper>
+      <Link to={`/${artInfo.id}`}>
+        <PhotoWrapper>
+          {artInfo.imageUrl ? (
+            <Photo src={artInfo.imageUrl} alt={artInfo.title} />
+          ) : (
+            <PlaceholderArtImage />
+          )}
+        </PhotoWrapper>
+      </Link>
       <Description>
         <DescriptionTextWrapper>
           <DescriptionTextArtName>{artInfo.title}</DescriptionTextArtName>

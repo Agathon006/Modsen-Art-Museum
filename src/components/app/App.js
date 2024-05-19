@@ -17,6 +17,7 @@ import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
 import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
+import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
 var Wrapper = styled.div(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(
@@ -38,7 +39,8 @@ var App = function () {
           _jsxs(Routes, {
             children: [
               _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
-              _jsx(Route, { path: '/favorites', element: _jsx(SingleArtPage, {}) }),
+              _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
+              _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
               _jsx(Route, { path: '*', element: _jsx('span', { children: 'page not found' }) }),
             ],
           }),

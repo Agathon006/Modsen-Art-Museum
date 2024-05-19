@@ -8,6 +8,7 @@ const initialState = {
   artsGalleryAllPages: 0,
   artsCollectionList: [],
   artsCollectionListProcess: 'loading',
+  artByID: {},
   artByIDProcess: 'confirmed',
 };
 
@@ -47,6 +48,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         artsCollectionListProcess: action.payload,
+      };
+    case 'SET_ART_BY_ID':
+      return {
+        ...state,
+        artByID: action.payload,
       };
     case 'SET_ART_BY_ID_PROCESS':
       return {
