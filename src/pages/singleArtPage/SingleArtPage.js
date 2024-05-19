@@ -34,13 +34,13 @@ var Wrapper = styled.main(
 var PhotoSkeletonWrapper = styled.div(
   templateObject_2 ||
     (templateObject_2 = __makeTemplateObject(
-      ['\nwidth: 497px;\nheight: 570px;\n'],
-      ['\nwidth: 497px;\nheight: 570px;\n']
+      ['\n  width: 497px;\n  height: 570px;\n'],
+      ['\n  width: 497px;\n  height: 570px;\n']
     ))
 );
 var DescriptionSkeletonWrapper = styled.div(
   templateObject_3 ||
-    (templateObject_3 = __makeTemplateObject(['\nwidth: 703px;\n'], ['\nwidth: 703px;\n']))
+    (templateObject_3 = __makeTemplateObject(['\n  width: 703px;\n'], ['\n  width: 703px;\n']))
 );
 var SingleArtPage = function () {
   var getArtById = useArtService().getArtById;
@@ -70,8 +70,14 @@ var SingleArtPage = function () {
   var artByIDProcess = useSelector(function (state) {
     return state.artByIDProcess;
   });
+  // @ts-ignore
+  var favoriteArts = useSelector(function (state) {
+    return state.favoriteArts;
+  });
+  // @ts-ignore
+  var isFavorite = favoriteArts.includes(artByID.id);
   var renderPicture = function () {
-    return _jsx(StyledPicture, { artInfo: artByID });
+    return _jsx(StyledPicture, { dispatch: dispatch, isFavorite: isFavorite, artInfo: artByID });
   };
   var renderDescription = function () {
     return _jsx(StyledDescription, { artInfo: artByID });

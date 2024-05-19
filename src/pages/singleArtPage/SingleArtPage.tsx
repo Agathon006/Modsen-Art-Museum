@@ -54,8 +54,13 @@ const SingleArtPage = () => {
   // @ts-ignore
   const artByIDProcess = useSelector(state => state.artByIDProcess);
 
+  // @ts-ignore
+  const favoriteArts = useSelector(state => state.favoriteArts);
+  // @ts-ignore
+  let isFavorite = favoriteArts.includes(artByID.id);
+
   const renderPicture = () => {
-    return <StyledPicture artInfo={artByID} />;
+    return <StyledPicture dispatch={dispatch} isFavorite={isFavorite} artInfo={artByID} />;
   };
 
   const renderDescription = () => {

@@ -10,6 +10,8 @@ const initialState = {
   artsCollectionListProcess: 'loading',
   artByID: {},
   artByIDProcess: 'confirmed',
+  // @ts-ignore
+  favoriteArts: JSON.parse(localStorage.getItem('favoriteArts')) || [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -58,6 +60,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         artByIDProcess: action.payload,
+      };
+    case 'SET_FAVORITE_ARTS':
+      return {
+        ...state,
+        favoriteArts: action.payload,
       };
     default:
       return state;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { changeInStorage } from '../../utils/localStorageHandler';
 import Bookmark from '../../assets/bookmark.svg';
 import PlaceholderArtImage from '../../assets/placeholderArt.svg';
 
@@ -91,14 +92,14 @@ const DescriptionTextVisibilityStatus = styled.span`
 const DescriptionTextFavoriteButton = styled.button`
   width: 59px;
   height: 59px;
-  background-color: #f9f9f9;
+  background-color: ${({ $favorite }) => ($favorite ? '#FBD7B24D' : '#f9f9f9')};
   border-radius: 100px;
 `;
 
-function StyledArtCard({ artInfo }) {
+function StyledArtCard({ dispatch, isFavorite, artInfo }) {
   return (
     <Wrapper>
-      <Link to={`/${artInfo.id}`}>
+      <Link to={`/ ${artInfo.id} `}>
         <PhotoWrapper>
           {artInfo.imageUrl ? (
             <Photo src={artInfo.imageUrl} alt={artInfo.title} />
@@ -115,7 +116,10 @@ function StyledArtCard({ artInfo }) {
             {artInfo.isPublicDomain ? 'public' : 'private'}
           </DescriptionTextVisibilityStatus>
         </DescriptionTextWrapper>
-        <DescriptionTextFavoriteButton>
+        <DescriptionTextFavoriteButton
+          $favorite={isFavorite}
+          onClick={() => changeInStorage(dispatch, artInfo.id)}
+        >
           <Bookmark />
         </DescriptionTextFavoriteButton>
       </Description>

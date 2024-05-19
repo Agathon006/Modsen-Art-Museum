@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { changeInStorage } from '../../utils/localStorageHandler';
 import Bookmark from '../../assets/bookmark.svg';
 import PlaceholderArtImage from '../../assets/placeholderArt.svg';
 
@@ -27,11 +28,11 @@ const PhotoFavoriteButton = styled.button`
   right: 16px;
   width: 59px;
   height: 59px;
-  background-color: #f9f9f9;
+  background-color: ${({ $favorite }) => ($favorite ? '#fbd7b2' : '#f9f9f9')};
   border-radius: 100px;
 `;
 
-export const StyledPicture = ({ artInfo }) => {
+export const StyledPicture = ({ dispatch, isFavorite, artInfo }) => {
   return (
     <PhotoWrapper>
       {artInfo.imageUrl ? (
@@ -39,7 +40,10 @@ export const StyledPicture = ({ artInfo }) => {
       ) : (
         <PlaceholderArtImage />
       )}
-      <PhotoFavoriteButton>
+      <PhotoFavoriteButton
+        $favorite={isFavorite}
+        onClick={() => changeInStorage(dispatch, artInfo.id)}
+      >
         <Bookmark />
       </PhotoFavoriteButton>
     </PhotoWrapper>
