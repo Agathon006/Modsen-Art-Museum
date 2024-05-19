@@ -7,7 +7,7 @@ import store from '../../store/store.js';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
-// import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
+import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
 
 const Wrapper = styled.div`
@@ -27,7 +27,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<MainPage />} />
             {/* <Route path="/:id" element={<SingleArtPage />} /> */}
-            <Route path="/favorites" element={<FavouriteArtsPage />} />
+            <Route path="/favorites" element={<SingleArtPage />} />
             <Route path="*" element={<span>page not found</span>} />
           </Routes>
           <Footer />
