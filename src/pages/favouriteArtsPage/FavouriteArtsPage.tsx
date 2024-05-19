@@ -25,8 +25,8 @@ const FavouriteArtsPage = () => {
   const dispatch = useDispatch();
   // @ts-ignore
   const artsFavoriteCollectionList = useSelector(state => state.artsFavoriteCollectionList);
-  // @ts-ignore
   const artsFavoriteCollectionListProcess = useSelector(
+    // @ts-ignore
     state => state.artsFavoriteCollectionListProcess
   );
   // @ts-ignore
