@@ -9,6 +9,18 @@ interface IResponseArtInfo {
   image_id: string;
 }
 
+interface IResponseDetailedArtInfo {
+  id: number;
+  title: string;
+  artist_title: string;
+  is_public_domain: boolean;
+  image_id: string;
+  date_display: string;
+  artist_display: string;
+  dimensions: string;
+  credit_line: string;
+}
+
 interface IResponseArtsBody {
   pagination: {
     total: number;
@@ -21,6 +33,18 @@ interface IResponseArtsBody {
   data: IResponseArtInfo[];
 }
 
+interface IResponseDetailedArtBody {
+  pagination: {
+    total: number;
+    limit: number;
+    offset: number;
+    total_pages: number;
+    current_page: number;
+    next_url: string;
+  };
+  data: IResponseDetailedArtInfo[];
+}
+
 export interface IArtInfo {
   id: number;
   title: string;
@@ -29,12 +53,36 @@ export interface IArtInfo {
   imageUrl: string | Promise<string>;
 }
 
+export interface IDetaildArtInfo {
+  id: number;
+  title: string;
+  artistName: string;
+  isPublicDomain: boolean;
+  imageUrl: string | Promise<string>;
+  date: string;
+  artistNationality: string | null;
+  artDimensions: string;
+  creditLine: string;
+}
+
 const emtyArtInfo = {
   id: null,
   title: null,
   artistName: null,
   isPublicDomain: null,
   imageUrl: null,
+};
+
+const emtyDetailedArtInfo = {
+  id: null,
+  title: null,
+  artistName: null,
+  isPublicDomain: null,
+  imageUrl: null,
+  date: null,
+  artistNationality: null,
+  artDimensions: null,
+  creditLine: null,
 };
 
 const useArtService = () => {
@@ -92,6 +140,17 @@ const useArtService = () => {
     }
   };
 
+  const getArtById = async (id: number): Promise<IDetaildArtInfo[]> => {
+    try {
+      const result: IResponseDetailedArtBody = await request(`${_apiBase}/${id}`);
+      return result.data.map(_DetailTransformArt);
+    } catch {
+      dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
+      // @ts-ignore
+      return [emtyDetailedArtInfo];
+    }
+  };
+
   const _transformArt = (art: IResponseArtInfo): IArtInfo => {
     return {
       id: art.id,
@@ -101,6 +160,22 @@ const useArtService = () => {
       imageUrl: art.image_id
         ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
         : '',
+    };
+  };
+
+  const _DetailTransformArt = (art: IResponseDetailedArtInfo): IDetaildArtInfo => {
+    return {
+      id: art.id,
+      title: art.title,
+      artistName: art.artist_title,
+      isPublicDomain: art.is_public_domain,
+      imageUrl: art.image_id
+        ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+        : '',
+      date: art.date_display,
+      artistNationality: art.artist_display.match(/\n(.+?),/)?.[1] || null,
+      artDimensions: art.dimensions,
+      creditLine: art.credit_line,
     };
   };
 

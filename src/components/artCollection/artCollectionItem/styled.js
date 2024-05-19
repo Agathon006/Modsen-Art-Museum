@@ -19,6 +19,7 @@ const PhotoWrapper = styled.div`
   width: 80px;
   height: 80px;
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+  cursor: pointer;
 `;
 
 const Photo = styled.img`
