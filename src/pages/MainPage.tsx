@@ -192,7 +192,11 @@ const MainPage = () => {
   return (
     <Wrapper>
       <MainPageTitle />
-      <MainPageSearchBar onSubmit={onGalleryArtsSearchRequest} />
+      <MainPageSearchBar
+        artsGallerySearch={artsGallerySearch}
+        artsGallerySortOption={artsGallerySortOption}
+        onSubmit={onGalleryArtsSearchRequest}
+      />
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />
       <MainPageSectionGallery process={artsGalleryListProcess} data={galleryArtsList} />

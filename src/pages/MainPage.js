@@ -207,7 +207,11 @@ var MainPage = function () {
   return _jsxs(Wrapper, {
     children: [
       _jsx(MainPageTitle, {}),
-      _jsx(MainPageSearchBar, { onSubmit: onGalleryArtsSearchRequest }),
+      _jsx(MainPageSearchBar, {
+        artsGallerySearch: artsGallerySearch,
+        artsGallerySortOption: artsGallerySortOption,
+        onSubmit: onGalleryArtsSearchRequest,
+      }),
       _jsx(MainPageGallerySubTitle, {}),
       _jsx(MainPageGalleryTitle, {}),
       _jsx(MainPageSectionGallery, { process: artsGalleryListProcess, data: galleryArtsList }),

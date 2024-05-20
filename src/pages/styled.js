@@ -105,26 +105,27 @@ const searchSchema = Yup.object().shape({
   ),
 });
 
-export const MainPageSearchBar = ({ onSubmit }) => {
+export const MainPageSearchBar = ({ artsGallerySearch, artsGallerySortOption, onSubmit }) => {
   return (
     <SearchBarContainer>
       <Formik
-        initialValues={{ searchQuery: '', sortOption: 'deault' }}
+        initialValues={{ searchQuery: artsGallerySearch, sortOption: artsGallerySortOption }}
         validationSchema={searchSchema}
         onSubmit={async (values, { setSubmitting }) => {
           await onSubmit(values.searchQuery, values.sortOption);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, handleChange, handleSubmit, values, setFieldValue }) => (
+        {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
           <Form>
             <Field
               id="searchQuery"
               name="searchQuery"
               type="text"
               placeholder="Search art, artist, work..."
+              value={values.searchQuery}
               component={SearchBarInput}
-              onChange={handleChange}
+              onChange={e => setFieldValue('searchQuery', e.target.value)}
               onKeyDown={e => {
                 if (e.key === 'Enter') {
                   handleSubmit();
@@ -148,6 +149,7 @@ export const MainPageSearchBar = ({ onSubmit }) => {
                     setFieldValue('sortOption', 'deault');
                     handleSubmit();
                   }}
+                  style={{ cursor: 'pointer' }}
                 />
                 <SortBarOptionLabel htmlFor="option1">deault</SortBarOptionLabel>
               </SortBarOptionContainer>
@@ -162,6 +164,7 @@ export const MainPageSearchBar = ({ onSubmit }) => {
                     setFieldValue('sortOption', 'modern');
                     handleSubmit();
                   }}
+                  style={{ cursor: 'pointer' }}
                 />
                 <SortBarOptionLabel htmlFor="option2">start with modern</SortBarOptionLabel>
               </SortBarOptionContainer>
@@ -176,6 +179,7 @@ export const MainPageSearchBar = ({ onSubmit }) => {
                     setFieldValue('sortOption', 'ancient');
                     handleSubmit();
                   }}
+                  style={{ cursor: 'pointer' }}
                 />
                 <SortBarOptionLabel htmlFor="option3">start with ancient</SortBarOptionLabel>
               </SortBarOptionContainer>
