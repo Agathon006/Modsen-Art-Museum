@@ -168,7 +168,7 @@ var useArtService = function () {
                       .concat(_apiBase, '/search?q=')
                       .concat(search, '&page=')
                       .concat(page ? page : 1, '&limit=3')
-                  : ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3&has_image=true')
+                  : ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3')
               ),
             ];
           case 1:
@@ -200,7 +200,7 @@ var useArtService = function () {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
-            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9&has_image=true'))];
+            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9'))];
           case 1:
             result = _b.sent();
             return [2 /*return*/, result.data.map(_transformArt)];
@@ -238,14 +238,29 @@ var useArtService = function () {
   };
   var getArtById = function (id) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result, _a;
+      var neededFields, result, _a;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
-            return [4 /*yield*/, request(''.concat(_apiBase, '/').concat(id))];
+            neededFields = [
+              'id',
+              'title',
+              'artist_title',
+              'is_public_domain',
+              'image_id',
+              'date_display',
+              'artist_display',
+              'dimensions',
+              'credit_line',
+            ];
+            return [
+              4 /*yield*/,
+              request(''.concat(_apiBase, '/').concat(id, '?fields=').concat(neededFields)),
+            ];
           case 1:
             result = _b.sent();
+            console.log(result);
             // @ts-ignore
             return [2 /*return*/, _DetailTransformArt(result.data)];
           case 2:
@@ -261,17 +276,16 @@ var useArtService = function () {
   };
   var getArtsByIdArray = function (idArray) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result, _a;
+      var neededFields, result, _a;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
+            neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
             return [
               4 /*yield*/,
-              Promise.all(
-                idArray.map(function (artId) {
-                  return request(''.concat(_apiBase, '/').concat(artId));
-                })
+              request(
+                ''.concat(_apiBase, '/?ids=').concat(idArray, '&fields=').concat(neededFields)
               ),
             ];
           case 1:
@@ -279,8 +293,8 @@ var useArtService = function () {
             // @ts-ignore
             return [
               2 /*return*/,
-              result.map(function (itemArt) {
-                return _transformArt(itemArt.data);
+              result.data.map(function (itemArt) {
+                return _transformArt(itemArt);
               }),
             ];
           case 2:

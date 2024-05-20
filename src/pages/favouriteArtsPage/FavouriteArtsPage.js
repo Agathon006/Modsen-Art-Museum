@@ -38,10 +38,12 @@ var FavouriteArtsPage = function () {
   var artsFavoriteCollectionList = useSelector(function (state) {
     return state.artsFavoriteCollectionList;
   });
-  // @ts-ignore
-  var artsFavoriteCollectionListProcess = useSelector(function (state) {
-    return state.artsFavoriteCollectionListProcess;
-  });
+  var artsFavoriteCollectionListProcess = useSelector(
+    // @ts-ignore
+    function (state) {
+      return state.artsFavoriteCollectionListProcess;
+    }
+  );
   // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favoriteArtsIdList;

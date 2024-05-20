@@ -97,7 +97,7 @@ const useArtService = () => {
       const result: IResponseArtsBody = await request(
         search
           ? `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3`
-          : `${_apiBase}?page=${page ? page : 1}&limit=3&has_image=true`
+          : `${_apiBase}?page=${page ? page : 1}&limit=3`
       );
       if (!page) {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
@@ -114,7 +114,7 @@ const useArtService = () => {
   // @ts-ignore
   const getCollectionArts = async (): Promise<IArtInfo[]> => {
     try {
-      const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9&has_image=true`);
+      const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9`);
       return result.data.map(_transformArt);
     } catch {
       dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
@@ -143,7 +143,20 @@ const useArtService = () => {
 
   const getArtById = async (id: number): Promise<IDetaildArtInfo> => {
     try {
-      const result: IResponseDetailedArtBody = await request(`${_apiBase}/${id}`);
+      const neededFields = [
+        'id',
+        'title',
+        'artist_title',
+        'is_public_domain',
+        'image_id',
+        'date_display',
+        'artist_display',
+        'dimensions',
+        'credit_line',
+      ];
+      const result: IResponseDetailedArtBody = await request(
+        `${_apiBase}/${id}?fields=${neededFields}`
+      );
       // @ts-ignore
       return _DetailTransformArt(result.data);
     } catch {
@@ -155,11 +168,12 @@ const useArtService = () => {
 
   const getArtsByIdArray = async (idArray: number[]): Promise<IArtInfo> => {
     try {
-      const result: any[] = await Promise.all(
-        idArray.map(artId => request(`${_apiBase}/${artId}`))
+      const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
+      const result: IResponseDetailedArtBody = await request(
+        `${_apiBase}/?ids=${idArray}&fields=${neededFields}`
       );
       // @ts-ignore
-      return result.map(itemArt => _transformArt(itemArt.data));
+      return result.data.map(itemArt => _transformArt(itemArt));
     } catch {
       dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
       // @ts-ignore
