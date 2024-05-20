@@ -131,6 +131,7 @@ var __generator =
   };
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
+import imageUrlChecker from '../utils/imageUrlChecker';
 var emtyArtInfo = {
   id: null,
   title: null,
@@ -250,7 +251,14 @@ var useArtService = function () {
                 payload: result.pagination.total_pages,
               });
             }
-            return [2 /*return*/, result.data.map(_transformArt)];
+            return [
+              2 /*return*/,
+              Promise.all(
+                result.data.map(function (itemArt) {
+                  return _transformArt(itemArt);
+                })
+              ),
+            ];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
@@ -277,7 +285,14 @@ var useArtService = function () {
             ];
           case 1:
             result = _b.sent();
-            return [2 /*return*/, result.data.map(_transformArt)];
+            return [
+              2 /*return*/,
+              Promise.all(
+                result.data.map(function (itemArt) {
+                  return _transformArt(itemArt);
+                })
+              ),
+            ];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
@@ -346,9 +361,11 @@ var useArtService = function () {
             // @ts-ignore
             return [
               2 /*return*/,
-              result.data.map(function (itemArt) {
-                return _transformArt(itemArt);
-              }),
+              Promise.all(
+                result.data.map(function (itemArt) {
+                  return _transformArt(itemArt);
+                })
+              ),
             ];
           case 2:
             _a = _b.sent();
@@ -362,30 +379,139 @@ var useArtService = function () {
     });
   };
   var _transformArt = function (art) {
-    return {
-      id: art.id,
-      title: art.title,
-      artistName: art.artist_title,
-      isPublicDomain: art.is_public_domain,
-      imageUrl: art.image_id
-        ? 'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
-        : '',
-    };
+    return __awaiter(void 0, void 0, void 0, function () {
+      var validUrl, error_1;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (!art.image_id) return [3 /*break*/, 5];
+            _a.label = 1;
+          case 1:
+            _a.trys.push([1, 3, , 4]);
+            return [
+              4 /*yield*/,
+              imageUrlChecker(
+                'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
+              ),
+            ];
+          case 2:
+            validUrl = _a.sent();
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                // @ts-ignore
+                imageUrl: validUrl,
+              },
+            ];
+          case 3:
+            error_1 = _a.sent();
+            console.log('Image loading error:', error_1, ' it was replaced with placeholder');
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                imageUrl: '',
+              },
+            ];
+          case 4:
+            return [3 /*break*/, 6];
+          case 5:
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                imageUrl: '',
+              },
+            ];
+          case 6:
+            return [2 /*return*/];
+        }
+      });
+    });
   };
+  // @ts-ignore
   var _DetailTransformArt = function (art) {
-    return {
-      id: art.id,
-      title: art.title,
-      artistName: art.artist_title,
-      isPublicDomain: art.is_public_domain,
-      imageUrl: art.image_id
-        ? 'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
-        : '',
-      date: art.date_display,
-      artistNationality: _NationalityIdentifier(art.artist_display),
-      artDimensions: art.dimensions,
-      creditLine: art.credit_line,
-    };
+    return __awaiter(void 0, void 0, void 0, function () {
+      var validUrl, error_2;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (!art.image_id) return [3 /*break*/, 5];
+            _a.label = 1;
+          case 1:
+            _a.trys.push([1, 3, , 4]);
+            return [
+              4 /*yield*/,
+              imageUrlChecker(
+                'https://www.artic.edu/iiif/2/'.concat(art.image_id, '/full/843,/0/default.jpg')
+              ),
+            ];
+          case 2:
+            validUrl = _a.sent();
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                // @ts-ignore
+                imageUrl: validUrl,
+                date: art.date_display,
+                artistNationality: _NationalityIdentifier(art.artist_display),
+                artDimensions: art.dimensions,
+                creditLine: art.credit_line,
+              },
+            ];
+          case 3:
+            error_2 = _a.sent();
+            console.log('Image loading error:', error_2, ' it was replaced with placeholder');
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                imageUrl: '',
+                date: art.date_display,
+                artistNationality: _NationalityIdentifier(art.artist_display),
+                artDimensions: art.dimensions,
+                creditLine: art.credit_line,
+              },
+            ];
+          case 4:
+            return [3 /*break*/, 6];
+          case 5:
+            return [
+              2 /*return*/,
+              {
+                id: art.id,
+                title: art.title,
+                artistName: art.artist_title,
+                isPublicDomain: art.is_public_domain,
+                imageUrl: '',
+                date: art.date_display,
+                artistNationality: _NationalityIdentifier(art.artist_display),
+                artDimensions: art.dimensions,
+                creditLine: art.credit_line,
+              },
+            ];
+          case 6:
+            return [2 /*return*/];
+        }
+      });
+    });
   };
   var _NationalityIdentifier = function (str) {
     var nationalitiesDictionary = [

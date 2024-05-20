@@ -1,6 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
 
+import imageUrlChecker from '../utils/imageUrlChecker';
+
 interface IResponseArtInfo {
   id: number;
   title: string;
@@ -142,7 +144,7 @@ const useArtService = () => {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
         dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
       }
-      return result.data.map(_transformArt);
+      return Promise.all(result.data.map(itemArt => _transformArt(itemArt)));
     } catch {
       dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
       // @ts-ignore
@@ -157,7 +159,7 @@ const useArtService = () => {
       const result: IResponseArtsBody = await request(
         `${_apiBase}/search?size=9&fields=${neededFields}`
       );
-      return result.data.map(_transformArt);
+      return Promise.all(result.data.map(itemArt => _transformArt(itemArt)));
     } catch {
       dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
       return Array(9).fill(emtyArtInfo);
@@ -198,7 +200,7 @@ const useArtService = () => {
         `${_apiBase}/?ids=${idArray}&fields=${neededFields}`
       );
       // @ts-ignore
-      return result.data.map(itemArt => _transformArt(itemArt));
+      return Promise.all(result.data.map(itemArt => _transformArt(itemArt)));
     } catch {
       dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
       // @ts-ignore
@@ -206,32 +208,87 @@ const useArtService = () => {
     }
   };
 
-  const _transformArt = (art: IResponseArtInfo): IArtInfo => {
-    return {
-      id: art.id,
-      title: art.title,
-      artistName: art.artist_title,
-      isPublicDomain: art.is_public_domain,
-      imageUrl: art.image_id
-        ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
-        : '',
-    };
+  const _transformArt = async (art: IResponseArtInfo): Promise<IArtInfo> => {
+    if (art.image_id) {
+      try {
+        const validUrl = await imageUrlChecker(
+          `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+        );
+        return {
+          id: art.id,
+          title: art.title,
+          artistName: art.artist_title,
+          isPublicDomain: art.is_public_domain,
+          // @ts-ignore
+          imageUrl: validUrl,
+        };
+      } catch (error) {
+        console.log('Image loading error:', error, ' it was replaced with placeholder');
+        return {
+          id: art.id,
+          title: art.title,
+          artistName: art.artist_title,
+          isPublicDomain: art.is_public_domain,
+          imageUrl: '',
+        };
+      }
+    } else {
+      return {
+        id: art.id,
+        title: art.title,
+        artistName: art.artist_title,
+        isPublicDomain: art.is_public_domain,
+        imageUrl: '',
+      };
+    }
   };
 
-  const _DetailTransformArt = (art: IResponseDetailedArtInfo): IDetaildArtInfo => {
-    return {
-      id: art.id,
-      title: art.title,
-      artistName: art.artist_title,
-      isPublicDomain: art.is_public_domain,
-      imageUrl: art.image_id
-        ? `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
-        : '',
-      date: art.date_display,
-      artistNationality: _NationalityIdentifier(art.artist_display),
-      artDimensions: art.dimensions,
-      creditLine: art.credit_line,
-    };
+  // @ts-ignore
+  const _DetailTransformArt = async (art: IResponseDetailedArtInfo): IDetaildArtInfo => {
+    if (art.image_id) {
+      try {
+        const validUrl = await imageUrlChecker(
+          `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+        );
+        return {
+          id: art.id,
+          title: art.title,
+          artistName: art.artist_title,
+          isPublicDomain: art.is_public_domain,
+          // @ts-ignore
+          imageUrl: validUrl,
+          date: art.date_display,
+          artistNationality: _NationalityIdentifier(art.artist_display),
+          artDimensions: art.dimensions,
+          creditLine: art.credit_line,
+        };
+      } catch (error) {
+        console.log('Image loading error:', error, ' it was replaced with placeholder');
+        return {
+          id: art.id,
+          title: art.title,
+          artistName: art.artist_title,
+          isPublicDomain: art.is_public_domain,
+          imageUrl: '',
+          date: art.date_display,
+          artistNationality: _NationalityIdentifier(art.artist_display),
+          artDimensions: art.dimensions,
+          creditLine: art.credit_line,
+        };
+      }
+    } else {
+      return {
+        id: art.id,
+        title: art.title,
+        artistName: art.artist_title,
+        isPublicDomain: art.is_public_domain,
+        imageUrl: '',
+        date: art.date_display,
+        artistNationality: _NationalityIdentifier(art.artist_display),
+        artDimensions: art.dimensions,
+        creditLine: art.credit_line,
+      };
+    }
   };
 
   const _NationalityIdentifier = (str: string) => {
