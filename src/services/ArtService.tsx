@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { useHttp } from '../hooks/http.hook';
-import { date } from 'yup';
 
 interface IResponseArtInfo {
   id: number;
@@ -94,10 +93,11 @@ const useArtService = () => {
 
   const getGalleryArts = async (page: number, search: string): Promise<IArtInfo[]> => {
     try {
+      const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
       const result: IResponseArtsBody = await request(
         search
-          ? `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3`
-          : `${_apiBase}?page=${page ? page : 1}&limit=3`
+          ? `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3&fields=${neededFields}`
+          : `${_apiBase}?page=${page ? page : 1}&limit=3&fields=${neededFields}`
       );
       if (!page) {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
@@ -107,37 +107,21 @@ const useArtService = () => {
     } catch {
       dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
       // @ts-ignore
-      return [emtyArtInfo, emtyArtInfo, emtyArtInfo];
+      return Array(3).fill(emtyArtInfo);
     }
   };
 
   // @ts-ignore
   const getCollectionArts = async (): Promise<IArtInfo[]> => {
     try {
-      const result: IResponseArtsBody = await request(`${_apiBase}?page=1&limit=9`);
+      const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
+      const result: IResponseArtsBody = await request(
+        `${_apiBase}/search?size=9&fields=${neededFields}`
+      );
       return result.data.map(_transformArt);
     } catch {
       dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
-      return [
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-      ];
+      return Array(9).fill(emtyArtInfo);
     }
   };
 
@@ -177,44 +161,7 @@ const useArtService = () => {
     } catch {
       dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
       // @ts-ignore
-      return [
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-        // @ts-ignore
-        emtyArtInfo,
-      ];
+      return Array(18).fill(emtyArtInfo);
     }
   };
 

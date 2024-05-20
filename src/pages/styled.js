@@ -85,7 +85,7 @@ export const MainPageSearchBar = ({ onSubmit }) => {
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, handleChange }) => (
+        {({ isSubmitting, handleChange, handleSubmit }) => (
           <Form>
             <Field
               id="searchQuery"
@@ -94,6 +94,11 @@ export const MainPageSearchBar = ({ onSubmit }) => {
               placeholder="Search art, artist, work..."
               component={SearchBarInput}
               onChange={handleChange}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  handleSubmit();
+                }
+              }}
             />
             <ErrorMessage style={{ color: 'red' }} name="searchQuery" component="div" />
             <SearchButton type="submit" disabled={isSubmitting}>

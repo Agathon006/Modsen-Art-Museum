@@ -155,11 +155,12 @@ var useArtService = function () {
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
   var getGalleryArts = function (page, search) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result, _a;
+      var neededFields, result, _a;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
+            neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
             return [
               4 /*yield*/,
               request(
@@ -167,8 +168,12 @@ var useArtService = function () {
                   ? ''
                       .concat(_apiBase, '/search?q=')
                       .concat(search, '&page=')
-                      .concat(page ? page : 1, '&limit=3')
-                  : ''.concat(_apiBase, '?page=').concat(page ? page : 1, '&limit=3')
+                      .concat(page ? page : 1, '&limit=3&fields=')
+                      .concat(neededFields)
+                  : ''
+                      .concat(_apiBase, '?page=')
+                      .concat(page ? page : 1, '&limit=3&fields=')
+                      .concat(neededFields)
               ),
             ];
           case 1:
@@ -185,7 +190,7 @@ var useArtService = function () {
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
             // @ts-ignore
-            return [2 /*return*/, [emtyArtInfo, emtyArtInfo, emtyArtInfo]];
+            return [2 /*return*/, Array(3).fill(emtyArtInfo)];
           case 3:
             return [2 /*return*/];
         }
@@ -195,41 +200,23 @@ var useArtService = function () {
   // @ts-ignore
   var getCollectionArts = function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var result, _a;
+      var neededFields, result, _a;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
-            return [4 /*yield*/, request(''.concat(_apiBase, '?page=1&limit=9'))];
+            neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
+            return [
+              4 /*yield*/,
+              request(''.concat(_apiBase, '/search?size=9&fields=').concat(neededFields)),
+            ];
           case 1:
             result = _b.sent();
             return [2 /*return*/, result.data.map(_transformArt)];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
-            return [
-              2 /*return*/,
-              [
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-              ],
-            ];
+            return [2 /*return*/, Array(9).fill(emtyArtInfo)];
           case 3:
             return [2 /*return*/];
         }
@@ -260,7 +247,6 @@ var useArtService = function () {
             ];
           case 1:
             result = _b.sent();
-            console.log(result);
             // @ts-ignore
             return [2 /*return*/, _DetailTransformArt(result.data)];
           case 2:
@@ -301,47 +287,7 @@ var useArtService = function () {
             _a = _b.sent();
             dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
             // @ts-ignore
-            return [
-              2 /*return*/,
-              [
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-                // @ts-ignore
-                emtyArtInfo,
-              ],
-            ];
+            return [2 /*return*/, Array(18).fill(emtyArtInfo)];
           case 3:
             return [2 /*return*/];
         }
