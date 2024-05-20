@@ -173,12 +173,15 @@ var MainPage = function () {
     getGalleryArts = _a.getGalleryArts,
     getCollectionArts = _a.getCollectionArts;
   var dispatch = useDispatch();
-  var _b = useState([]),
-    searchResults = _b[0],
-    setSearchResults = _b[1];
-  var _c = useState(-1),
-    selectedResultIndex = _c[0],
-    setSelectedResultIndex = _c[1];
+  var _b = useState(true),
+    searchingMode = _b[0],
+    setSearchingMode = _b[1];
+  var _c = useState([]),
+    searchResults = _c[0],
+    setSearchResults = _c[1];
+  var _d = useState(-1),
+    selectedResultIndex = _d[0],
+    setSelectedResultIndex = _d[1];
   // @ts-ignore
   var artsGallerySearch = useSelector(function (state) {
     return state.artsGallerySearch;
@@ -363,6 +366,8 @@ var MainPage = function () {
     children: [
       _jsx(MainPageTitle, {}),
       _jsx(MainPageSearchBar, {
+        searchingMode: searchingMode,
+        setSearchingMode: setSearchingMode,
         searchResults: searchResults,
         setSearchResults: setSearchResults,
         selectedResultIndex: selectedResultIndex,
@@ -370,7 +375,7 @@ var MainPage = function () {
         debouncedSearch: debouncedSearch,
         artsGallerySearch: artsGallerySearch,
         artsGallerySortOption: artsGallerySortOption,
-        onSubmit: onGalleryArtsSearchRequest,
+        onSubmitForm: onGalleryArtsSearchRequest,
       }),
       _jsx(MainPageGallerySubTitle, {}),
       _jsx(MainPageGalleryTitle, {}),

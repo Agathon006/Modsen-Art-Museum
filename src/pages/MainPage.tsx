@@ -31,6 +31,7 @@ const MainPage = () => {
   const { getArtTitlesByQuery, getGalleryArts, getCollectionArts } = useArtService();
   const dispatch = useDispatch();
 
+  const [searchingMode, setSearchingMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
 
@@ -203,6 +204,8 @@ const MainPage = () => {
     <Wrapper>
       <MainPageTitle />
       <MainPageSearchBar
+        searchingMode={searchingMode}
+        setSearchingMode={setSearchingMode}
         searchResults={searchResults}
         setSearchResults={setSearchResults}
         selectedResultIndex={selectedResultIndex}
@@ -210,7 +213,7 @@ const MainPage = () => {
         debouncedSearch={debouncedSearch}
         artsGallerySearch={artsGallerySearch}
         artsGallerySortOption={artsGallerySortOption}
-        onSubmit={onGalleryArtsSearchRequest}
+        onSubmitForm={onGalleryArtsSearchRequest}
       />
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />

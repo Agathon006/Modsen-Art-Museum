@@ -129,6 +129,8 @@ const SortBarOptionLabel = styled.label`
 `;
 
 export const MainPageSearchBar = ({
+  searchingMode,
+  setSearchingMode,
   searchResults,
   setSearchResults,
   selectedResultIndex,
@@ -136,20 +138,20 @@ export const MainPageSearchBar = ({
   debouncedSearch,
   artsGallerySearch,
   artsGallerySortOption,
-  onSubmit,
+  onSubmitForm,
 }) => {
   return (
     <SearchBarContainer>
       <Formik
         initialValues={{ searchQuery: artsGallerySearch, sortOption: artsGallerySortOption }}
         validationSchema={Yup.object().shape({
-          searchQuery: Yup.string().matches(
-            /^[A-Za-z0-9\s.,!?;:'"-]+$/,
-            'Only latin letters, numbers, spaces, and these special characters are allowed: . , ! ? ; : \' " - '
-          ),
+          searchQuery: Yup.string().max(200, 'Maximum 200 characters allowed'),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          await onSubmit(values.searchQuery, values.sortOption);
+          setSearchingMode(false);
+          setSelectedResultIndex(-1);
+          setSearchResults([]);
+          await onSubmitForm(values.searchQuery, values.sortOption);
           setSubmitting(false);
         }}
       >
@@ -162,6 +164,10 @@ export const MainPageSearchBar = ({
               placeholder="Search art, artist, work..."
               value={values.searchQuery}
               component={SearchBarInput}
+              onBlur={() => {
+                setSelectedResultIndex(-1);
+                setSearchResults([]);
+              }}
               onChange={e => {
                 setFieldValue('searchQuery', e.target.value);
               }}
@@ -192,15 +198,21 @@ export const MainPageSearchBar = ({
                   e.key !== 'ArrowDown' &&
                   e.key !== 'ArrowLeft' &&
                   e.key !== 'ArrowRight'
-                )
+                ) {
+                  setSearchingMode(true);
                   debouncedSearch(e.target.value);
+                }
               }}
             />
-            <ErrorMessage style={{ color: 'red' }} name="searchQuery" component="div" />
+            <ErrorMessage
+              style={{ color: 'red', marginLeft: '5px' }}
+              name="searchQuery"
+              component="div"
+            />
             <SearchButton type="submit" disabled={isSubmitting}>
               <SearchIcon />
             </SearchButton>
-            {searchResults.length > 0 && values.searchQuery && (
+            {searchResults.length > 0 && values.searchQuery && searchingMode && (
               <BounceSearchesContainer>
                 {searchResults.map((title, index) => (
                   <BounceSearchesOption
