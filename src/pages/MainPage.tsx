@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { IArtInfo } from './../services/ArtService';
@@ -28,8 +28,11 @@ const Wrapper = styled.main`
 `;
 
 const MainPage = () => {
-  const { getGalleryArts, getCollectionArts } = useArtService();
+  const { getArtTitlesByQuery, getGalleryArts, getCollectionArts } = useArtService();
   const dispatch = useDispatch();
+
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
 
   // @ts-ignore
   const artsGallerySearch = useSelector(state => state.artsGallerySearch);
@@ -82,6 +85,13 @@ const MainPage = () => {
   const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
+  };
+
+  const debouncedSearch = async (query: string) => {
+    const results = await getArtTitlesByQuery(query);
+    setSelectedResultIndex(-1);
+    // @ts-ignore
+    setSearchResults(results);
   };
 
   const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {
@@ -193,6 +203,11 @@ const MainPage = () => {
     <Wrapper>
       <MainPageTitle />
       <MainPageSearchBar
+        searchResults={searchResults}
+        setSearchResults={setSearchResults}
+        selectedResultIndex={selectedResultIndex}
+        setSelectedResultIndex={setSelectedResultIndex}
+        debouncedSearch={debouncedSearch}
         artsGallerySearch={artsGallerySearch}
         artsGallerySortOption={artsGallerySortOption}
         onSubmit={onGalleryArtsSearchRequest}

@@ -34,12 +34,13 @@ export const MainPageTitle = () => {
 };
 
 const SearchBarContainer = styled.div`
+  width: 762px;
   position: relative;
   margin-top: 72px;
 `;
 
 const SearchBarInput = styled.input`
-  width: 762px;
+  width: 100%;
   padding: 23.5px 48px 23.5px 16px;
   background: rgba(57, 57, 57, 0.05);
   border-radius: 16px;
@@ -50,7 +51,6 @@ const SearchBarInput = styled.input`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  text-transform: capitalize;
 
   &:focus {
     outline: none;
@@ -65,6 +65,36 @@ const SearchButton = styled.button`
   height: 32px;
   border: none;
   cursor: pointer;
+`;
+
+const BounceSearchesContainer = styled.div`
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+`;
+
+const BounceSearchesOption = styled.div`
+  padding: 16px 48px 16px 16px;
+  width: 100%;
+  background-color: ${({ $index, $selectedResultIndex }) =>
+    $index === $selectedResultIndex ? 'lightgray' : 'white'};
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+
+  &:hover {
+    background-color: #f0f0f0; // Or your desired hover color
+  }
 `;
 
 const SortBarContainer = styled.div`
@@ -98,19 +128,26 @@ const SortBarOptionLabel = styled.label`
   cursor: pointer;
 `;
 
-const searchSchema = Yup.object().shape({
-  searchQuery: Yup.string().matches(
-    /^[A-Za-z0-9\s]+$/,
-    'Only latin letters, numbers, and spaces are allowed'
-  ),
-});
-
-export const MainPageSearchBar = ({ artsGallerySearch, artsGallerySortOption, onSubmit }) => {
+export const MainPageSearchBar = ({
+  searchResults,
+  setSearchResults,
+  selectedResultIndex,
+  setSelectedResultIndex,
+  debouncedSearch,
+  artsGallerySearch,
+  artsGallerySortOption,
+  onSubmit,
+}) => {
   return (
     <SearchBarContainer>
       <Formik
         initialValues={{ searchQuery: artsGallerySearch, sortOption: artsGallerySortOption }}
-        validationSchema={searchSchema}
+        validationSchema={Yup.object().shape({
+          searchQuery: Yup.string().matches(
+            /^[A-Za-z0-9\s.,!?;:'"-]+$/,
+            'Only latin letters, numbers, spaces, and these special characters are allowed: . , ! ? ; : \' " - '
+          ),
+        })}
         onSubmit={async (values, { setSubmitting }) => {
           await onSubmit(values.searchQuery, values.sortOption);
           setSubmitting(false);
@@ -125,17 +162,62 @@ export const MainPageSearchBar = ({ artsGallerySearch, artsGallerySortOption, on
               placeholder="Search art, artist, work..."
               value={values.searchQuery}
               component={SearchBarInput}
-              onChange={e => setFieldValue('searchQuery', e.target.value)}
+              onChange={e => {
+                setFieldValue('searchQuery', e.target.value);
+              }}
               onKeyDown={e => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Backspace') {
+                  setSelectedResultIndex(-1);
+                  setSearchResults([]);
+                } else if (e.key === 'Enter' && selectedResultIndex === -1) {
+                  setSelectedResultIndex(-1);
+                  setSearchResults([]);
                   handleSubmit();
+                } else if (e.key === 'Enter' && selectedResultIndex > -1) {
+                  setFieldValue('searchQuery', searchResults[selectedResultIndex]);
+                  setSelectedResultIndex(-1);
+                  setSearchResults([]);
+                } else if (e.key === 'ArrowUp' && selectedResultIndex > -1) {
+                  setSelectedResultIndex(selectedResultIndex - 1);
+                } else if (
+                  e.key === 'ArrowDown' &&
+                  selectedResultIndex < searchResults.length - 1
+                ) {
+                  setSelectedResultIndex(selectedResultIndex + 1);
                 }
+                if (
+                  e.key !== 'Backspace' &&
+                  e.key !== 'Enter' &&
+                  e.key !== 'ArrowUp' &&
+                  e.key !== 'ArrowDown' &&
+                  e.key !== 'ArrowLeft' &&
+                  e.key !== 'ArrowRight'
+                )
+                  debouncedSearch(e.target.value);
               }}
             />
             <ErrorMessage style={{ color: 'red' }} name="searchQuery" component="div" />
             <SearchButton type="submit" disabled={isSubmitting}>
               <SearchIcon />
             </SearchButton>
+            {searchResults.length > 0 && values.searchQuery && (
+              <BounceSearchesContainer>
+                {searchResults.map((title, index) => (
+                  <BounceSearchesOption
+                    key={index}
+                    $index={index}
+                    $selectedResultIndex={selectedResultIndex}
+                    onClick={() => {
+                      setFieldValue('searchQuery', searchResults[index]);
+                      setSelectedResultIndex(-1);
+                      setSearchResults([]);
+                    }}
+                  >
+                    {title}
+                  </BounceSearchesOption>
+                ))}
+              </BounceSearchesContainer>
+            )}
             <SortBarContainer>
               <SortBarTitle>Sort:</SortBarTitle>
               <SortBarOptionContainer>

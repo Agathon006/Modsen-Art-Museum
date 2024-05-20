@@ -153,6 +153,38 @@ var useArtService = function () {
   var request = useHttp().request;
   var dispatch = useDispatch();
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
+  var getArtTitlesByQuery = function (query) {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result, _a;
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            _b.trys.push([0, 2, , 3]);
+            return [
+              4 /*yield*/,
+              request(''.concat(_apiBase, '/search?q=').concat(query, '&size=3&fields=title')),
+            ];
+          case 1:
+            result = _b.sent();
+            // @ts-ignore
+            return [
+              2 /*return*/,
+              result.data.length
+                ? result.data.map(function (artItem) {
+                    return artItem.title;
+                  })
+                : [],
+            ];
+          case 2:
+            _a = _b.sent();
+            // @ts-ignore
+            return [2 /*return*/, []];
+          case 3:
+            return [2 /*return*/];
+        }
+      });
+    });
+  };
   var getGalleryArts = function (page, search, sortOption) {
     return __awaiter(void 0, void 0, void 0, function () {
       var neededFields, requestUrl, result, _a;
@@ -300,6 +332,8 @@ var useArtService = function () {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
+            // @ts-ignore
+            if (!idArray.length) return [2 /*return*/, []];
             neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
             return [
               4 /*yield*/,
@@ -377,6 +411,7 @@ var useArtService = function () {
     return result;
   };
   return {
+    getArtTitlesByQuery: getArtTitlesByQuery,
     getGalleryArts: getGalleryArts,
     getCollectionArts: getCollectionArts,
     getArtById: getArtById,

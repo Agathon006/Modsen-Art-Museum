@@ -17,6 +17,25 @@ const SkeletonWrapper = styled.div`
   height: 130px;
 `;
 
+const GalleryPlaceholderWrapper = styled.div`
+  margin-top: 40px;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
+`;
+
+const GalleryPlaceholder = styled.span`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+`;
+
 function StyledArtCollection({ itemsNumber, process, artsCollectionArray }) {
   const renderArt = i => {
     if (artsCollectionArray[i]) {
@@ -40,7 +59,17 @@ function StyledArtCollection({ itemsNumber, process, artsCollectionArray }) {
     }
   }
 
-  return <Wrapper>{contentArray}</Wrapper>;
+  let noArtsPlaceholder = (
+    <GalleryPlaceholderWrapper>
+      <GalleryPlaceholder>You don't have favorites arts yet.</GalleryPlaceholder>
+    </GalleryPlaceholderWrapper>
+  );
+
+  return !artsCollectionArray.length && process !== 'loading' ? (
+    noArtsPlaceholder
+  ) : (
+    <Wrapper>{contentArray}</Wrapper>
+  );
 }
 
 export default StyledArtCollection;

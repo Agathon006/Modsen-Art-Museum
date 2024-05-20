@@ -91,6 +91,19 @@ const useArtService = () => {
 
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
+  const getArtTitlesByQuery = async (query: string): Promise<IArtInfo[]> => {
+    try {
+      const result: IResponseArtsBody = await request(
+        `${_apiBase}/search?q=${query}&size=3&fields=title`
+      );
+      // @ts-ignore
+      return result.data.length ? result.data.map(artItem => artItem.title) : [];
+    } catch {
+      // @ts-ignore
+      return [];
+    }
+  };
+
   const getGalleryArts = async (
     page: number,
     search: string,
@@ -178,6 +191,8 @@ const useArtService = () => {
 
   const getArtsByIdArray = async (idArray: number[]): Promise<IArtInfo> => {
     try {
+      // @ts-ignore
+      if (!idArray.length) return [];
       const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
       const result: IResponseDetailedArtBody = await request(
         `${_apiBase}/?ids=${idArray}&fields=${neededFields}`
@@ -241,6 +256,7 @@ const useArtService = () => {
   };
 
   return {
+    getArtTitlesByQuery,
     getGalleryArts,
     getCollectionArts,
     getArtById,
