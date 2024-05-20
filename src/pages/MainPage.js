@@ -46,6 +46,10 @@ var MainPage = function () {
     return state.artsGallerySearch;
   });
   // @ts-ignore
+  var artsGallerySortOption = useSelector(function (state) {
+    return state.artsGallerySortOption;
+  });
+  // @ts-ignore
   var galleryArtsList = useSelector(function (state) {
     return state.artsGalleryList;
   });
@@ -70,7 +74,6 @@ var MainPage = function () {
     return state.artsCollectionList;
   });
   useEffect(function () {
-    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
     onCollectionArtsRequest();
   }, []);
   var onCollectionArtsRequest = function () {
@@ -87,10 +90,13 @@ var MainPage = function () {
     [artsGalleryPage]
   );
   var onGalleryArtsRequest = function () {
-    getGalleryArts(artsGalleryPage, artsGallerySearch).then(onArtGalleryLoaded);
+    getGalleryArts(artsGalleryPage, artsGallerySearch, artsGallerySortOption).then(
+      onArtGalleryLoaded
+    );
   };
-  var onGalleryArtsSearchRequest = function (searchInput) {
+  var onGalleryArtsSearchRequest = function (searchInput, sortOption) {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
+    dispatch({ type: 'SET_ARTS_GALLERY_SORT_OPTION', payload: sortOption });
     dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });

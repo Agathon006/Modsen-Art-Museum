@@ -153,29 +153,62 @@ var useArtService = function () {
   var request = useHttp().request;
   var dispatch = useDispatch();
   var _apiBase = 'https://api.artic.edu/api/v1/artworks';
-  var getGalleryArts = function (page, search) {
+  var getGalleryArts = function (page, search, sortOption) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var neededFields, result, _a;
+      var neededFields, requestUrl, result, _a;
       return __generator(this, function (_b) {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
             neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
-            return [
-              4 /*yield*/,
-              request(
-                search
-                  ? ''
-                      .concat(_apiBase, '/search?q=')
-                      .concat(search, '&page=')
-                      .concat(page ? page : 1, '&limit=3&fields=')
-                      .concat(neededFields)
-                  : ''
-                      .concat(_apiBase, '?page=')
-                      .concat(page ? page : 1, '&limit=3&fields=')
-                      .concat(neededFields)
-              ),
-            ];
+            requestUrl = '';
+            if (search) {
+              switch (sortOption) {
+                case 'modern':
+                  requestUrl = ''
+                    .concat(_apiBase, '/search?q=')
+                    .concat(search, '&page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields, '&sort[date_start][order]=desc');
+                  break;
+                case 'ancient':
+                  requestUrl = ''
+                    .concat(_apiBase, '/search?q=')
+                    .concat(search, '&page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields, '&sort[date_start][order]=asc');
+                  break;
+                default:
+                  requestUrl = ''
+                    .concat(_apiBase, '/search?q=')
+                    .concat(search, '&page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields);
+                  break;
+              }
+            } else {
+              switch (sortOption) {
+                case 'modern':
+                  requestUrl = ''
+                    .concat(_apiBase, '/search?page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields, '&sort[date_start][order]=desc');
+                  break;
+                case 'ancient':
+                  requestUrl = ''
+                    .concat(_apiBase, '/search?page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields, '&sort[date_start][order]=asc');
+                  break;
+                default:
+                  requestUrl = ''
+                    .concat(_apiBase, '?page=')
+                    .concat(page ? page : 1, '&limit=3&fields=')
+                    .concat(neededFields);
+                  break;
+              }
+            }
+            return [4 /*yield*/, request(requestUrl)];
           case 1:
             result = _b.sent();
             if (!page) {

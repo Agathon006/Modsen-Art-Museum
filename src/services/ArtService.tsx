@@ -91,14 +91,40 @@ const useArtService = () => {
 
   const _apiBase = 'https://api.artic.edu/api/v1/artworks';
 
-  const getGalleryArts = async (page: number, search: string): Promise<IArtInfo[]> => {
+  const getGalleryArts = async (
+    page: number,
+    search: string,
+    sortOption: string
+  ): Promise<IArtInfo[]> => {
     try {
       const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
-      const result: IResponseArtsBody = await request(
-        search
-          ? `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3&fields=${neededFields}`
-          : `${_apiBase}?page=${page ? page : 1}&limit=3&fields=${neededFields}`
-      );
+      let requestUrl = '';
+      if (search) {
+        switch (sortOption) {
+          case 'modern':
+            requestUrl = `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3&fields=${neededFields}&sort[date_start][order]=desc`;
+            break;
+          case 'ancient':
+            requestUrl = `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3&fields=${neededFields}&sort[date_start][order]=asc`;
+            break;
+          default:
+            requestUrl = `${_apiBase}/search?q=${search}&page=${page ? page : 1}&limit=3&fields=${neededFields}`;
+            break;
+        }
+      } else {
+        switch (sortOption) {
+          case 'modern':
+            requestUrl = `${_apiBase}/search?page=${page ? page : 1}&limit=3&fields=${neededFields}&sort[date_start][order]=desc`;
+            break;
+          case 'ancient':
+            requestUrl = `${_apiBase}/search?page=${page ? page : 1}&limit=3&fields=${neededFields}&sort[date_start][order]=asc`;
+            break;
+          default:
+            requestUrl = `${_apiBase}?page=${page ? page : 1}&limit=3&fields=${neededFields}`;
+            break;
+        }
+      }
+      const result: IResponseArtsBody = await request(requestUrl);
       if (!page) {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
         dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });

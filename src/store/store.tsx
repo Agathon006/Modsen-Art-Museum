@@ -2,6 +2,7 @@ import { createStore } from 'redux';
 
 const initialState = {
   artsGallerySearch: '',
+  artsGallerySortOption: 'deault',
   artsGalleryList: [],
   artsGalleryListProcess: 'loading',
   artsGalleryPage: 0,
@@ -22,6 +23,11 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         artsGallerySearch: action.payload,
+      };
+    case 'SET_ARTS_GALLERY_SORT_OPTION':
+      return {
+        ...state,
+        artsGallerySortOption: action.payload,
       };
     case 'SET_ARTS_GALLERY_LIST':
       return {

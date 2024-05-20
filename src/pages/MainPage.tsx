@@ -34,6 +34,8 @@ const MainPage = () => {
   // @ts-ignore
   const artsGallerySearch = useSelector(state => state.artsGallerySearch);
   // @ts-ignore
+  const artsGallerySortOption = useSelector(state => state.artsGallerySortOption);
+  // @ts-ignore
   const galleryArtsList = useSelector(state => state.artsGalleryList);
   // @ts-ignore
   const artsGalleryListProcess = useSelector(state => state.artsGalleryListProcess);
@@ -47,7 +49,6 @@ const MainPage = () => {
   const artsCollectionList = useSelector(state => state.artsCollectionList);
 
   useEffect(() => {
-    dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: '' });
     onCollectionArtsRequest();
   }, []);
 
@@ -65,11 +66,14 @@ const MainPage = () => {
   }, [artsGalleryPage]);
 
   const onGalleryArtsRequest = () => {
-    getGalleryArts(artsGalleryPage, artsGallerySearch).then(onArtGalleryLoaded);
+    getGalleryArts(artsGalleryPage, artsGallerySearch, artsGallerySortOption).then(
+      onArtGalleryLoaded
+    );
   };
 
-  const onGalleryArtsSearchRequest = (searchInput: string) => {
+  const onGalleryArtsSearchRequest = (searchInput: string, sortOption: string) => {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
+    dispatch({ type: 'SET_ARTS_GALLERY_SORT_OPTION', payload: sortOption });
     dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });

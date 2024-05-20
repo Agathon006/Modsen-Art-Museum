@@ -67,6 +67,37 @@ const SearchButton = styled.button`
   cursor: pointer;
 `;
 
+const SortBarContainer = styled.div`
+  margin-top: 20px;
+  width: 762px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+`;
+
+const SortBarTitle = styled.span`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+`;
+
+const SortBarOptionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+const SortBarOptionLabel = styled.label`
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+  cursor: pointer;
+`;
+
 const searchSchema = Yup.object().shape({
   searchQuery: Yup.string().matches(
     /^[A-Za-z0-9\s]+$/,
@@ -78,14 +109,14 @@ export const MainPageSearchBar = ({ onSubmit }) => {
   return (
     <SearchBarContainer>
       <Formik
-        initialValues={{ searchQuery: '' }}
+        initialValues={{ searchQuery: '', sortOption: 'deault' }}
         validationSchema={searchSchema}
         onSubmit={async (values, { setSubmitting }) => {
-          await onSubmit(values.searchQuery);
+          await onSubmit(values.searchQuery, values.sortOption);
           setSubmitting(false);
         }}
       >
-        {({ isSubmitting, handleChange, handleSubmit }) => (
+        {({ isSubmitting, handleChange, handleSubmit, values, setFieldValue }) => (
           <Form>
             <Field
               id="searchQuery"
@@ -104,6 +135,51 @@ export const MainPageSearchBar = ({ onSubmit }) => {
             <SearchButton type="submit" disabled={isSubmitting}>
               <SearchIcon />
             </SearchButton>
+            <SortBarContainer>
+              <SortBarTitle>Sort:</SortBarTitle>
+              <SortBarOptionContainer>
+                <Field
+                  type="radio"
+                  id="option1"
+                  name="sortOption"
+                  value="deault"
+                  checked={values.sortOption === 'deault'}
+                  onChange={() => {
+                    setFieldValue('sortOption', 'deault');
+                    handleSubmit();
+                  }}
+                />
+                <SortBarOptionLabel htmlFor="option1">deault</SortBarOptionLabel>
+              </SortBarOptionContainer>
+              <SortBarOptionContainer>
+                <Field
+                  type="radio"
+                  id="option2"
+                  name="sortOption"
+                  value="modern"
+                  checked={values.sortOption === 'modern'}
+                  onChange={() => {
+                    setFieldValue('sortOption', 'modern');
+                    handleSubmit();
+                  }}
+                />
+                <SortBarOptionLabel htmlFor="option2">start with modern</SortBarOptionLabel>
+              </SortBarOptionContainer>
+              <SortBarOptionContainer>
+                <Field
+                  type="radio"
+                  id="option3"
+                  name="sortOption"
+                  value="ancient"
+                  checked={values.sortOption === 'ancient'}
+                  onChange={() => {
+                    setFieldValue('sortOption', 'ancient');
+                    handleSubmit();
+                  }}
+                />
+                <SortBarOptionLabel htmlFor="option3">start with ancient</SortBarOptionLabel>
+              </SortBarOptionContainer>
+            </SortBarContainer>
           </Form>
         )}
       </Formik>
