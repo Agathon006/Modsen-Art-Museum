@@ -141,6 +141,8 @@ const useArtService = () => {
       }
       const result: IResponseArtsBody = await request(requestUrl);
       if (!page) {
+        if (sortOption !== 'default' && result.pagination.total_pages > 333)
+          result.pagination.total_pages = 333;
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
         dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
       }

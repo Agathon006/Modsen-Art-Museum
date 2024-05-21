@@ -237,15 +237,15 @@ export const MainPageSearchBar = ({
                   type="radio"
                   id="option1"
                   name="sortOption"
-                  value="deault"
-                  checked={values.sortOption === 'deault'}
+                  value="default"
+                  checked={values.sortOption === 'default'}
                   onChange={() => {
-                    setFieldValue('sortOption', 'deault');
+                    setFieldValue('sortOption', 'default');
                     handleSubmit();
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', filter: `hue-rotate(180deg)` }}
                 />
-                <SortBarOptionLabel htmlFor="option1">deault</SortBarOptionLabel>
+                <SortBarOptionLabel htmlFor="option1">default</SortBarOptionLabel>
               </SortBarOptionContainer>
               <SortBarOptionContainer>
                 <Field
@@ -258,9 +258,9 @@ export const MainPageSearchBar = ({
                     setFieldValue('sortOption', 'modern');
                     handleSubmit();
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', filter: `hue-rotate(180deg)` }}
                 />
-                <SortBarOptionLabel htmlFor="option2">start with modern</SortBarOptionLabel>
+                <SortBarOptionLabel htmlFor="option2">TOP-999 modern</SortBarOptionLabel>
               </SortBarOptionContainer>
               <SortBarOptionContainer>
                 <Field
@@ -273,9 +273,9 @@ export const MainPageSearchBar = ({
                     setFieldValue('sortOption', 'ancient');
                     handleSubmit();
                   }}
-                  style={{ cursor: 'pointer' }}
+                  style={{ cursor: 'pointer', filter: `hue-rotate(180deg)` }}
                 />
-                <SortBarOptionLabel htmlFor="option3">start with ancient</SortBarOptionLabel>
+                <SortBarOptionLabel htmlFor="option3">TOP-999 ancient</SortBarOptionLabel>
               </SortBarOptionContainer>
             </SortBarContainer>
           </Form>

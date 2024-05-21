@@ -15,7 +15,7 @@ var __assign =
 import { createStore } from 'redux';
 var initialState = {
   artsGallerySearch: '',
-  artsGallerySortOption: 'deault',
+  artsGallerySortOption: 'default',
   artsGalleryList: [],
   artsGalleryListProcess: 'loading',
   artsGalleryPage: 0,

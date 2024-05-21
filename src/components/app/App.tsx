@@ -25,9 +25,8 @@ const App = () => {
           <AppLayout>
             <Routes>
               <Route path="/" element={<MainPage />} />
-              <Route path="/:id" element={<SingleArtPage />} />
               <Route path="/favorites" element={<FavouriteArtsPage />} />
-              <Route path="*" element={<span>page not found</span>} />
+              <Route path="/:id" element={<SingleArtPage />} />
             </Routes>
           </AppLayout>
         </Wrapper>

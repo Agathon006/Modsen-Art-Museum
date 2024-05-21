@@ -2,7 +2,7 @@ import { createStore } from 'redux';
 
 const initialState = {
   artsGallerySearch: '',
-  artsGallerySortOption: 'deault',
+  artsGallerySortOption: 'default',
   artsGalleryList: [],
   artsGalleryListProcess: 'loading',
   artsGalleryPage: 0,

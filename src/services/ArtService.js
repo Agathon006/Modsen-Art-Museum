@@ -245,6 +245,8 @@ var useArtService = function () {
           case 1:
             result = _b.sent();
             if (!page) {
+              if (sortOption !== 'default' && result.pagination.total_pages > 333)
+                result.pagination.total_pages = 333;
               dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
               dispatch({
                 type: 'SET_ARTS_GALLERY_ALL_PAGES',
