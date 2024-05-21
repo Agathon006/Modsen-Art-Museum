@@ -11,7 +11,7 @@ var __makeTemplateObject =
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AppLayout from '../../components/appLayout/AppLayout.js';
 import store from '../../store/store.js';
 import MainPage from '../../pages/MainPage.js';
@@ -39,7 +39,6 @@ var App = function () {
               _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
               _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
               _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
-              _jsx(Route, { path: '*', element: _jsx(Navigate, { to: '/', replace: true }) }),
             ],
           }),
         }),

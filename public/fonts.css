@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Lexend Deca';
+    src: url('./fonts/Lexend_Deca/LexendDeca-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
+}
