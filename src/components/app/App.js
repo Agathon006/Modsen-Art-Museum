@@ -12,9 +12,8 @@ import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AppLayout from '../../components/appLayout/AppLayout.js';
 import store from '../../store/store.js';
-import Header from '../header/index.js';
-import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
 import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
@@ -33,10 +32,9 @@ var App = function () {
   return _jsx(Provider, {
     store: store,
     children: _jsx(Router, {
-      children: _jsxs(Wrapper, {
-        children: [
-          _jsx(Header, {}),
-          _jsxs(Routes, {
+      children: _jsx(Wrapper, {
+        children: _jsx(AppLayout, {
+          children: _jsxs(Routes, {
             children: [
               _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
               _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
@@ -44,8 +42,7 @@ var App = function () {
               _jsx(Route, { path: '*', element: _jsx('span', { children: 'page not found' }) }),
             ],
           }),
-          _jsx(Footer, {}),
-        ],
+        }),
       }),
     }),
   });

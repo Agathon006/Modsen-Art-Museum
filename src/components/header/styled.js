@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logo.svg';
+import Home from '../../assets/home.svg';
 import Bookmark from '../../assets/bookmark.svg';
 
 const Wrapper = styled.header`
@@ -22,7 +23,12 @@ const Navigation = styled.nav`
   align-items: center;
 `;
 
-const FavoritesPageLinkWrapper = styled.div`
+const RightPartWrapper = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+const LinkWrapper = styled.div`
   height: 24px;
   display: flex;
   justify-content: space-between;
@@ -34,24 +40,46 @@ const FavoritesPageLinkSpan = styled.span`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 19px;
   color: #ffffff;
 `;
 
-function StyledHeader() {
+const HomeLinkSpan = styled.span`
+  margin-right: 8px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+`;
+
+function StyledHeader({ pathname }) {
+  let homelink = (
+    <Link to="/">
+      <LinkWrapper>
+        <Home />
+        <HomeLinkSpan>Home</HomeLinkSpan>
+      </LinkWrapper>
+    </Link>
+  );
+
   return (
     <Wrapper>
       <Navigation>
         <Link to="/">
           <Logo />
         </Link>
-        <Link to="/favorites">
-          <FavoritesPageLinkWrapper>
-            <Bookmark />
-            <FavoritesPageLinkSpan>Your favorites</FavoritesPageLinkSpan>
-          </FavoritesPageLinkWrapper>
-        </Link>
+        <RightPartWrapper>
+          {pathname !== '/' ? homelink : null}
+          <Link to="/favorites">
+            <LinkWrapper>
+              <Bookmark />
+              <FavoritesPageLinkSpan>Your favorites</FavoritesPageLinkSpan>
+            </LinkWrapper>
+          </Link>
+        </RightPartWrapper>
       </Navigation>
     </Wrapper>
   );

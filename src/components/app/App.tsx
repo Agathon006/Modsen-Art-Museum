@@ -3,9 +3,8 @@ import { Provider } from 'react-redux';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import AppLayout from '../../components/appLayout/AppLayout.js';
 import store from '../../store/store.js';
-import Header from '../header/index.js';
-import Footer from '../footer/index.js';
 import MainPage from '../../pages/MainPage.js';
 import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
@@ -23,14 +22,14 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Wrapper>
-          <Header />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/:id" element={<SingleArtPage />} />
-            <Route path="/favorites" element={<FavouriteArtsPage />} />
-            <Route path="*" element={<span>page not found</span>} />
-          </Routes>
-          <Footer />
+          <AppLayout>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/:id" element={<SingleArtPage />} />
+              <Route path="/favorites" element={<FavouriteArtsPage />} />
+              <Route path="*" element={<span>page not found</span>} />
+            </Routes>
+          </AppLayout>
         </Wrapper>
       </Router>
     </Provider>
