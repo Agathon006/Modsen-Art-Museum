@@ -25,6 +25,10 @@ const Navigation = styled.nav`
     width: 100%;
     padding: 0 30px;
   }
+
+  @media (max-width: 400px) {
+    padding: 0 10px;
+  }
 `;
 
 function StyledFooter() {

@@ -8,13 +8,17 @@ import Bookmark from '../../../assets/bookmark.svg';
 
 const Wrapper = styled.figure`
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
   align-items: center;
   padding: 16px 13px;
   width: 416px;
   height: 130px;
   background: #ffffff;
   border: 1px solid #f0f1f1;
+
+  @media (max-width: 425px) {
+    width: 381px;
+  }
 `;
 
 const PhotoWrapper = styled.div`
@@ -34,6 +38,10 @@ const DescriptionTextWrapper = styled.div`
   width: 219px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 425px) {
+    width: 184px;
+  }
 `;
 
 const DescriptionTextArtName = styled.span`

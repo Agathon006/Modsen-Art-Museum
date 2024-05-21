@@ -21,6 +21,7 @@ const Wrapper = styled.main`
 
   @media (max-width: 1400px) {
     width: 100%;
+    padding: 0 10px;
   }
 `;
 

@@ -14,6 +14,12 @@ const PhotoWrapper = styled.div`
   justify-content: center;
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
   border: 1px solid black;
+
+  @media (max-width: 520px) {
+    margin: 0 auto;
+    width: 370px;
+    height: 420px;
+  }
 `;
 
 const Photo = styled.img`

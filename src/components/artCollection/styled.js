@@ -23,6 +23,10 @@ const Wrapper = styled.div`
 const SkeletonWrapper = styled.div`
   width: 416px;
   height: 130px;
+
+  @media (max-width: 425px) {
+    width: 381px;
+  }
 `;
 
 const GalleryPlaceholderWrapper = styled.div`

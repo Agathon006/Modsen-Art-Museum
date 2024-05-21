@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -19,6 +19,10 @@ const Title = styled.h1`
   text-align: center;
   text-transform: capitalize;
   color: #393939;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 const TitleSpecial = styled.span`
@@ -115,6 +119,7 @@ const SortBarContainer = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 15px;
 `;
 
@@ -337,12 +342,22 @@ const GalleryWrapper = styled.section`
     gap: 20px;
     width: 514px;
   }
+
+  @media (max-width: 550px) {
+    width: 100%;
+    padding: 0 10px;
+  }
 `;
 
 const GallerySkeletonWrapper = styled.div`
   position: relative;
   width: 387px;
   height: 514px;
+
+  @media (max-width: 425px) {
+    width: 370px;
+    height: 420px;
+  }
 `;
 
 const GalleryPlaceholderWrapper = styled.div`
@@ -377,17 +392,26 @@ export const MainPageSectionGallery = ({ process, data }) => {
       <GalleryPlaceholder>No such arts</GalleryPlaceholder>
     </GalleryPlaceholderWrapper>
   );
-  let content = (
-    <>
-      <GallerySkeletonWrapper>{setContent(process, () => renderArt(0))}</GallerySkeletonWrapper>
-      <GallerySkeletonWrapper>{setContent(process, () => renderArt(1))}</GallerySkeletonWrapper>
-      <GallerySkeletonWrapper>{setContent(process, () => renderArt(2))}</GallerySkeletonWrapper>
-    </>
-  );
+
+  let contentArray = [];
+
+  if (process === 'loading') {
+    for (let i = 0; i < 3; i++) {
+      contentArray.push(
+        <GallerySkeletonWrapper key={i}>
+          {setContent(process, () => renderArt(i))}
+        </GallerySkeletonWrapper>
+      );
+    }
+  } else {
+    for (let i = 0; i < data.length; i++) {
+      contentArray.push(<Fragment key={i}>{setContent(process, () => renderArt(i))}</Fragment>);
+    }
+  }
 
   return (
     <GalleryWrapper>
-      {!data.length && process !== 'loading' ? noArtsPlaceholder : content}
+      {!data.length && process !== 'loading' ? noArtsPlaceholder : contentArray}
     </GalleryWrapper>
   );
 };
@@ -406,7 +430,7 @@ const GalleryNavigationWrapper = styled.nav`
 `;
 
 const GalleryNavigationSpan = styled.span`
-  padding: 0 10px;
+  padding: 5px 10px;
   min-width: 30px;
   height: 30px;
   border-radius: 4px;
@@ -417,6 +441,13 @@ const GalleryNavigationSpan = styled.span`
   font-size: 18px;
   line-height: 24px;
   color: #393939;
+  text-align: center;
+
+  @media (max-width: 600px) {
+    height: 20px;
+    font-size: 14px;
+    padding: 1px 3px;
+  }
 `;
 
 const GalleryNavigationButtonInactive = styled.button`
@@ -431,6 +462,13 @@ const GalleryNavigationButtonInactive = styled.button`
   font-size: 18px;
   line-height: 24px;
   color: #393939;
+
+  @media (max-width: 600px) {
+    height: 20px;
+    min-width: 20px;
+    font-size: 14px;
+    padding: 0 3px;
+  }
 `;
 
 const GalleryNavigationButtonActive = styled.button`
@@ -445,6 +483,13 @@ const GalleryNavigationButtonActive = styled.button`
   font-size: 18px;
   line-height: 23px;
   color: #ffffff;
+
+  @media (max-width: 600px) {
+    height: 20px;
+    min-width: 20px;
+    font-size: 14px;
+    padding: 0 3px;
+  }
 `;
 
 export const MainPageSectionGalleryNavigation = ({ paginationClicked, paginationArray }) => {

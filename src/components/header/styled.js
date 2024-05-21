@@ -117,6 +117,10 @@ const BurgerMenuContent = styled.aside`
   width: 60%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 425px) {
+    width: 80%;
+  }
 `;
 
 const BurgerMenuCloseButton = styled.aside`

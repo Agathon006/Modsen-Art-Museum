@@ -29,6 +29,10 @@ const Wrapper = styled.main`
     flex-direction: column;
     align-items: center;
   }
+
+  @media (max-width: 520px) {
+    padding: 0 10px;
+  }
 `;
 
 const PhotoSkeletonWrapper = styled.div`
@@ -38,10 +42,21 @@ const PhotoSkeletonWrapper = styled.div`
   @media (max-width: 900px) {
     align-self: center;
   }
+
+  @media (max-width: 520px) {
+    margin: 0 auto;
+    width: 370px;
+    height: 420px;
+  }
 `;
 
 const DescriptionSkeletonWrapper = styled.div`
   width: 703px;
+  margin: 0 auto;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const SingleArtPage = () => {

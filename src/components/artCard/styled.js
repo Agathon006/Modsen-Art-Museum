@@ -10,6 +10,11 @@ const Wrapper = styled.figure`
   position: relative;
   width: 387px;
   height: 514px;
+
+  @media (max-width: 425px) {
+    width: 370px;
+    height: 420px;
+  }
 `;
 
 const PhotoWrapper = styled.div`
@@ -24,6 +29,11 @@ const PhotoWrapper = styled.div`
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
   border: 1px solid black;
   cursor: pointer;
+
+  @media (max-width: 425px) {
+    width: 370px;
+    height: 363px;
+  }
 `;
 
 const Photo = styled.img`
@@ -44,6 +54,10 @@ const Description = styled.figcaption`
   padding: 17px 24px;
   background: #ffffff;
   border: 1px solid #f0f1f1;
+
+  @media (max-width: 425px) {
+    left: 17px;
+  }
 `;
 
 const DescriptionTextWrapper = styled.div`

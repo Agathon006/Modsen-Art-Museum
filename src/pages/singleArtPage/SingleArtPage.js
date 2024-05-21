@@ -24,10 +24,10 @@ var Wrapper = styled.main(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n\n  @media (max-width: 520px) {\n    padding: 0 10px;\n  }\n',
       ],
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n\n  @media (max-width: 520px) {\n    padding: 0 10px;\n  }\n',
       ]
     ))
 );
@@ -35,16 +35,23 @@ var PhotoSkeletonWrapper = styled.div(
   templateObject_2 ||
     (templateObject_2 = __makeTemplateObject(
       [
-        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n',
+        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n\n  @media (max-width: 520px) {\n    margin: 0 auto;\n    width: 370px;\n    height: 420px;\n  }\n',
       ],
       [
-        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n',
+        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n\n  @media (max-width: 520px) {\n    margin: 0 auto;\n    width: 370px;\n    height: 420px;\n  }\n',
       ]
     ))
 );
 var DescriptionSkeletonWrapper = styled.div(
   templateObject_3 ||
-    (templateObject_3 = __makeTemplateObject(['\n  width: 703px;\n'], ['\n  width: 703px;\n']))
+    (templateObject_3 = __makeTemplateObject(
+      [
+        '\n  width: 703px;\n  margin: 0 auto;\n\n  @media (max-width: 900px) {\n    width: 100%;\n  }\n',
+      ],
+      [
+        '\n  width: 703px;\n  margin: 0 auto;\n\n  @media (max-width: 900px) {\n    width: 100%;\n  }\n',
+      ]
+    ))
 );
 var SingleArtPage = function () {
   var getArtById = useArtService().getArtById;
