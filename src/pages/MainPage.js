@@ -160,10 +160,10 @@ var Wrapper = styled.main(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n  }\n',
       ],
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n  }\n',
       ]
     ))
 );

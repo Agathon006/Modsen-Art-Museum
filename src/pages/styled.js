@@ -37,6 +37,11 @@ const SearchBarContainer = styled.div`
   width: 762px;
   position: relative;
   margin-top: 72px;
+
+  @media (max-width: 800px) {
+    width: 100%;
+    padding: 0 20px;
+  }
 `;
 
 const SearchBarInput = styled.input`
@@ -65,6 +70,10 @@ const SearchButton = styled.button`
   height: 32px;
   border: none;
   cursor: pointer;
+
+  @media (max-width: 800px) {
+    right: 36px;
+  }
 `;
 
 const BounceSearchesContainer = styled.div`
@@ -72,6 +81,11 @@ const BounceSearchesContainer = styled.div`
   top: 64px;
   left: 0;
   width: 100%;
+  z-index: 3;
+
+  @media (max-width: 800px) {
+    padding: 0 20px;
+  }
 `;
 
 const BounceSearchesOption = styled.div`
@@ -93,13 +107,12 @@ const BounceSearchesOption = styled.div`
   line-height: 17px;
 
   &:hover {
-    background-color: #f0f0f0; // Or your desired hover color
+    background-color: #f0f0f0;
   }
 `;
 
 const SortBarContainer = styled.div`
   margin-top: 20px;
-  width: 762px;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -318,7 +331,12 @@ const GalleryWrapper = styled.section`
   justify-content: space-between;
   align-items: center;
   width: 1280px;
-  height: 514px;
+
+  @media (max-width: 1400px) {
+    flex-direction: column;
+    gap: 20px;
+    width: 514px;
+  }
 `;
 
 const GallerySkeletonWrapper = styled.div`
@@ -329,7 +347,7 @@ const GallerySkeletonWrapper = styled.div`
 
 const GalleryPlaceholderWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 514px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -375,13 +393,16 @@ export const MainPageSectionGallery = ({ process, data }) => {
 };
 
 const GalleryNavigationWrapper = styled.nav`
-  align-self: flex-end;
   margin-top: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   height: 30px;
+
+  @media (max-width: 1400px) {
+    align-self: center;
+  }
 `;
 
 const GalleryNavigationSpan = styled.span`

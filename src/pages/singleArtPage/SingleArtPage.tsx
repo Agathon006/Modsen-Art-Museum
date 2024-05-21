@@ -16,12 +16,28 @@ const Wrapper = styled.main`
   width: 1280px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 80px;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    padding: 0 30px;
+    gap: 30px;
+  }
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const PhotoSkeletonWrapper = styled.div`
   width: 497px;
   height: 570px;
+
+  @media (max-width: 900px) {
+    align-self: center;
+  }
 `;
 
 const DescriptionSkeletonWrapper = styled.div`

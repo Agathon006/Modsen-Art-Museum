@@ -21,6 +21,11 @@ const Navigation = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    padding: 0 30px;
+  }
 `;
 
 const RightPartWrapper = styled.div`

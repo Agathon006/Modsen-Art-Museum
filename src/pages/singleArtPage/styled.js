@@ -51,11 +51,21 @@ export const StyledPicture = ({ dispatch, isFavorite, artInfo }) => {
 };
 
 const DescriptionWrapper = styled.section`
-  width: 703px;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 900px) {
+    gap: 30px;
+  }
+`;
+
+const TopDescriptionWrapper = styled.div`
+  @media (max-width: 900px) {
+    text-align: center;
+  }
 `;
 
 const Title = styled.h2`
@@ -110,11 +120,11 @@ const OverviewSpecialText = styled.span`
 export const StyledDescription = ({ artInfo }) => {
   return (
     <DescriptionWrapper>
-      <div>
+      <TopDescriptionWrapper>
         <Title>{artInfo.title ? artInfo.title : 'Unknown title'}</Title>
         <ArtistName>{artInfo.artistName ? artInfo.artistName : 'Unknown artist'}</ArtistName>
         <ArtDate>{artInfo.date ? artInfo.date : 'Unknown date'}</ArtDate>
-      </div>
+      </TopDescriptionWrapper>
       <div>
         <Title>Overview</Title>
         <OverviewWrapper>

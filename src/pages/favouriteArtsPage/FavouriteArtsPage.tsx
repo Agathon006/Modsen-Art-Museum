@@ -18,6 +18,10 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+  }
 `;
 
 const FavouriteArtsPage = () => {

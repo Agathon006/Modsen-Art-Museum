@@ -24,18 +24,22 @@ var Wrapper = styled.main(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n',
       ],
       [
-        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: space-between;\n',
+        '\n  width: 1280px;\n  margin: 0 auto;\n  display: flex;\n  justify-content: center;\n  gap: 80px;\n\n  @media (max-width: 1400px) {\n    width: 100%;\n    padding: 0 30px;\n    gap: 30px;\n  }\n\n  @media (max-width: 900px) {\n    flex-direction: column;\n    align-items: center;\n  }\n',
       ]
     ))
 );
 var PhotoSkeletonWrapper = styled.div(
   templateObject_2 ||
     (templateObject_2 = __makeTemplateObject(
-      ['\n  width: 497px;\n  height: 570px;\n'],
-      ['\n  width: 497px;\n  height: 570px;\n']
+      [
+        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n',
+      ],
+      [
+        '\n  width: 497px;\n  height: 570px;\n\n  @media (max-width: 900px) {\n    align-self: center;\n  }\n',
+      ]
     ))
 );
 var DescriptionSkeletonWrapper = styled.div(
