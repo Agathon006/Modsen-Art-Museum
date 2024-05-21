@@ -14,6 +14,7 @@ var __assign =
   };
 import { createStore } from 'redux';
 var initialState = {
+  asideMode: false,
   artsGallerySearch: '',
   artsGallerySortOption: 'default',
   artsGalleryList: [],
@@ -34,6 +35,8 @@ var reducer = function (state, action) {
     state = initialState;
   }
   switch (action.type) {
+    case 'SET_ASIDE_MODE':
+      return __assign(__assign({}, state), { asideMode: action.payload });
     case 'SET_ARTS_GALLERY_SEARCH':
       return __assign(__assign({}, state), { artsGallerySearch: action.payload });
     case 'SET_ARTS_GALLERY_SORT_OPTION':

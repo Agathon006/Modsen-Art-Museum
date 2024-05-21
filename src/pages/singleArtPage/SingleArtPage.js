@@ -50,6 +50,9 @@ var SingleArtPage = function () {
   var getArtById = useArtService().getArtById;
   var dispatch = useDispatch();
   var id = useParams().id;
+  useEffect(function () {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
+  }, []);
   useEffect(
     function () {
       dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });

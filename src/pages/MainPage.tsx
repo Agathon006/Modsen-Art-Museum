@@ -57,6 +57,7 @@ const MainPage = () => {
   const artsCollectionList = useSelector(state => state.artsCollectionList);
 
   useEffect(() => {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
     onCollectionArtsRequest();
   }, []);
 

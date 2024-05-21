@@ -50,6 +50,10 @@ const SingleArtPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
+  }, []);
+
+  useEffect(() => {
     dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });
     updateData();
   }, [id]);

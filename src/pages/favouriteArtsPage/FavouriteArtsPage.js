@@ -49,6 +49,7 @@ var FavouriteArtsPage = function () {
     return state.favoriteArtsIdList;
   });
   useEffect(function () {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'loading' });
     updateData();
   }, []);

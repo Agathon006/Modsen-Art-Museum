@@ -215,6 +215,7 @@ var MainPage = function () {
     return state.artsCollectionList;
   });
   useEffect(function () {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
     onCollectionArtsRequest();
   }, []);
   var onCollectionArtsRequest = function () {

@@ -1,6 +1,7 @@
 import { createStore } from 'redux';
 
 const initialState = {
+  asideMode: false,
   artsGallerySearch: '',
   artsGallerySortOption: 'default',
   artsGalleryList: [],
@@ -19,6 +20,11 @@ const initialState = {
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
+    case 'SET_ASIDE_MODE':
+      return {
+        ...state,
+        asideMode: action.payload,
+      };
     case 'SET_ARTS_GALLERY_SEARCH':
       return {
         ...state,
