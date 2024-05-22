@@ -1,15 +1,15 @@
 import { ActionTypes } from '../../actions/burgerMenuAside/index.js';
-import { SetAsideModeAction } from '../../actions/burgerMenuAside/index.js';
+import { ISetAsideModeAction } from '../../actions/burgerMenuAside/index.js';
 
-export interface BurgerMenuAsideState {
+export interface IBurgerMenuAsideState {
   asideMode: boolean;
 }
 
-const initialState: BurgerMenuAsideState = {
+const initialState: IBurgerMenuAsideState = {
   asideMode: false,
 };
 
-export const burgerMenuAsideReducer = (state = initialState, action: SetAsideModeAction) => {
+export const burgerMenuAsideReducer = (state = initialState, action: ISetAsideModeAction) => {
   switch (action.type) {
     case ActionTypes.SET_ASIDE_MODE:
       return {

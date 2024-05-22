@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook';
 
 import imageUrlChecker from '../utils/imageUrlChecker';
 
-interface ArtInfo {
+interface IArtInfo {
   id: number | null;
   title: string | null;
   artist_title: string | null;
@@ -11,14 +11,14 @@ interface ArtInfo {
   image_id: string | null;
 }
 
-interface DetailedArtInfo extends ArtInfo {
+interface IDetailedArtInfo extends IArtInfo {
   date_display: string | null;
   artist_display: string | null;
   dimensions: string | null;
   credit_line: string | null;
 }
 
-interface HandledArtInfo {
+interface IHandledArtInfo {
   id: number | null;
   title: string | null;
   artistName: string | null;
@@ -26,14 +26,14 @@ interface HandledArtInfo {
   imageUrl: string | null;
 }
 
-interface HandledDetailedArtInfo extends HandledArtInfo {
+interface IHandledDetailedArtInfo extends IHandledArtInfo {
   date: string | null;
   artistNationality: string | null;
   artDimensions: string | null;
   creditLine: string | null;
 }
 
-const emtyArtInfo: HandledArtInfo = {
+const emtyArtInfo: IHandledArtInfo = {
   id: null,
   title: null,
   artistName: null,
@@ -41,7 +41,7 @@ const emtyArtInfo: HandledArtInfo = {
   imageUrl: null,
 };
 
-const emtyDetailedArtInfo: HandledDetailedArtInfo = {
+const emtyDetailedArtInfo: IHandledDetailedArtInfo = {
   id: null,
   title: null,
   artistName: null,
@@ -62,7 +62,7 @@ const useArtService = () => {
   const getArtTitlesByQuery = async (query: string) => {
     try {
       const result = await request(`${_apiBase}/search?q=${query}&size=3&fields=title`);
-      return result.data.length ? result.data.map((artItem: ArtInfo) => artItem.title) : [];
+      return result.data.length ? result.data.map((artItem: IArtInfo) => artItem.title) : [];
     } catch {
       return [];
     }
@@ -104,7 +104,7 @@ const useArtService = () => {
         dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: result.pagination.current_page });
         dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: result.pagination.total_pages });
       }
-      return Promise.all(result.data.map((artItem: ArtInfo) => _transformArt(artItem)));
+      return Promise.all(result.data.map((artItem: IArtInfo) => _transformArt(artItem)));
     } catch {
       dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
 
@@ -116,7 +116,7 @@ const useArtService = () => {
     try {
       const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
       const result = await request(`${_apiBase}/search?size=9&fields=${neededFields}`);
-      return Promise.all(result.data.map((artItem: ArtInfo) => _transformArt(artItem)));
+      return Promise.all(result.data.map((artItem: IArtInfo) => _transformArt(artItem)));
     } catch {
       dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'error' });
       return Array(9).fill(emtyArtInfo);
@@ -151,7 +151,7 @@ const useArtService = () => {
       if (!idArray.length) return [];
       const neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
       const result = await request(`${_apiBase}/?ids=${idArray}&fields=${neededFields}`);
-      return Promise.all(result.data.map((artItem: ArtInfo) => _transformArt(artItem)));
+      return Promise.all(result.data.map((artItem: IArtInfo) => _transformArt(artItem)));
     } catch {
       dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
 
@@ -159,7 +159,7 @@ const useArtService = () => {
     }
   };
 
-  const _transformArt = async (art: ArtInfo) => {
+  const _transformArt = async (art: IArtInfo) => {
     if (art.image_id) {
       try {
         const validUrl = await imageUrlChecker(
@@ -194,7 +194,7 @@ const useArtService = () => {
     }
   };
 
-  const _DetailTransformArt = async (art: DetailedArtInfo) => {
+  const _DetailTransformArt = async (art: IDetailedArtInfo) => {
     if (art.image_id) {
       try {
         const validUrl = await imageUrlChecker(

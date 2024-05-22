@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import StyledArtCard from './styled.js';
 var ArtCard = function (props) {
+  console.log(props);
   var dispatch = useDispatch();
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favorite.favoriteArtsIdList;

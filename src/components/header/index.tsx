@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../../store/reducers/index.js';
+import { IRootState } from '../../store/reducers/index.js';
 
 // @ts-ignore
 import StyledHeader from './styled.js';
@@ -13,7 +13,7 @@ const Header = () => {
   const { pathname } = location;
 
   const dispatch = useDispatch();
-  const asideMode = useSelector((state: RootState) => state.burgerMenuAside.asideMode);
+  const asideMode = useSelector((state: IRootState) => state.burgerMenuAside.asideMode);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (wrapperRef.current === event.target) {

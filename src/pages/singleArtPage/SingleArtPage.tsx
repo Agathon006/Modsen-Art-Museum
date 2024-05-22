@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../../store/reducers/index.js';
+import { IRootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
@@ -84,10 +84,10 @@ const SingleArtPage = () => {
     dispatch({ type: 'SET_ART_BY_ID', payload: data });
   };
 
-  const artByID = useSelector((state: RootState) => state.artById.artByID);
-  const artByIDProcess = useSelector((state: RootState) => state.artById.artByIDProcess);
+  const artByID = useSelector((state: IRootState) => state.artById.artByID);
+  const artByIDProcess = useSelector((state: IRootState) => state.artById.artByIDProcess);
 
-  const favoriteArtsIdList = useSelector((state: RootState) => state.favorite.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector((state: IRootState) => state.favorite.favoriteArtsIdList);
   let isFavorite = favoriteArtsIdList.includes(artByID.id);
 
   const renderPicture = () => {

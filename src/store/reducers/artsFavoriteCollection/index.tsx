@@ -1,17 +1,17 @@
 import { ActionTypes } from '../../actions/artsFavoriteCollection/index.js';
 import {
-  SetFavoriteCollectionListAction,
-  SetFavoriteCollectionListProcessAction,
-  SetFavoriteArtsIdListAction,
+  ISetFavoriteCollectionListAction,
+  ISetFavoriteCollectionListProcessAction,
+  ISetFavoriteArtsIdListAction,
 } from '../../actions/artsFavoriteCollection/index.js';
 
-export interface FavoriteState {
+export interface IFavoriteState {
   artsFavoriteCollectionList: any[];
   artsFavoriteCollectionListProcess: 'loading' | 'confirmed' | 'error';
   favoriteArtsIdList: number[];
 }
 
-const initialState: FavoriteState = {
+const initialState: IFavoriteState = {
   artsFavoriteCollectionList: [],
   artsFavoriteCollectionListProcess: 'loading',
   favoriteArtsIdList: JSON.parse(localStorage.getItem('favoriteArtsIdList') ?? '[]'),
@@ -20,9 +20,9 @@ const initialState: FavoriteState = {
 export const favoriteReducer = (
   state = initialState,
   action:
-    | SetFavoriteCollectionListAction
-    | SetFavoriteCollectionListProcessAction
-    | SetFavoriteArtsIdListAction
+    | ISetFavoriteCollectionListAction
+    | ISetFavoriteCollectionListProcessAction
+    | ISetFavoriteArtsIdListAction
 ) => {
   switch (action.type) {
     case ActionTypes.SET_FAVORITE_COLLECTION_LIST:

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../store/reducers/index.js';
+import { IRootState } from '../store/reducers/index.js';
 import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
 import useArtService from './../services/ArtService';
 import ArtCollection from '../components/artCollection/ArtCollection.js';
@@ -40,23 +40,23 @@ const MainPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
 
-  const artsGallerySearch = useSelector((state: RootState) => state.artsGallery.artsGallerySearch);
+  const artsGallerySearch = useSelector((state: IRootState) => state.artsGallery.artsGallerySearch);
   const artsGallerySortOption = useSelector(
-    (state: RootState) => state.artsGallery.artsGallerySortOption
+    (state: IRootState) => state.artsGallery.artsGallerySortOption
   );
-  const galleryArtsList = useSelector((state: RootState) => state.artsGallery.artsGalleryList);
+  const galleryArtsList = useSelector((state: IRootState) => state.artsGallery.artsGalleryList);
   const artsGalleryListProcess = useSelector(
-    (state: RootState) => state.artsGallery.artsGalleryListProcess
+    (state: IRootState) => state.artsGallery.artsGalleryListProcess
   );
-  const artsGalleryPage = useSelector((state: RootState) => state.artsGallery.artsGalleryPage);
+  const artsGalleryPage = useSelector((state: IRootState) => state.artsGallery.artsGalleryPage);
   const artsGalleryAllPages = useSelector(
-    (state: RootState) => state.artsGallery.artsGalleryAllPages
+    (state: IRootState) => state.artsGallery.artsGalleryAllPages
   );
   const artsCollectionList = useSelector(
-    (state: RootState) => state.artsCollection.artsCollectionList
+    (state: IRootState) => state.artsCollection.artsCollectionList
   );
   const artsCollectionListProcess = useSelector(
-    (state: RootState) => state.artsCollection.artsCollectionListProcess
+    (state: IRootState) => state.artsCollection.artsCollectionListProcess
   );
 
   useEffect(() => {

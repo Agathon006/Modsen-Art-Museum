@@ -4,34 +4,34 @@ export enum ActionTypes {
   SET_FAVORITE_ARTS_ID_LIST = 'SET_FAVORITE_ARTS_ID_LIST',
 }
 
-export interface SetFavoriteCollectionListAction {
+export interface ISetFavoriteCollectionListAction {
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST;
   payload: any[];
 }
 
-export interface SetFavoriteCollectionListProcessAction {
+export interface ISetFavoriteCollectionListProcessAction {
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST_PROCESS;
   payload: 'loading' | 'confirmed' | 'error';
 }
 
-export interface SetFavoriteArtsIdListAction {
+export interface ISetFavoriteArtsIdListAction {
   type: ActionTypes.SET_FAVORITE_ARTS_ID_LIST;
   payload: number[];
 }
 
-export const setFavoriteCollectionList = (payload: any[]): SetFavoriteCollectionListAction => ({
+export const setFavoriteCollectionList = (payload: any[]): ISetFavoriteCollectionListAction => ({
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST,
   payload,
 });
 
 export const setFavoriteCollectionListProcess = (
   payload: 'loading' | 'confirmed' | 'error'
-): SetFavoriteCollectionListProcessAction => ({
+): ISetFavoriteCollectionListProcessAction => ({
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST_PROCESS,
   payload,
 });
 
-export const setFavoriteArtsIdList = (payload: number[]): SetFavoriteArtsIdListAction => ({
+export const setFavoriteArtsIdList = (payload: number[]): ISetFavoriteArtsIdListAction => ({
   type: ActionTypes.SET_FAVORITE_ARTS_ID_LIST,
   payload,
 });

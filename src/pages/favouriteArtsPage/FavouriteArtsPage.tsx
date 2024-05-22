@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../../store/reducers/index.js';
+import { IRootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import useArtService from '../../services/ArtService';
 import ArtCollection from '../../components/artCollection/ArtCollection.js';
@@ -31,12 +31,12 @@ const FavouriteArtsPage = () => {
   const { getArtsByIdArray } = useArtService();
   const dispatch = useDispatch();
   const artsFavoriteCollectionList = useSelector(
-    (state: RootState) => state.favorite.artsFavoriteCollectionList
+    (state: IRootState) => state.favorite.artsFavoriteCollectionList
   );
   const artsFavoriteCollectionListProcess = useSelector(
-    (state: RootState) => state.favorite.artsFavoriteCollectionListProcess
+    (state: IRootState) => state.favorite.artsFavoriteCollectionListProcess
   );
-  const favoriteArtsIdList = useSelector((state: RootState) => state.favorite.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector((state: IRootState) => state.favorite.favoriteArtsIdList);
 
   useEffect(() => {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });

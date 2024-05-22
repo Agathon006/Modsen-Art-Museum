@@ -1,22 +1,22 @@
 import { ActionTypes } from '../../actions/artsCollection/index.js';
 import {
-  SetArtsCollectionListAction,
-  SetArtsCollectionListProcessAction,
+  ISetArtsCollectionListAction,
+  ISetArtsCollectionListProcessAction,
 } from '../../actions/artsCollection/index.js';
 
-export interface ArtsCollectionState {
+export interface IArtsCollectionState {
   artsCollectionList: any[];
   artsCollectionListProcess: 'loading' | 'confirmed' | 'error';
 }
 
-const initialState: ArtsCollectionState = {
+const initialState: IArtsCollectionState = {
   artsCollectionList: [],
   artsCollectionListProcess: 'loading',
 };
 
 export const artsCollectionReducer = (
   state = initialState,
-  action: SetArtsCollectionListAction | SetArtsCollectionListProcessAction
+  action: ISetArtsCollectionListAction | ISetArtsCollectionListProcessAction
 ) => {
   switch (action.type) {
     case ActionTypes.SET_ARTS_COLLECTION_LIST:

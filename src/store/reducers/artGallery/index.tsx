@@ -1,14 +1,14 @@
 import { ActionTypes } from '../../actions/artGallery/index.js';
 import {
-  SetArtsGallerySearchAction,
-  SetArtsGallerySortOptionAction,
-  SetArtsGalleryListAction,
-  SetArtsGalleryListProcessAction,
-  SetArtsGalleryPageAction,
-  SetArtsGalleryAllPagesAction,
+  ISetArtsGallerySearchAction,
+  ISetArtsGallerySortOptionAction,
+  ISetArtsGalleryListAction,
+  ISetArtsGalleryListProcessAction,
+  ISetArtsGalleryPageAction,
+  ISetArtsGalleryAllPagesAction,
 } from '../../actions/artGallery/index.js';
 
-export interface ArtsGalleryState {
+export interface IArtsGalleryState {
   artsGallerySearch: string;
   artsGallerySortOption: string;
   artsGalleryList: any[];
@@ -17,7 +17,7 @@ export interface ArtsGalleryState {
   artsGalleryAllPages: number;
 }
 
-const initialState: ArtsGalleryState = {
+const initialState: IArtsGalleryState = {
   artsGallerySearch: '',
   artsGallerySortOption: 'default',
   artsGalleryList: [],
@@ -29,12 +29,12 @@ const initialState: ArtsGalleryState = {
 export const artsGalleryReducer = (
   state = initialState,
   action:
-    | SetArtsGallerySearchAction
-    | SetArtsGallerySortOptionAction
-    | SetArtsGalleryListAction
-    | SetArtsGalleryListProcessAction
-    | SetArtsGalleryPageAction
-    | SetArtsGalleryAllPagesAction
+    | ISetArtsGallerySearchAction
+    | ISetArtsGallerySortOptionAction
+    | ISetArtsGalleryListAction
+    | ISetArtsGalleryListProcessAction
+    | ISetArtsGalleryPageAction
+    | ISetArtsGalleryAllPagesAction
 ) => {
   switch (action.type) {
     case ActionTypes.SET_ARTS_GALLERY_SEARCH:

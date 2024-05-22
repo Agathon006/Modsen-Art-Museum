@@ -7,64 +7,64 @@ export enum ActionTypes {
   SET_ARTS_GALLERY_ALL_PAGES = 'SET_ARTS_GALLERY_ALL_PAGES',
 }
 
-export interface SetArtsGallerySearchAction {
+export interface ISetArtsGallerySearchAction {
   type: ActionTypes.SET_ARTS_GALLERY_SEARCH;
   payload: string;
 }
 
-export interface SetArtsGallerySortOptionAction {
+export interface ISetArtsGallerySortOptionAction {
   type: ActionTypes.SET_ARTS_GALLERY_SORT_OPTION;
   payload: string;
 }
 
-export interface SetArtsGalleryListAction {
+export interface ISetArtsGalleryListAction {
   type: ActionTypes.SET_ARTS_GALLERY_LIST;
   payload: any[];
 }
 
-export interface SetArtsGalleryListProcessAction {
+export interface ISetArtsGalleryListProcessAction {
   type: ActionTypes.SET_ARTS_GALLERY_LIST_PROCESS;
   payload: 'loading' | 'confirmed' | 'error';
 }
 
-export interface SetArtsGalleryPageAction {
+export interface ISetArtsGalleryPageAction {
   type: ActionTypes.SET_ARTS_GALLERY_PAGE;
   payload: number;
 }
 
-export interface SetArtsGalleryAllPagesAction {
+export interface ISetArtsGalleryAllPagesAction {
   type: ActionTypes.SET_ARTS_GALLERY_ALL_PAGES;
   payload: number;
 }
 
-export const setArtsGallerySearch = (payload: string): SetArtsGallerySearchAction => ({
+export const setArtsGallerySearch = (payload: string): ISetArtsGallerySearchAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_SEARCH,
   payload,
 });
 
-export const setArtsGallerySortOption = (payload: string): SetArtsGallerySortOptionAction => ({
+export const setArtsGallerySortOption = (payload: string): ISetArtsGallerySortOptionAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_SORT_OPTION,
   payload,
 });
 
-export const setArtsGalleryList = (payload: any[]): SetArtsGalleryListAction => ({
+export const setArtsGalleryList = (payload: any[]): ISetArtsGalleryListAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_LIST,
   payload,
 });
 
 export const setArtsGalleryListProcess = (
   payload: 'loading' | 'confirmed' | 'error'
-): SetArtsGalleryListProcessAction => ({
+): ISetArtsGalleryListProcessAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_LIST_PROCESS,
   payload,
 });
 
-export const setArtsGalleryPage = (payload: number): SetArtsGalleryPageAction => ({
+export const setArtsGalleryPage = (payload: number): ISetArtsGalleryPageAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_PAGE,
   payload,
 });
 
-export const setArtsGalleryAllPages = (payload: number): SetArtsGalleryAllPagesAction => ({
+export const setArtsGalleryAllPages = (payload: number): ISetArtsGalleryAllPagesAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_ALL_PAGES,
   payload,
 });
