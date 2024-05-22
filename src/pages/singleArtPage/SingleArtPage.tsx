@@ -67,25 +67,6 @@ const SingleArtPage = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  useEffect(() => {
-    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
-  }, []);
-
-  useEffect(() => {
-    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });
-    updateData();
-  }, [id]);
-
-  const updateData = () => {
-    getArtById(id).then(onDataLoaded);
-  };
-
-  const onDataLoaded = (data: IHandledDetailedArtInfo) => {
-    console.log(data);
-    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
-    dispatch({ type: 'SET_ART_BY_ID', payload: data });
-  };
-
   const artByID = useSelector((state: IRootState) => state.artById.artByID);
   const artByIDProcess = useSelector((state: IRootState) => state.artById.artByIDProcess);
 
@@ -95,6 +76,21 @@ const SingleArtPage = () => {
     isFavorite = favoriteArtsIdList.includes(artByID.id);
   }
 
+  useEffect(() => {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
+    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });
+    displayData();
+  }, []);
+
+  const displayData = () => {
+    getArtById(id).then(onDataLoaded);
+  };
+
+  const onDataLoaded = (data: IHandledDetailedArtInfo) => {
+    dispatch({ type: 'SET_ART_BY_ID', payload: data });
+    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
+  };
+
   const renderPicture = () => {
     return <StyledPicture dispatch={dispatch} isFavorite={isFavorite} artInfo={artByID} />;
   };
@@ -102,6 +98,7 @@ const SingleArtPage = () => {
   const renderDescription = () => {
     return <StyledDescription artInfo={artByID} />;
   };
+
   return (
     <Wrapper>
       <PhotoSkeletonWrapper>

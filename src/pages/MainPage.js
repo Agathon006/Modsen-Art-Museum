@@ -169,11 +169,11 @@ var Wrapper = styled.main(
     ))
 );
 var MainPage = function () {
+  var dispatch = useDispatch();
   var _a = useArtService(),
     getArtTitlesByQuery = _a.getArtTitlesByQuery,
     getGalleryArts = _a.getGalleryArts,
     getCollectionArts = _a.getCollectionArts;
-  var dispatch = useDispatch();
   var _b = useState(true),
     searchingMode = _b[0],
     setSearchingMode = _b[1];
@@ -229,16 +229,16 @@ var MainPage = function () {
       onArtGalleryLoaded
     );
   };
+  var onArtGalleryLoaded = function (ArtsGalleryList) {
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
+  };
   var onGalleryArtsSearchRequest = function (searchInput, sortOption) {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
     dispatch({ type: 'SET_ARTS_GALLERY_SORT_OPTION', payload: sortOption });
     dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
-  };
-  var onArtGalleryLoaded = function (ArtsGalleryList) {
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
   var debouncedSearch = function (query) {
     return __awaiter(void 0, void 0, void 0, function () {

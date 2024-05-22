@@ -53,8 +53,8 @@ var FavouriteArtsPage = function () {
     getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
   };
   var onDataLoaded = function (data) {
-    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
   return _jsxs(Wrapper, {
     children: [

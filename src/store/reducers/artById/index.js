@@ -21,7 +21,7 @@ var initialState = {
     is_public_domain: null,
     image_id: null,
   },
-  artByIDProcess: 'confirmed',
+  artByIDProcess: 'loading',
 };
 export var artByIdReducer = function (state, action) {
   if (state === void 0) {

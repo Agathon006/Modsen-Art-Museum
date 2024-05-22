@@ -421,6 +421,7 @@ const GalleryNavigationWrapper = styled.nav`
   align-items: center;
   gap: 10px;
   height: 30px;
+  align-self: flex-end;
 
   @media (max-width: 1400px) {
     align-self: center;

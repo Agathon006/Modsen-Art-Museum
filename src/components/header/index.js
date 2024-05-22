@@ -5,10 +5,10 @@ import { useLocation } from 'react-router-dom';
 // @ts-ignore
 import StyledHeader from './styled.js';
 var Header = function () {
-  var wrapperRef = useRef(null);
+  var dispatch = useDispatch();
   var location = useLocation();
   var pathname = location.pathname;
-  var dispatch = useDispatch();
+  var wrapperRef = useRef(null);
   var asideMode = useSelector(function (state) {
     return state.burgerMenuAside.asideMode;
   });

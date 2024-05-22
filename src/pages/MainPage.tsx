@@ -33,8 +33,8 @@ const Wrapper = styled.main`
 `;
 
 const MainPage = () => {
-  const { getArtTitlesByQuery, getGalleryArts, getCollectionArts } = useArtService();
   const dispatch = useDispatch();
+  const { getArtTitlesByQuery, getGalleryArts, getCollectionArts } = useArtService();
 
   const [searchingMode, setSearchingMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
@@ -83,17 +83,17 @@ const MainPage = () => {
     );
   };
 
+  const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
+    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
+  };
+
   const onGalleryArtsSearchRequest = (searchInput: string, sortOption: string) => {
     dispatch({ type: 'SET_ARTS_GALLERY_SEARCH', payload: searchInput });
     dispatch({ type: 'SET_ARTS_GALLERY_SORT_OPTION', payload: sortOption });
     dispatch({ type: 'SET_ARTS_GALLERY_PAGE', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
-  };
-
-  const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
-    dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
 
   const debouncedSearch = async (query: string) => {

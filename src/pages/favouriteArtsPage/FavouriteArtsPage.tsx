@@ -31,6 +31,7 @@ const Wrapper = styled.main`
 const FavouriteArtsPage = () => {
   const { getArtsByIdArray } = useArtService();
   const dispatch = useDispatch();
+
   const artsFavoriteCollectionList = useSelector(
     (state: IRootState) => state.favorite.artsFavoriteCollectionList
   );
@@ -50,8 +51,8 @@ const FavouriteArtsPage = () => {
   };
 
   const onDataLoaded = (data: IArtInfo[]) => {
-    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
+    dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
 
   return (

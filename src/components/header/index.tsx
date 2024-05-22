@@ -8,11 +8,12 @@ import { IRootState } from '@store/reducers/index.js';
 import StyledHeader from './styled.js';
 
 const Header = () => {
-  const wrapperRef = useRef(null);
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const { pathname } = location;
 
-  const dispatch = useDispatch();
+  const wrapperRef = useRef(null);
   const asideMode = useSelector((state: IRootState) => state.burgerMenuAside.asideMode);
 
   const handleClickOutside = (event: MouseEvent) => {

@@ -107,7 +107,6 @@ const useArtService = () => {
       return Promise.all(result.data.map((artItem: IArtInfo) => _transformArt(artItem)));
     } catch {
       dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
-
       return Array(3).fill(emtyArtInfo);
     }
   };
@@ -137,11 +136,9 @@ const useArtService = () => {
         'credit_line',
       ];
       const result = await request(`${_apiBase}/${id}?fields=${neededFields}`);
-
       return _DetailTransformArt(result.data);
     } catch {
       dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
-
       return emtyDetailedArtInfo;
     }
   };
@@ -154,7 +151,6 @@ const useArtService = () => {
       return Promise.all(result.data.map((artItem: IArtInfo) => _transformArt(artItem)));
     } catch {
       dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
-
       return Array(18).fill(emtyArtInfo);
     }
   };

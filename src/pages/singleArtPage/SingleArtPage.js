@@ -58,24 +58,6 @@ var SingleArtPage = function () {
   var getArtById = useArtService().getArtById;
   var dispatch = useDispatch();
   var id = useParams().id;
-  useEffect(function () {
-    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
-  }, []);
-  useEffect(
-    function () {
-      dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });
-      updateData();
-    },
-    [id]
-  );
-  var updateData = function () {
-    getArtById(id).then(onDataLoaded);
-  };
-  var onDataLoaded = function (data) {
-    console.log(data);
-    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
-    dispatch({ type: 'SET_ART_BY_ID', payload: data });
-  };
   var artByID = useSelector(function (state) {
     return state.artById.artByID;
   });
@@ -89,6 +71,18 @@ var SingleArtPage = function () {
   if (artByID.id) {
     isFavorite = favoriteArtsIdList.includes(artByID.id);
   }
+  useEffect(function () {
+    dispatch({ type: 'SET_ASIDE_MODE', payload: false });
+    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'loading' });
+    displayData();
+  }, []);
+  var displayData = function () {
+    getArtById(id).then(onDataLoaded);
+  };
+  var onDataLoaded = function (data) {
+    dispatch({ type: 'SET_ART_BY_ID', payload: data });
+    dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
+  };
   var renderPicture = function () {
     return _jsx(StyledPicture, { dispatch: dispatch, isFavorite: isFavorite, artInfo: artByID });
   };

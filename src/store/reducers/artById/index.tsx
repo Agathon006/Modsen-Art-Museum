@@ -15,7 +15,7 @@ const initialState: IArtByIdState = {
     is_public_domain: null,
     image_id: null,
   },
-  artByIDProcess: 'confirmed',
+  artByIDProcess: 'loading',
 };
 
 export const artByIdReducer = (
