@@ -1,5 +1,6 @@
-//@ts-ignore
-export const changeInStorage = (dispatch, id: number) => {
+import { Dispatch } from 'redux';
+
+export const changeInStorage = (dispatch: Dispatch, id: number) => {
   const favoriteArtsIdList: number[] = JSON.parse(
     localStorage.getItem('favoriteArtsIdList') ?? '[]'
   );
