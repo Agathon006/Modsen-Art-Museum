@@ -12,6 +12,7 @@ import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
 import styled from 'styled-components';
@@ -99,13 +100,17 @@ var SingleArtPage = function () {
   return _jsxs(Wrapper, {
     children: [
       _jsx(PhotoSkeletonWrapper, {
-        children: setContent(artByIDProcess, function () {
-          return renderPicture();
+        children: _jsx(ErrorBoundary, {
+          children: setContent(artByIDProcess, function () {
+            return renderPicture();
+          }),
         }),
       }),
       _jsx(DescriptionSkeletonWrapper, {
-        children: setContent(artByIDProcess, function () {
-          return renderDescription();
+        children: _jsx(ErrorBoundary, {
+          children: setContent(artByIDProcess, function () {
+            return renderDescription();
+          }),
         }),
       }),
     ],

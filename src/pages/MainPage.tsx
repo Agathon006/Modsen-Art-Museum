@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
 import { IArtInfo } from './../services/ArtService';
 import useArtService from './../services/ArtService';
 import ArtCollection from '../components/artCollection/ArtCollection.js';
@@ -208,33 +209,41 @@ const MainPage = () => {
   return (
     <Wrapper>
       <MainPageTitle />
-      <MainPageSearchBar
-        searchingMode={searchingMode}
-        setSearchingMode={setSearchingMode}
-        searchResults={searchResults}
-        setSearchResults={setSearchResults}
-        selectedResultIndex={selectedResultIndex}
-        setSelectedResultIndex={setSelectedResultIndex}
-        debouncedSearch={debouncedSearch}
-        artsGallerySearch={artsGallerySearch}
-        artsGallerySortOption={artsGallerySortOption}
-        onSubmitForm={onGalleryArtsSearchRequest}
-      />
+      <ErrorBoundary>
+        <MainPageSearchBar
+          searchingMode={searchingMode}
+          setSearchingMode={setSearchingMode}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          selectedResultIndex={selectedResultIndex}
+          setSelectedResultIndex={setSelectedResultIndex}
+          debouncedSearch={debouncedSearch}
+          artsGallerySearch={artsGallerySearch}
+          artsGallerySortOption={artsGallerySortOption}
+          onSubmitForm={onGalleryArtsSearchRequest}
+        />
+      </ErrorBoundary>
       <MainPageGallerySubTitle />
       <MainPageGalleryTitle />
-      <MainPageSectionGallery process={artsGalleryListProcess} data={galleryArtsList} />
-      <MainPageSectionGalleryNavigation
-        paginationClicked={onPaginationClick}
-        paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}
-      />
+      <ErrorBoundary>
+        <MainPageSectionGallery process={artsGalleryListProcess} data={galleryArtsList} />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <MainPageSectionGalleryNavigation
+          paginationClicked={onPaginationClick}
+          paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}
+        />
+      </ErrorBoundary>
       <MainPageCollectionSubtitle />
       <MainPageCollectionTitle />
-      <ArtCollection
-        itemsNumber={9}
-        // @ts-ignore
-        process={artsCollectionListProcess}
-        artsList={artsCollectionList}
-      />
+      <ErrorBoundary>
+        <ArtCollection
+          itemsNumber={9}
+          // @ts-ignore
+          process={artsCollectionListProcess}
+          artsList={artsCollectionList}
+        />
+      </ErrorBoundary>
     </Wrapper>
   );
 };

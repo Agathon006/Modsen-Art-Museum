@@ -11,6 +11,7 @@ var __makeTemplateObject =
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import useArtService from '../../services/ArtService';
 import ArtCollection from '../../components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
@@ -67,11 +68,13 @@ var FavouriteArtsPage = function () {
       _jsx(FavouriteArtsPageTitle, {}),
       _jsx(FavouriteArtsPageCollectionSubTitle, {}),
       _jsx(FavouriteArtsPageCollectionTitle, {}),
-      _jsx(ArtCollection, {
-        itemsNumber: 18,
-        // @ts-ignore
-        process: artsFavoriteCollectionListProcess,
-        artsList: artsFavoriteCollectionList,
+      _jsx(ErrorBoundary, {
+        children: _jsx(ArtCollection, {
+          itemsNumber: 18,
+          // @ts-ignore
+          process: artsFavoriteCollectionListProcess,
+          artsList: artsFavoriteCollectionList,
+        }),
       }),
     ],
   });

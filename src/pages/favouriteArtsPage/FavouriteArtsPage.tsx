@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import useArtService from '../../services/ArtService';
 import ArtCollection from '../../components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
@@ -59,12 +60,14 @@ const FavouriteArtsPage = () => {
       <FavouriteArtsPageTitle />
       <FavouriteArtsPageCollectionSubTitle />
       <FavouriteArtsPageCollectionTitle />
-      <ArtCollection
-        itemsNumber={18}
-        // @ts-ignore
-        process={artsFavoriteCollectionListProcess}
-        artsList={artsFavoriteCollectionList}
-      />
+      <ErrorBoundary>
+        <ArtCollection
+          itemsNumber={18}
+          // @ts-ignore
+          process={artsFavoriteCollectionListProcess}
+          artsList={artsFavoriteCollectionList}
+        />
+      </ErrorBoundary>
     </Wrapper>
   );
 };

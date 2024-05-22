@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
 import styled from 'styled-components';
@@ -104,10 +105,10 @@ const SingleArtPage = () => {
   return (
     <Wrapper>
       <PhotoSkeletonWrapper>
-        {setContent(artByIDProcess, () => renderPicture())}
+        <ErrorBoundary>{setContent(artByIDProcess, () => renderPicture())}</ErrorBoundary>
       </PhotoSkeletonWrapper>
       <DescriptionSkeletonWrapper>
-        {setContent(artByIDProcess, () => renderDescription())}
+        <ErrorBoundary>{setContent(artByIDProcess, () => renderDescription())}</ErrorBoundary>
       </DescriptionSkeletonWrapper>
     </Wrapper>
   );
