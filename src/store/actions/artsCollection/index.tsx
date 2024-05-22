@@ -1,3 +1,5 @@
+import { IArtInfo } from '../../../services/ArtService';
+
 export enum ActionTypes {
   SET_ARTS_COLLECTION_LIST = 'SET_ARTS_COLLECTION_LIST',
   SET_ARTS_COLLECTION_LIST_PROCESS = 'SET_ARTS_COLLECTION_LIST_PROCESS',
@@ -5,7 +7,7 @@ export enum ActionTypes {
 
 export interface ISetArtsCollectionListAction {
   type: ActionTypes.SET_ARTS_COLLECTION_LIST;
-  payload: any[];
+  payload: IArtInfo[];
 }
 
 export interface ISetArtsCollectionListProcessAction {
@@ -13,7 +15,7 @@ export interface ISetArtsCollectionListProcessAction {
   payload: 'loading' | 'confirmed' | 'error';
 }
 
-export const setArtsCollectionList = (payload: any[]): ISetArtsCollectionListAction => ({
+export const setArtsCollectionList = (payload: IArtInfo[]): ISetArtsCollectionListAction => ({
   type: ActionTypes.SET_ARTS_COLLECTION_LIST,
   payload,
 });

@@ -1,3 +1,4 @@
+import { IArtInfo } from '../../../services/ArtService';
 import { ActionTypes } from '../../actions/artGallery/index.js';
 import {
   ISetArtsGallerySearchAction,
@@ -11,7 +12,7 @@ import {
 export interface IArtsGalleryState {
   artsGallerySearch: string;
   artsGallerySortOption: string;
-  artsGalleryList: any[];
+  artsGalleryList: IArtInfo[];
   artsGalleryListProcess: 'loading' | 'confirmed' | 'error';
   artsGalleryPage: number;
   artsGalleryAllPages: number;

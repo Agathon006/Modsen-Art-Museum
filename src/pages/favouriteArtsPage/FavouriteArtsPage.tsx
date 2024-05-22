@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { IArtInfo } from '../../services/ArtService';
 import { IRootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import useArtService from '../../services/ArtService';
@@ -48,7 +49,7 @@ const FavouriteArtsPage = () => {
     getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
   };
 
-  const onDataLoaded = (data: any[]) => {
+  const onDataLoaded = (data: IArtInfo[]) => {
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
   };

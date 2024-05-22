@@ -1,3 +1,5 @@
+import { IArtInfo } from '../../../services/ArtService';
+
 export enum ActionTypes {
   SET_ARTS_GALLERY_SEARCH = 'SET_ARTS_GALLERY_SEARCH',
   SET_ARTS_GALLERY_SORT_OPTION = 'SET_ARTS_GALLERY_SORT_OPTION',
@@ -19,7 +21,7 @@ export interface ISetArtsGallerySortOptionAction {
 
 export interface ISetArtsGalleryListAction {
   type: ActionTypes.SET_ARTS_GALLERY_LIST;
-  payload: any[];
+  payload: IArtInfo[];
 }
 
 export interface ISetArtsGalleryListProcessAction {
@@ -47,7 +49,7 @@ export const setArtsGallerySortOption = (payload: string): ISetArtsGallerySortOp
   payload,
 });
 
-export const setArtsGalleryList = (payload: any[]): ISetArtsGalleryListAction => ({
+export const setArtsGalleryList = (payload: IArtInfo[]): ISetArtsGalleryListAction => ({
   type: ActionTypes.SET_ARTS_GALLERY_LIST,
   payload,
 });

@@ -14,7 +14,13 @@ var __assign =
   };
 import { ActionTypes } from '../../actions/artById/index.js';
 var initialState = {
-  artByID: {},
+  artByID: {
+    id: null,
+    title: null,
+    artist_title: null,
+    is_public_domain: null,
+    image_id: null,
+  },
   artByIDProcess: 'confirmed',
 };
 export var artByIdReducer = function (state, action) {

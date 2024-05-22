@@ -8,7 +8,10 @@ var ArtCollectionItem = function (_a) {
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favorite.favoriteArtsIdList;
   });
-  var isFavorite = favoriteArtsIdList.includes(artInfo.id);
+  var isFavorite = false;
+  if (artInfo.id) {
+    isFavorite = favoriteArtsIdList.includes(artInfo.id);
+  }
   return _jsx(StyledArtCollectionItem, {
     dispatch: dispatch,
     isFavorite: isFavorite,

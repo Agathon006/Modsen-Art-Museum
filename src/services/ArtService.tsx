@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook';
 
 import imageUrlChecker from '../utils/imageUrlChecker';
 
-interface IArtInfo {
+export interface IArtInfo {
   id: number | null;
   title: string | null;
   artist_title: string | null;
@@ -11,22 +11,22 @@ interface IArtInfo {
   image_id: string | null;
 }
 
-interface IDetailedArtInfo extends IArtInfo {
+export interface IDetailedArtInfo extends IArtInfo {
   date_display: string | null;
   artist_display: string | null;
   dimensions: string | null;
   credit_line: string | null;
 }
 
-interface IHandledArtInfo {
+export interface IHandledArtInfo {
   id: number | null;
   title: string | null;
   artistName: string | null;
   isPublicDomain: boolean | null;
-  imageUrl: string | null;
+  imageUrl: string | null | unknown;
 }
 
-interface IHandledDetailedArtInfo extends IHandledArtInfo {
+export interface IHandledDetailedArtInfo extends IHandledArtInfo {
   date: string | null;
   artistNationality: string | null;
   artDimensions: string | null;
@@ -142,7 +142,7 @@ const useArtService = () => {
     } catch {
       dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
 
-      return [emtyDetailedArtInfo];
+      return emtyDetailedArtInfo;
     }
   };
 

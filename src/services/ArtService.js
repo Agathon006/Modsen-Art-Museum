@@ -329,7 +329,7 @@ var useArtService = function () {
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
-            return [2 /*return*/, [emtyDetailedArtInfo]];
+            return [2 /*return*/, emtyDetailedArtInfo];
           case 3:
             return [2 /*return*/];
         }

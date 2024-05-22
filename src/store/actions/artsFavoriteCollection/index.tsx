@@ -1,3 +1,5 @@
+import { IArtInfo } from '../../../services/ArtService';
+
 export enum ActionTypes {
   SET_FAVORITE_COLLECTION_LIST = 'SET_FAVORITE_COLLECTION_LIST',
   SET_FAVORITE_COLLECTION_LIST_PROCESS = 'SET_FAVORITE_COLLECTION_LIST_PROCESS',
@@ -6,7 +8,7 @@ export enum ActionTypes {
 
 export interface ISetFavoriteCollectionListAction {
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST;
-  payload: any[];
+  payload: IArtInfo[];
 }
 
 export interface ISetFavoriteCollectionListProcessAction {
@@ -19,7 +21,9 @@ export interface ISetFavoriteArtsIdListAction {
   payload: number[];
 }
 
-export const setFavoriteCollectionList = (payload: any[]): ISetFavoriteCollectionListAction => ({
+export const setFavoriteCollectionList = (
+  payload: IArtInfo[]
+): ISetFavoriteCollectionListAction => ({
   type: ActionTypes.SET_FAVORITE_COLLECTION_LIST,
   payload,
 });

@@ -1,13 +1,20 @@
+import { IArtInfo } from '../../../services/ArtService';
 import { ActionTypes } from '../../actions/artById/index.js';
 import { ISetArtByIdAction, ISetArtByIdProcessAction } from '../../actions/artById/index.js';
 
 export interface IArtByIdState {
-  artByID: any;
+  artByID: IArtInfo;
   artByIDProcess: 'loading' | 'confirmed' | 'error';
 }
 
 const initialState: IArtByIdState = {
-  artByID: {},
+  artByID: {
+    id: null,
+    title: null,
+    artist_title: null,
+    is_public_domain: null,
+    image_id: null,
+  },
   artByIDProcess: 'confirmed',
 };
 

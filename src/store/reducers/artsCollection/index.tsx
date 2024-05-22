@@ -1,3 +1,4 @@
+import { IArtInfo } from '../../../services/ArtService';
 import { ActionTypes } from '../../actions/artsCollection/index.js';
 import {
   ISetArtsCollectionListAction,
@@ -5,7 +6,7 @@ import {
 } from '../../actions/artsCollection/index.js';
 
 export interface IArtsCollectionState {
-  artsCollectionList: any[];
+  artsCollectionList: IArtInfo[];
   artsCollectionListProcess: 'loading' | 'confirmed' | 'error';
 }
 

@@ -1,3 +1,4 @@
+import { IArtInfo } from '../../../services/ArtService';
 import { ActionTypes } from '../../actions/artsFavoriteCollection/index.js';
 import {
   ISetFavoriteCollectionListAction,
@@ -6,7 +7,7 @@ import {
 } from '../../actions/artsFavoriteCollection/index.js';
 
 export interface IFavoriteState {
-  artsFavoriteCollectionList: any[];
+  artsFavoriteCollectionList: IArtInfo[];
   artsFavoriteCollectionListProcess: 'loading' | 'confirmed' | 'error';
   favoriteArtsIdList: number[];
 }

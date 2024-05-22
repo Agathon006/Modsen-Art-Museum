@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { IHandledDetailedArtInfo } from '../../services/ArtService';
 import { IRootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import setContent from '../../utils/setContent.js';
@@ -79,7 +80,8 @@ const SingleArtPage = () => {
     getArtById(id).then(onDataLoaded);
   };
 
-  const onDataLoaded = (data: any) => {
+  const onDataLoaded = (data: IHandledDetailedArtInfo) => {
+    console.log(data);
     dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_ART_BY_ID', payload: data });
   };
@@ -88,7 +90,10 @@ const SingleArtPage = () => {
   const artByIDProcess = useSelector((state: IRootState) => state.artById.artByIDProcess);
 
   const favoriteArtsIdList = useSelector((state: IRootState) => state.favorite.favoriteArtsIdList);
-  let isFavorite = favoriteArtsIdList.includes(artByID.id);
+  let isFavorite = false;
+  if (artByID.id) {
+    isFavorite = favoriteArtsIdList.includes(artByID.id);
+  }
 
   const renderPicture = () => {
     return <StyledPicture dispatch={dispatch} isFavorite={isFavorite} artInfo={artByID} />;

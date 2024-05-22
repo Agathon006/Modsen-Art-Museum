@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { IArtInfo } from '../services/ArtService';
 import { IRootState } from '../store/reducers/index.js';
 import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
 import useArtService from './../services/ArtService';
@@ -68,7 +69,7 @@ const MainPage = () => {
     getCollectionArts().then(onArtCollectionLoaded);
   };
 
-  const onArtCollectionLoaded = (ArtsCollectionList: any[]) => {
+  const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
@@ -91,7 +92,7 @@ const MainPage = () => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
 
-  const onArtGalleryLoaded = (ArtsGalleryList: any[]) => {
+  const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };

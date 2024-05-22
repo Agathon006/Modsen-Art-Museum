@@ -1,3 +1,5 @@
+import { IArtInfo } from '../../../services/ArtService';
+
 export enum ActionTypes {
   SET_ART_BY_ID = 'SET_ART_BY_ID',
   SET_ART_BY_ID_PROCESS = 'SET_ART_BY_ID_PROCESS',
@@ -5,7 +7,7 @@ export enum ActionTypes {
 
 export interface ISetArtByIdAction {
   type: ActionTypes.SET_ART_BY_ID;
-  payload: any;
+  payload: IArtInfo;
 }
 
 export interface ISetArtByIdProcessAction {
@@ -13,7 +15,7 @@ export interface ISetArtByIdProcessAction {
   payload: 'loading' | 'confirmed' | 'error';
 }
 
-export const setArtById = (payload: any): ISetArtByIdAction => ({
+export const setArtById = (payload: IArtInfo): ISetArtByIdAction => ({
   type: ActionTypes.SET_ART_BY_ID,
   payload,
 });
