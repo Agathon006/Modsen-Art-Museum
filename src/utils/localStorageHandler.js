@@ -1,4 +1,3 @@
-//@ts-ignore
 export var changeInStorage = function (dispatch, id) {
   var _a;
   var favoriteArtsIdList = JSON.parse(

@@ -29,8 +29,8 @@ const Wrapper = styled.main`
 const FavouriteArtsPage = () => {
   const { getArtsByIdArray } = useArtService();
   const dispatch = useDispatch();
-  // @ts-ignore
   const artsFavoriteCollectionList = useSelector(
+    // @ts-ignore
     state => state.favorite.artsFavoriteCollectionList
   );
   const artsFavoriteCollectionListProcess = useSelector(

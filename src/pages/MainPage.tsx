@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
-import { IArtInfo } from './../services/ArtService';
 import useArtService from './../services/ArtService';
 import ArtCollection from '../components/artCollection/ArtCollection.js';
 
@@ -54,8 +53,8 @@ const MainPage = () => {
   const artsGalleryAllPages = useSelector(state => state.artsGallery.artsGalleryAllPages);
   // @ts-ignore
   const artsCollectionList = useSelector(state => state.artsCollection.artsCollectionList);
-  // @ts-ignore
   const artsCollectionListProcess = useSelector(
+    // @ts-ignore
     state => state.artsCollection.artsCollectionListProcess
   );
 
@@ -68,6 +67,7 @@ const MainPage = () => {
     getCollectionArts().then(onArtCollectionLoaded);
   };
 
+  // @ts-ignore
   const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
@@ -91,6 +91,7 @@ const MainPage = () => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
 
+  // @ts-ignore
   const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });

@@ -1,16 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IArtInfo } from '../../services/ArtService';
-
-interface PropsWithArtInfo {
-  artInfo: IArtInfo[];
-}
-
 // @ts-ignore
 import StyledArtCard from './styled.js';
 
-const ArtCard = (props: PropsWithArtInfo) => {
+// @ts-ignore
+const ArtCard = props => {
   const dispatch = useDispatch();
   // @ts-ignore
   const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);

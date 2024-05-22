@@ -35,10 +35,12 @@ var Wrapper = styled.main(
 var FavouriteArtsPage = function () {
   var getArtsByIdArray = useArtService().getArtsByIdArray;
   var dispatch = useDispatch();
-  // @ts-ignore
-  var artsFavoriteCollectionList = useSelector(function (state) {
-    return state.favorite.artsFavoriteCollectionList;
-  });
+  var artsFavoriteCollectionList = useSelector(
+    // @ts-ignore
+    function (state) {
+      return state.favorite.artsFavoriteCollectionList;
+    }
+  );
   var artsFavoriteCollectionListProcess = useSelector(
     // @ts-ignore
     function (state) {

@@ -167,7 +167,6 @@ var useArtService = function () {
             ];
           case 1:
             result = _b.sent();
-            // @ts-ignore
             return [
               2 /*return*/,
               result.data.length
@@ -178,7 +177,6 @@ var useArtService = function () {
             ];
           case 2:
             _a = _b.sent();
-            // @ts-ignore
             return [2 /*return*/, []];
           case 3:
             return [2 /*return*/];
@@ -256,15 +254,14 @@ var useArtService = function () {
             return [
               2 /*return*/,
               Promise.all(
-                result.data.map(function (itemArt) {
-                  return _transformArt(itemArt);
+                result.data.map(function (artItem) {
+                  return _transformArt(artItem);
                 })
               ),
             ];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'error' });
-            // @ts-ignore
             return [2 /*return*/, Array(3).fill(emtyArtInfo)];
           case 3:
             return [2 /*return*/];
@@ -272,7 +269,6 @@ var useArtService = function () {
       });
     });
   };
-  // @ts-ignore
   var getCollectionArts = function () {
     return __awaiter(void 0, void 0, void 0, function () {
       var neededFields, result, _a;
@@ -290,8 +286,8 @@ var useArtService = function () {
             return [
               2 /*return*/,
               Promise.all(
-                result.data.map(function (itemArt) {
-                  return _transformArt(itemArt);
+                result.data.map(function (artItem) {
+                  return _transformArt(artItem);
                 })
               ),
             ];
@@ -329,12 +325,10 @@ var useArtService = function () {
             ];
           case 1:
             result = _b.sent();
-            // @ts-ignore
             return [2 /*return*/, _DetailTransformArt(result.data)];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'error' });
-            // @ts-ignore
             return [2 /*return*/, [emtyDetailedArtInfo]];
           case 3:
             return [2 /*return*/];
@@ -349,7 +343,6 @@ var useArtService = function () {
         switch (_b.label) {
           case 0:
             _b.trys.push([0, 2, , 3]);
-            // @ts-ignore
             if (!idArray.length) return [2 /*return*/, []];
             neededFields = ['id', 'title', 'artist_title', 'is_public_domain', 'image_id'];
             return [
@@ -360,19 +353,17 @@ var useArtService = function () {
             ];
           case 1:
             result = _b.sent();
-            // @ts-ignore
             return [
               2 /*return*/,
               Promise.all(
-                result.data.map(function (itemArt) {
-                  return _transformArt(itemArt);
+                result.data.map(function (artItem) {
+                  return _transformArt(artItem);
                 })
               ),
             ];
           case 2:
             _a = _b.sent();
             dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'error' });
-            // @ts-ignore
             return [2 /*return*/, Array(18).fill(emtyArtInfo)];
           case 3:
             return [2 /*return*/];
@@ -405,7 +396,6 @@ var useArtService = function () {
                 title: art.title,
                 artistName: art.artist_title,
                 isPublicDomain: art.is_public_domain,
-                // @ts-ignore
                 imageUrl: validUrl,
               },
             ];
@@ -441,7 +431,6 @@ var useArtService = function () {
       });
     });
   };
-  // @ts-ignore
   var _DetailTransformArt = function (art) {
     return __awaiter(void 0, void 0, void 0, function () {
       var validUrl, error_2;
@@ -467,7 +456,6 @@ var useArtService = function () {
                 title: art.title,
                 artistName: art.artist_title,
                 isPublicDomain: art.is_public_domain,
-                // @ts-ignore
                 imageUrl: validUrl,
                 date: art.date_display,
                 artistNationality: _NationalityIdentifier(art.artist_display),
@@ -525,6 +513,7 @@ var useArtService = function () {
       'English',
       'Italian',
     ];
+    if (!str) return '';
     for (
       var _i = 0, nationalitiesDictionary_1 = nationalitiesDictionary;
       _i < nationalitiesDictionary_1.length;
