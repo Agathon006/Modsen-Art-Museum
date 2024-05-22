@@ -79,15 +79,15 @@ var SingleArtPage = function () {
   };
   // @ts-ignore
   var artByID = useSelector(function (state) {
-    return state.artByID;
+    return state.artById.artByID;
   });
   // @ts-ignore
   var artByIDProcess = useSelector(function (state) {
-    return state.artByIDProcess;
+    return state.artById.artByIDProcess;
   });
   // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
-    return state.favoriteArtsIdList;
+    return state.favorite.favoriteArtsIdList;
   });
   // @ts-ignore
   var isFavorite = favoriteArtsIdList.includes(artByID.id);

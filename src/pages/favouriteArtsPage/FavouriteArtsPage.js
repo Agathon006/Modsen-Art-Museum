@@ -37,17 +37,17 @@ var FavouriteArtsPage = function () {
   var dispatch = useDispatch();
   // @ts-ignore
   var artsFavoriteCollectionList = useSelector(function (state) {
-    return state.artsFavoriteCollectionList;
+    return state.favorite.artsFavoriteCollectionList;
   });
   var artsFavoriteCollectionListProcess = useSelector(
     // @ts-ignore
     function (state) {
-      return state.artsFavoriteCollectionListProcess;
+      return state.favorite.artsFavoriteCollectionListProcess;
     }
   );
   // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
-    return state.favoriteArtsIdList;
+    return state.favorite.favoriteArtsIdList;
   });
   useEffect(function () {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });

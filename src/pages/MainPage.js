@@ -185,35 +185,35 @@ var MainPage = function () {
     setSelectedResultIndex = _d[1];
   // @ts-ignore
   var artsGallerySearch = useSelector(function (state) {
-    return state.artsGallerySearch;
+    return state.artsGallery.artsGallerySearch;
   });
   // @ts-ignore
   var artsGallerySortOption = useSelector(function (state) {
-    return state.artsGallerySortOption;
+    return state.artsGallery.artsGallerySortOption;
   });
   // @ts-ignore
   var galleryArtsList = useSelector(function (state) {
-    return state.artsGalleryList;
+    return state.artsGallery.artsGalleryList;
   });
   // @ts-ignore
   var artsGalleryListProcess = useSelector(function (state) {
-    return state.artsGalleryListProcess;
+    return state.artsGallery.artsGalleryListProcess;
   });
   // @ts-ignore
   var artsGalleryPage = useSelector(function (state) {
-    return state.artsGalleryPage;
+    return state.artsGallery.artsGalleryPage;
   });
   // @ts-ignore
   var artsGalleryAllPages = useSelector(function (state) {
-    return state.artsGalleryAllPages;
-  });
-  // @ts-ignore
-  var artsCollectionListProcess = useSelector(function (state) {
-    return state.artsCollectionListProcess;
+    return state.artsGallery.artsGalleryAllPages;
   });
   // @ts-ignore
   var artsCollectionList = useSelector(function (state) {
-    return state.artsCollectionList;
+    return state.artsCollection.artsCollectionList;
+  });
+  // @ts-ignore
+  var artsCollectionListProcess = useSelector(function (state) {
+    return state.artsCollection.artsCollectionListProcess;
   });
   useEffect(function () {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });

@@ -11,7 +11,7 @@ var Header = function () {
   var dispatch = useDispatch();
   // @ts-ignore
   var asideMode = useSelector(function (state) {
-    return state.asideMode;
+    return state.burgerMenuAside.asideMode;
   });
   // @ts-ignore
   var handleClickOutside = function (event) {

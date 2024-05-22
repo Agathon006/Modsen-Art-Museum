@@ -12,7 +12,7 @@ const Header = () => {
 
   const dispatch = useDispatch();
   // @ts-ignore
-  const asideMode = useSelector(state => state.asideMode);
+  const asideMode = useSelector(state => state.burgerMenuAside.asideMode);
 
   // @ts-ignore
   const handleClickOutside = event => {

@@ -86,12 +86,12 @@ const SingleArtPage = () => {
   };
 
   // @ts-ignore
-  const artByID = useSelector(state => state.artByID);
+  const artByID = useSelector(state => state.artById.artByID);
   // @ts-ignore
-  const artByIDProcess = useSelector(state => state.artByIDProcess);
+  const artByIDProcess = useSelector(state => state.artById.artByIDProcess);
 
   // @ts-ignore
-  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);
   // @ts-ignore
   let isFavorite = favoriteArtsIdList.includes(artByID.id);
 

@@ -7,7 +7,7 @@ var ArtCollectionItem = function (_a) {
   var dispatch = useDispatch();
   // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
-    return state.favoriteArtsIdList;
+    return state.favorite.favoriteArtsIdList;
   });
   // @ts-ignore
   var isFavorite = favoriteArtsIdList.includes(artInfo.id);

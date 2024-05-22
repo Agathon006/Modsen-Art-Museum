@@ -1,7 +1,8 @@
-// @ts-ignore
+//@ts-ignore
 export const changeInStorage = (dispatch, id: number) => {
-  // @ts-ignore
-  let favoriteArtsIdList = JSON.parse(localStorage.getItem('favoriteArtsIdList')) || [];
+  const favoriteArtsIdList: number[] = JSON.parse(
+    localStorage.getItem('favoriteArtsIdList') ?? '[]'
+  );
 
   const existingIndex = favoriteArtsIdList.indexOf(id);
 

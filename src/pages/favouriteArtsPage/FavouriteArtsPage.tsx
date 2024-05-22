@@ -30,13 +30,15 @@ const FavouriteArtsPage = () => {
   const { getArtsByIdArray } = useArtService();
   const dispatch = useDispatch();
   // @ts-ignore
-  const artsFavoriteCollectionList = useSelector(state => state.artsFavoriteCollectionList);
+  const artsFavoriteCollectionList = useSelector(
+    state => state.favorite.artsFavoriteCollectionList
+  );
   const artsFavoriteCollectionListProcess = useSelector(
     // @ts-ignore
-    state => state.artsFavoriteCollectionListProcess
+    state => state.favorite.artsFavoriteCollectionListProcess
   );
   // @ts-ignore
-  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);
 
   useEffect(() => {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });

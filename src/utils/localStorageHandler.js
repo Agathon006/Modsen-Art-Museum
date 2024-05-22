@@ -1,7 +1,9 @@
-// @ts-ignore
+//@ts-ignore
 export var changeInStorage = function (dispatch, id) {
-  // @ts-ignore
-  var favoriteArtsIdList = JSON.parse(localStorage.getItem('favoriteArtsIdList')) || [];
+  var _a;
+  var favoriteArtsIdList = JSON.parse(
+    (_a = localStorage.getItem('favoriteArtsIdList')) !== null && _a !== void 0 ? _a : '[]'
+  );
   var existingIndex = favoriteArtsIdList.indexOf(id);
   if (existingIndex !== -1) {
     favoriteArtsIdList.splice(existingIndex, 1);

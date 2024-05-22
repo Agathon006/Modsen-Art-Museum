@@ -6,7 +6,7 @@ var ArtCard = function (props) {
   var dispatch = useDispatch();
   // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
-    return state.favoriteArtsIdList;
+    return state.favorite.favoriteArtsIdList;
   });
   // @ts-ignore
   var isFavorite = favoriteArtsIdList.includes(props.artInfo.id);

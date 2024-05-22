@@ -41,21 +41,23 @@ const MainPage = () => {
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
 
   // @ts-ignore
-  const artsGallerySearch = useSelector(state => state.artsGallerySearch);
+  const artsGallerySearch = useSelector(state => state.artsGallery.artsGallerySearch);
   // @ts-ignore
-  const artsGallerySortOption = useSelector(state => state.artsGallerySortOption);
+  const artsGallerySortOption = useSelector(state => state.artsGallery.artsGallerySortOption);
   // @ts-ignore
-  const galleryArtsList = useSelector(state => state.artsGalleryList);
+  const galleryArtsList = useSelector(state => state.artsGallery.artsGalleryList);
   // @ts-ignore
-  const artsGalleryListProcess = useSelector(state => state.artsGalleryListProcess);
+  const artsGalleryListProcess = useSelector(state => state.artsGallery.artsGalleryListProcess);
   // @ts-ignore
-  const artsGalleryPage = useSelector(state => state.artsGalleryPage);
+  const artsGalleryPage = useSelector(state => state.artsGallery.artsGalleryPage);
   // @ts-ignore
-  const artsGalleryAllPages = useSelector(state => state.artsGalleryAllPages);
+  const artsGalleryAllPages = useSelector(state => state.artsGallery.artsGalleryAllPages);
   // @ts-ignore
-  const artsCollectionListProcess = useSelector(state => state.artsCollectionListProcess);
+  const artsCollectionList = useSelector(state => state.artsCollection.artsCollectionList);
   // @ts-ignore
-  const artsCollectionList = useSelector(state => state.artsCollectionList);
+  const artsCollectionListProcess = useSelector(
+    state => state.artsCollection.artsCollectionListProcess
+  );
 
   useEffect(() => {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });

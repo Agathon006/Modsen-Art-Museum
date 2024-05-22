@@ -13,7 +13,7 @@ import StyledArtCard from './styled.js';
 const ArtCard = (props: PropsWithArtInfo) => {
   const dispatch = useDispatch();
   // @ts-ignore
-  const favoriteArtsIdList = useSelector(state => state.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);
   // @ts-ignore
   let isFavorite = favoriteArtsIdList.includes(props.artInfo.id);
 
