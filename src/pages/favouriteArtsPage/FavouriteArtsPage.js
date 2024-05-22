@@ -11,9 +11,9 @@ var __makeTemplateObject =
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
-import useArtService from '../../services/ArtService';
-import ArtCollection from '../../components/artCollection/ArtCollection.js';
+import useArtService from '@services/ArtService';
+import ArtCollection from '@components/artCollection/ArtCollection.js';
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import styled from 'styled-components';
 import {
   FavouriteArtsPageTitle,

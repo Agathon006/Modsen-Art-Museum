@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
-import setContent from '../../utils/setContent.js';
-
-import ArtCollectionItem from './artCollectionItem/artCollectionItem.js';
+import setContent from '@utils/setContent.js';
+import ArtCollectionItem from '@components/artCollection/artCollectionItem/artCollectionItem.js';
 
 const Wrapper = styled.div`
   margin-top: 40px;

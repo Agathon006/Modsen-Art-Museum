@@ -12,7 +12,7 @@ var __assign =
       };
     return __assign.apply(this, arguments);
   };
-import { ActionTypes } from '../../actions/burgerMenuAside/index.js';
+import { ActionTypes } from '@store/actions/burgerMenuAside/index.js';
 var initialState = {
   asideMode: false,
 };

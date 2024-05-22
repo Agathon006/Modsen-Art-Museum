@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Logo from '../../assets/logo.svg';
-import Home from '../../assets/home.svg';
-import Bookmark from '../../assets/bookmark.svg';
+import Logo from '@assets/logo.svg';
+import Home from '@assets/home.svg';
+import Bookmark from '@assets/bookmark.svg';
 
 const Wrapper = styled.header`
   height: 127px;

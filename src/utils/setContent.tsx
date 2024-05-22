@@ -1,5 +1,5 @@
-import Skeleton from '../components/skeleton/Skeleton';
-import ErrorSkeleton from '../components/errorSkeleton/ErrorSkeleton';
+import Skeleton from '@components/skeleton/Skeleton';
+import ErrorSkeleton from '@components/errorSkeleton/ErrorSkeleton';
 
 const setContent = (process: string, Component: React.FC) => {
   switch (process) {

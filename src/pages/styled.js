@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import styled from 'styled-components';
 
-import setContent from '../utils/setContent.js';
-
-import ArtCard from '../components/artCard/ArtCard.js';
-
-import SearchIcon from './../assets/search.svg';
+import setContent from '@utils/setContent.js';
+import SearchIcon from '@assets/search.svg';
+import ArtCard from '@components/artCard/ArtCard.js';
 
 const Title = styled.h1`
   width: 684px;

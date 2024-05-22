@@ -10,11 +10,11 @@ var __makeTemplateObject =
   };
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
-import setContent from '../../utils/setContent.js';
-import useArtService from '../../services/ArtService';
+import { useParams } from 'react-router-dom';
+import useArtService from '@services/ArtService';
+import setContent from '@utils/setContent.js';
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
 import styled from 'styled-components';
 import {
   StyledPicture,

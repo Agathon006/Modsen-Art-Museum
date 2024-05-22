@@ -13,7 +13,7 @@ var __assign =
     return __assign.apply(this, arguments);
   };
 var _a;
-import { ActionTypes } from '../../actions/artsFavoriteCollection/index.js';
+import { ActionTypes } from '@store/actions/artsFavoriteCollection/index.js';
 var initialState = {
   artsFavoriteCollectionList: [],
   artsFavoriteCollectionListProcess: 'loading',

@@ -1,7 +1,7 @@
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 // @ts-ignore
 import StyledHeader from './styled.js';
 var Header = function () {

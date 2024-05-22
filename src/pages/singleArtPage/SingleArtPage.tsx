@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import { IHandledDetailedArtInfo } from '../../services/ArtService';
-import { IRootState } from '../../store/reducers/index.js';
-import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
-import setContent from '../../utils/setContent.js';
-import useArtService from '../../services/ArtService';
+import { IRootState } from '@store/reducers/index.js';
+import useArtService, { IHandledDetailedArtInfo } from '@services/ArtService';
+import setContent from '@utils/setContent.js';
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
+
 import styled from 'styled-components';
 
 import {

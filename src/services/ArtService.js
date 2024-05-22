@@ -130,8 +130,8 @@ var __generator =
     }
   };
 import { useDispatch } from 'react-redux';
-import { useHttp } from '../hooks/http.hook';
-import imageUrlChecker from '../utils/imageUrlChecker';
+import { useHttp } from '@hooks/http.hook';
+import imageUrlChecker from '@utils/imageUrlChecker';
 var emtyArtInfo = {
   id: null,
   title: null,

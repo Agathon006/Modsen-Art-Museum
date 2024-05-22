@@ -1,5 +1,5 @@
 import { Component, ErrorInfo } from 'react';
-import ErrorSkeleton from '../errorSkeleton/ErrorSkeleton';
+import ErrorSkeleton from '@components/errorSkeleton/ErrorSkeleton';
 
 class ErrorBoundary extends Component<{ children: JSX.Element }, { error: boolean }> {
   state = {

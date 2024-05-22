@@ -1,13 +1,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import AppLayout from '../../components/appLayout/AppLayout.js';
-import store from '../../store/store.js';
-import MainPage from '../../pages/MainPage.js';
-import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
-import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
+import store from '@store/store.js';
+import MainPage from '@pages/MainPage.js';
+import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
+import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
+import AppLayout from '@components/appLayout/AppLayout.js';
+
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   min-height: 100vh;

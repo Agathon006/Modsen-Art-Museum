@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { changeInStorage } from '../../utils/localStorageHandler';
-import Bookmark from '../../assets/bookmark.svg';
-import PlaceholderArtImage from '../../assets/placeholderArt.svg';
+import { changeInStorage } from '@utils/localStorageHandler';
+import Bookmark from '@assets/bookmark.svg';
+import PlaceholderArtImage from '@assets/placeholderArt.svg';
 
 const Wrapper = styled.figure`
   position: relative;

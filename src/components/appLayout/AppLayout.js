@@ -1,8 +1,8 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Header from '../header/index.js';
-import Footer from '../footer/index.js';
+import Header from '@components/header/index.js';
+import Footer from '@components/footer/index.js';
 function AppLayout(_a) {
   var children = _a.children;
   var location = useLocation();

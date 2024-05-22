@@ -12,7 +12,7 @@ var __assign =
       };
     return __assign.apply(this, arguments);
   };
-import { ActionTypes } from '../../actions/artGallery/index.js';
+import { ActionTypes } from '@store/actions/artGallery/index.js';
 var initialState = {
   artsGallerySearch: '',
   artsGallerySortOption: 'default',

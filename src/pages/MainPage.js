@@ -142,9 +142,9 @@ var __generator =
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
-import useArtService from './../services/ArtService';
-import ArtCollection from '../components/artCollection/ArtCollection.js';
+import useArtService from '@services/ArtService';
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
+import ArtCollection from '@components/artCollection/ArtCollection.js';
 import styled from 'styled-components';
 import {
   MainPageTitle,

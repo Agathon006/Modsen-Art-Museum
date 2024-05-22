@@ -1,5 +1,5 @@
-import { IArtInfo } from '../../../services/ArtService';
-import { ActionTypes } from '../../actions/artGallery/index.js';
+import { IArtInfo } from '@services/ArtService';
+import { ActionTypes } from '@store/actions/artGallery/index.js';
 import {
   ISetArtsGallerySearchAction,
   ISetArtsGallerySortOptionAction,
@@ -7,7 +7,7 @@ import {
   ISetArtsGalleryListProcessAction,
   ISetArtsGalleryPageAction,
   ISetArtsGalleryAllPagesAction,
-} from '../../actions/artGallery/index.js';
+} from '@store/actions/artGallery/index.js';
 
 export interface IArtsGalleryState {
   artsGallerySearch: string;

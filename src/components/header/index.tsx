@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
-import { IRootState } from '../../store/reducers/index.js';
+import { IRootState } from '@store/reducers/index.js';
 
 // @ts-ignore
 import StyledHeader from './styled.js';

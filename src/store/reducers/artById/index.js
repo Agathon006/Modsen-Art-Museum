@@ -12,7 +12,7 @@ var __assign =
       };
     return __assign.apply(this, arguments);
   };
-import { ActionTypes } from '../../actions/artById/index.js';
+import { ActionTypes } from '@store/actions/artById/index.js';
 var initialState = {
   artByID: {
     id: null,

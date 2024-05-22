@@ -12,7 +12,7 @@ var __assign =
       };
     return __assign.apply(this, arguments);
   };
-import { ActionTypes } from '../../actions/artsCollection/index.js';
+import { ActionTypes } from '@store/actions/artsCollection/index.js';
 var initialState = {
   artsCollectionList: [],
   artsCollectionListProcess: 'loading',

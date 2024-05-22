@@ -1,10 +1,10 @@
-import { IArtInfo } from '../../../services/ArtService';
-import { ActionTypes } from '../../actions/artsFavoriteCollection/index.js';
+import { IArtInfo } from '@services/ArtService';
+import { ActionTypes } from '@store/actions/artsFavoriteCollection/index.js';
 import {
   ISetFavoriteCollectionListAction,
   ISetFavoriteCollectionListProcessAction,
   ISetFavoriteArtsIdListAction,
-} from '../../actions/artsFavoriteCollection/index.js';
+} from '@store/actions/artsFavoriteCollection/index.js';
 
 export interface IFavoriteState {
   artsFavoriteCollectionList: IArtInfo[];

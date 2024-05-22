@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IArtInfo } from '../../services/ArtService';
-import { IRootState } from '../../store/reducers/index.js';
-import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
-import useArtService from '../../services/ArtService';
-import ArtCollection from '../../components/artCollection/ArtCollection.js';
+import { IRootState } from '@store/reducers/index.js';
+import useArtService, { IArtInfo } from '@services/ArtService';
+import ArtCollection from '@components/artCollection/ArtCollection.js';
+import ErrorBoundary from '@components/errorBoundary/ErrorBoundary';
+
 import styled from 'styled-components';
 
 import {

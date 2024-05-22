@@ -25,7 +25,7 @@ var __extends =
   })();
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { Component } from 'react';
-import ErrorSkeleton from '../errorSkeleton/ErrorSkeleton';
+import ErrorSkeleton from '@components/errorSkeleton/ErrorSkeleton';
 var ErrorBoundary = /** @class */ (function (_super) {
   __extends(ErrorBoundary, _super);
   function ErrorBoundary() {

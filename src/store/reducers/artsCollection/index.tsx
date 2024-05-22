@@ -1,9 +1,9 @@
-import { IArtInfo } from '../../../services/ArtService';
-import { ActionTypes } from '../../actions/artsCollection/index.js';
+import { IArtInfo } from '@services/ArtService';
+import { ActionTypes } from '@store/actions/artsCollection/index.js';
 import {
   ISetArtsCollectionListAction,
   ISetArtsCollectionListProcessAction,
-} from '../../actions/artsCollection/index.js';
+} from '@store/actions/artsCollection/index.js';
 
 export interface IArtsCollectionState {
   artsCollectionList: IArtInfo[];

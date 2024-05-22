@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { IArtInfo } from '../../services/ArtService';
-import { IRootState } from '../../store/reducers/index.js';
+import { IRootState } from '@store/reducers/index.js';
+import { IArtInfo } from '@services/ArtService';
 
 // @ts-ignore
 import StyledArtCard from './styled.js';

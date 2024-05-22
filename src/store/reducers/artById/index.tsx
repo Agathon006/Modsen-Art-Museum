@@ -1,6 +1,6 @@
-import { IArtInfo } from '../../../services/ArtService';
-import { ActionTypes } from '../../actions/artById/index.js';
-import { ISetArtByIdAction, ISetArtByIdProcessAction } from '../../actions/artById/index.js';
+import { IArtInfo } from '@services/ArtService';
+import { ActionTypes } from '@store/actions/artById/index.js';
+import { ISetArtByIdAction, ISetArtByIdProcessAction } from '@store/actions/artById/index.js';
 
 export interface IArtByIdState {
   artByID: IArtInfo;

@@ -1,4 +1,4 @@
-import { IArtInfo } from '../../../services/ArtService';
+import { IArtInfo } from '@services/ArtService';
 
 export enum ActionTypes {
   SET_ARTS_COLLECTION_LIST = 'SET_ARTS_COLLECTION_LIST',

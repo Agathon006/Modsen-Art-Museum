@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IArtInfo } from '../../services/ArtService';
+import { IArtInfo } from '@services/ArtService';
 
 // @ts-ignore
 import StyledArtCollection from './styled.js';

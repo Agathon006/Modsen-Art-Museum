@@ -10,13 +10,13 @@ var __makeTemplateObject =
   };
 import { jsx as _jsx, jsxs as _jsxs } from 'react/jsx-runtime';
 import { Provider } from 'react-redux';
-import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AppLayout from '../../components/appLayout/AppLayout.js';
-import store from '../../store/store.js';
-import MainPage from '../../pages/MainPage.js';
-import SingleArtPage from '../../pages/singleArtPage/SingleArtPage.js';
-import FavouriteArtsPage from '../../pages/favouriteArtsPage/FavouriteArtsPage.js';
+import store from '@store/store.js';
+import MainPage from '@pages/MainPage.js';
+import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
+import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
+import AppLayout from '@components/appLayout/AppLayout.js';
+import styled from 'styled-components';
 var Wrapper = styled.div(
   templateObject_1 ||
     (templateObject_1 = __makeTemplateObject(

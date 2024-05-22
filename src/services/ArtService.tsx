@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { useHttp } from '../hooks/http.hook';
 
-import imageUrlChecker from '../utils/imageUrlChecker';
+import { useHttp } from '@hooks/http.hook';
+import imageUrlChecker from '@utils/imageUrlChecker';
 
 export interface IArtInfo {
   id: number | null;

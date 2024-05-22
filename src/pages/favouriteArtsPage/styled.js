@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import BookmarkBig from '../../assets/bookmark_big.svg';
+import BookmarkBig from '@assets/bookmark_big.svg';
 
 const Title = styled.h1`
   font-family: 'Lexend Deca';

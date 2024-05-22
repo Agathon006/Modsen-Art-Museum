@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Logo from '../../assets/footer_logo.svg';
-import ModsenLogo from '../../assets/modsen_logo.svg';
+import Logo from '@assets/footer_logo.svg';
+import ModsenLogo from '@assets/modsen_logo.svg';
 
 const Wrapper = styled.header`
   height: 127px;
