@@ -231,6 +231,7 @@ const MainPage = () => {
       </ErrorBoundary>
       <ErrorBoundary>
         <MainPageSectionGalleryNavigation
+          artsGalleryListProcess={artsGalleryListProcess}
           paginationClicked={onPaginationClick}
           paginationArray={compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages)}
         />

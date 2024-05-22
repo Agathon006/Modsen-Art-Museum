@@ -382,6 +382,7 @@ var MainPage = function () {
       }),
       _jsx(ErrorBoundary, {
         children: _jsx(MainPageSectionGalleryNavigation, {
+          artsGalleryListProcess: artsGalleryListProcess,
           paginationClicked: onPaginationClick,
           paginationArray: compileNewPaginationNavigation(artsGalleryPage, artsGalleryAllPages),
         }),

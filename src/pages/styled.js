@@ -491,14 +491,32 @@ const GalleryNavigationButtonActive = styled.button`
   }
 `;
 
-export const MainPageSectionGalleryNavigation = ({ paginationClicked, paginationArray }) => {
+export const MainPageSectionGalleryNavigation = ({
+  artsGalleryListProcess,
+  paginationClicked,
+  paginationArray,
+}) => {
   if (!paginationArray.length) return null;
   const paginationElements = paginationArray.map((element, index) => {
     switch (element[0]) {
       case '<':
-        return <GalleryNavigationButtonInactive key={index}>{'<'}</GalleryNavigationButtonInactive>;
+        return (
+          <GalleryNavigationButtonInactive
+            disabled={artsGalleryListProcess === 'loading' ? true : false}
+            key={index}
+          >
+            {'<'}
+          </GalleryNavigationButtonInactive>
+        );
       case '>':
-        return <GalleryNavigationButtonInactive key={index}>{'>'}</GalleryNavigationButtonInactive>;
+        return (
+          <GalleryNavigationButtonInactive
+            disabled={artsGalleryListProcess === 'loading' ? true : false}
+            key={index}
+          >
+            {'>'}
+          </GalleryNavigationButtonInactive>
+        );
       case '...':
         return <GalleryNavigationSpan key={index}>{'...'}</GalleryNavigationSpan>;
       default:
@@ -510,7 +528,10 @@ export const MainPageSectionGalleryNavigation = ({ paginationClicked, pagination
           );
         } else {
           return (
-            <GalleryNavigationButtonInactive key={index}>
+            <GalleryNavigationButtonInactive
+              disabled={artsGalleryListProcess === 'loading' ? true : false}
+              key={index}
+            >
               {element[0]}
             </GalleryNavigationButtonInactive>
           );
