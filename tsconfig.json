@@ -8,9 +8,9 @@
     "noImplicitAny": true,
     "jsx": "react-jsx",
     "allowJs": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
   "include": [
-    "./src/**/*.tsx"
-  ]
+    "./src/**/*.tsx",
+  ],
 }

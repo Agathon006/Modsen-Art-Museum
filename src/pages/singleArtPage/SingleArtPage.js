@@ -69,27 +69,21 @@ var SingleArtPage = function () {
     [id]
   );
   var updateData = function () {
-    // @ts-ignore
     getArtById(id).then(onDataLoaded);
   };
-  // @ts-ignore
   var onDataLoaded = function (data) {
     dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_ART_BY_ID', payload: data });
   };
-  // @ts-ignore
   var artByID = useSelector(function (state) {
     return state.artById.artByID;
   });
-  // @ts-ignore
   var artByIDProcess = useSelector(function (state) {
     return state.artById.artByIDProcess;
   });
-  // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favorite.favoriteArtsIdList;
   });
-  // @ts-ignore
   var isFavorite = favoriteArtsIdList.includes(artByID.id);
   var renderPicture = function () {
     return _jsx(StyledPicture, { dispatch: dispatch, isFavorite: isFavorite, artInfo: artByID });

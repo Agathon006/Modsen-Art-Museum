@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import useArtService from '../../services/ArtService';
 import ArtCollection from '../../components/artCollection/ArtCollection.js';
@@ -30,15 +31,12 @@ const FavouriteArtsPage = () => {
   const { getArtsByIdArray } = useArtService();
   const dispatch = useDispatch();
   const artsFavoriteCollectionList = useSelector(
-    // @ts-ignore
-    state => state.favorite.artsFavoriteCollectionList
+    (state: RootState) => state.favorite.artsFavoriteCollectionList
   );
   const artsFavoriteCollectionListProcess = useSelector(
-    // @ts-ignore
-    state => state.favorite.artsFavoriteCollectionListProcess
+    (state: RootState) => state.favorite.artsFavoriteCollectionListProcess
   );
-  // @ts-ignore
-  const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);
+  const favoriteArtsIdList = useSelector((state: RootState) => state.favorite.favoriteArtsIdList);
 
   useEffect(() => {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });
@@ -47,12 +45,10 @@ const FavouriteArtsPage = () => {
   }, []);
 
   const updateData = () => {
-    // @ts-ignore
     getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
   };
 
-  // @ts-ignore
-  const onDataLoaded = data => {
+  const onDataLoaded = (data: any[]) => {
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
   };
@@ -65,7 +61,6 @@ const FavouriteArtsPage = () => {
       <ErrorBoundary>
         <ArtCollection
           itemsNumber={18}
-          // @ts-ignore
           process={artsFavoriteCollectionListProcess}
           artsList={artsFavoriteCollectionList}
         />

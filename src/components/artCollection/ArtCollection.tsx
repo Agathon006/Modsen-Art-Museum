@@ -3,8 +3,13 @@ import React from 'react';
 // @ts-ignore
 import StyledArtCollection from './styled.js';
 
-// @ts-ignore
-const ArtCollection = ({ itemsNumber, process, artsList }) => {
+interface ArtCollectionProps {
+  itemsNumber: number;
+  process: 'loading' | 'error' | 'confirmed';
+  artsList: any[];
+}
+
+const ArtCollection = ({ itemsNumber, process, artsList }: ArtCollectionProps) => {
   return (
     <StyledArtCollection
       itemsNumber={itemsNumber}

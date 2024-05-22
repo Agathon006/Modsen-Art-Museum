@@ -1,13 +1,12 @@
-import { Component } from 'react';
+import { Component, ErrorInfo } from 'react';
 import ErrorSkeleton from '../errorSkeleton/ErrorSkeleton';
 
-class ErrorBoundary extends Component {
+class ErrorBoundary extends Component<{ children: JSX.Element }, { error: boolean }> {
   state = {
     error: false,
   };
 
-  //@ts-ignore
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.log(error, errorInfo);
     this.setState({
       error: true,
@@ -19,7 +18,6 @@ class ErrorBoundary extends Component {
       return <ErrorSkeleton />;
     }
 
-    //@ts-ignore
     return this.props.children;
   }
 }

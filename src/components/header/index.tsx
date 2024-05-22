@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootState } from '../../store/reducers/index.js';
+
 // @ts-ignore
 import StyledHeader from './styled.js';
 
@@ -11,12 +13,9 @@ const Header = () => {
   const { pathname } = location;
 
   const dispatch = useDispatch();
-  // @ts-ignore
-  const asideMode = useSelector(state => state.burgerMenuAside.asideMode);
+  const asideMode = useSelector((state: RootState) => state.burgerMenuAside.asideMode);
 
-  // @ts-ignore
-  const handleClickOutside = event => {
-    // @ts-ignore
+  const handleClickOutside = (event: MouseEvent) => {
     if (wrapperRef.current === event.target) {
       switchAsideMode(false);
       document.body.style.overflow = 'auto';

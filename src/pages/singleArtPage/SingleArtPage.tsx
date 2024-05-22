@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootState } from '../../store/reducers/index.js';
 import ErrorBoundary from '../../components/errorBoundary/ErrorBoundary';
 import setContent from '../../utils/setContent.js';
 import useArtService from '../../services/ArtService';
@@ -75,24 +76,18 @@ const SingleArtPage = () => {
   }, [id]);
 
   const updateData = () => {
-    // @ts-ignore
     getArtById(id).then(onDataLoaded);
   };
 
-  // @ts-ignore
-  const onDataLoaded = data => {
+  const onDataLoaded = (data: any) => {
     dispatch({ type: 'SET_ART_BY_ID_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_ART_BY_ID', payload: data });
   };
 
-  // @ts-ignore
-  const artByID = useSelector(state => state.artById.artByID);
-  // @ts-ignore
-  const artByIDProcess = useSelector(state => state.artById.artByIDProcess);
+  const artByID = useSelector((state: RootState) => state.artById.artByID);
+  const artByIDProcess = useSelector((state: RootState) => state.artById.artByIDProcess);
 
-  // @ts-ignore
-  const favoriteArtsIdList = useSelector(state => state.favorite.favoriteArtsIdList);
-  // @ts-ignore
+  const favoriteArtsIdList = useSelector((state: RootState) => state.favorite.favoriteArtsIdList);
   let isFavorite = favoriteArtsIdList.includes(artByID.id);
 
   const renderPicture = () => {

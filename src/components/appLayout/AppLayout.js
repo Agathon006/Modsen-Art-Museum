@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
-// @ts-ignore
 function AppLayout(_a) {
   var children = _a.children;
   var location = useLocation();

@@ -1,7 +1,7 @@
 import { ActionTypes } from '../../actions/burgerMenuAside/index.js';
 import { SetAsideModeAction } from '../../actions/burgerMenuAside/index.js';
 
-interface BurgerMenuAsideState {
+export interface BurgerMenuAsideState {
   asideMode: boolean;
 }
 

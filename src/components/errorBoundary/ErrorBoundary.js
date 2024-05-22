@@ -35,7 +35,6 @@ var ErrorBoundary = /** @class */ (function (_super) {
     };
     return _this;
   }
-  //@ts-ignore
   ErrorBoundary.prototype.componentDidCatch = function (error, errorInfo) {
     console.log(error, errorInfo);
     this.setState({
@@ -46,7 +45,6 @@ var ErrorBoundary = /** @class */ (function (_super) {
     if (this.state.error) {
       return _jsx(ErrorSkeleton, {});
     }
-    //@ts-ignore
     return this.props.children;
   };
   return ErrorBoundary;

@@ -183,40 +183,30 @@ var MainPage = function () {
   var _d = useState(-1),
     selectedResultIndex = _d[0],
     setSelectedResultIndex = _d[1];
-  // @ts-ignore
   var artsGallerySearch = useSelector(function (state) {
     return state.artsGallery.artsGallerySearch;
   });
-  // @ts-ignore
   var artsGallerySortOption = useSelector(function (state) {
     return state.artsGallery.artsGallerySortOption;
   });
-  // @ts-ignore
   var galleryArtsList = useSelector(function (state) {
     return state.artsGallery.artsGalleryList;
   });
-  // @ts-ignore
   var artsGalleryListProcess = useSelector(function (state) {
     return state.artsGallery.artsGalleryListProcess;
   });
-  // @ts-ignore
   var artsGalleryPage = useSelector(function (state) {
     return state.artsGallery.artsGalleryPage;
   });
-  // @ts-ignore
   var artsGalleryAllPages = useSelector(function (state) {
     return state.artsGallery.artsGalleryAllPages;
   });
-  // @ts-ignore
   var artsCollectionList = useSelector(function (state) {
     return state.artsCollection.artsCollectionList;
   });
-  var artsCollectionListProcess = useSelector(
-    // @ts-ignore
-    function (state) {
-      return state.artsCollection.artsCollectionListProcess;
-    }
-  );
+  var artsCollectionListProcess = useSelector(function (state) {
+    return state.artsCollection.artsCollectionListProcess;
+  });
   useEffect(function () {
     dispatch({ type: 'SET_ASIDE_MODE', payload: false });
     onCollectionArtsRequest();
@@ -224,7 +214,6 @@ var MainPage = function () {
   var onCollectionArtsRequest = function () {
     getCollectionArts().then(onArtCollectionLoaded);
   };
-  // @ts-ignore
   var onArtCollectionLoaded = function (ArtsCollectionList) {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
@@ -247,7 +236,6 @@ var MainPage = function () {
     dispatch({ type: 'SET_ARTS_GALLERY_ALL_PAGES', payload: 0 });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
-  // @ts-ignore
   var onArtGalleryLoaded = function (ArtsGalleryList) {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
@@ -262,7 +250,6 @@ var MainPage = function () {
           case 1:
             results = _a.sent();
             setSelectedResultIndex(-1);
-            // @ts-ignore
             setSearchResults(results);
             return [2 /*return*/];
         }
@@ -404,7 +391,6 @@ var MainPage = function () {
       _jsx(ErrorBoundary, {
         children: _jsx(ArtCollection, {
           itemsNumber: 9,
-          // @ts-ignore
           process: artsCollectionListProcess,
           artsList: artsCollectionList,
         }),

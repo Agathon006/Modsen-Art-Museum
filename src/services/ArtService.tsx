@@ -123,7 +123,7 @@ const useArtService = () => {
     }
   };
 
-  const getArtById = async (id: number) => {
+  const getArtById = async (id: string | undefined) => {
     try {
       const neededFields = [
         'id',

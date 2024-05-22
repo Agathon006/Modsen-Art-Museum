@@ -2,14 +2,11 @@ import { jsx as _jsx } from 'react/jsx-runtime';
 import { useSelector, useDispatch } from 'react-redux';
 // @ts-ignore
 import StyledArtCard from './styled.js';
-// @ts-ignore
 var ArtCard = function (props) {
   var dispatch = useDispatch();
-  // @ts-ignore
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favorite.favoriteArtsIdList;
   });
-  // @ts-ignore
   var isFavorite = favoriteArtsIdList.includes(props.artInfo.id);
   return _jsx(StyledArtCard, {
     dispatch: dispatch,

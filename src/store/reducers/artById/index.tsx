@@ -1,7 +1,7 @@
 import { ActionTypes } from '../../actions/artById/index.js';
 import { SetArtByIdAction, SetArtByIdProcessAction } from '../../actions/artById/index.js';
 
-interface ArtByIdState {
+export interface ArtByIdState {
   artByID: any;
   artByIDProcess: 'loading' | 'confirmed' | 'error';
 }

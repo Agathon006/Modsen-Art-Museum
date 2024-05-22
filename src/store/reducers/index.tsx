@@ -1,9 +1,17 @@
 import { combineReducers } from 'redux';
-import { burgerMenuAsideReducer } from './burgerMenuAside/index.js';
-import { artsGalleryReducer } from './artGallery/index.js';
-import { artsCollectionReducer } from './artsCollection/index.js';
-import { artByIdReducer } from './artById/index.js';
-import { favoriteReducer } from './artsFavoriteCollection/index.js';
+import { BurgerMenuAsideState, burgerMenuAsideReducer } from './burgerMenuAside/index.js';
+import { ArtsGalleryState, artsGalleryReducer } from './artGallery/index.js';
+import { ArtsCollectionState, artsCollectionReducer } from './artsCollection/index.js';
+import { ArtByIdState, artByIdReducer } from './artById/index.js';
+import { FavoriteState, favoriteReducer } from './artsFavoriteCollection/index.js';
+
+export interface RootState {
+  burgerMenuAside: BurgerMenuAsideState;
+  artsGallery: ArtsGalleryState;
+  artsCollection: ArtsCollectionState;
+  artById: ArtByIdState;
+  favorite: FavoriteState;
+}
 
 const rootReducer = combineReducers({
   burgerMenuAside: burgerMenuAsideReducer,

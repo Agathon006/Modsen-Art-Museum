@@ -35,19 +35,12 @@ var Wrapper = styled.main(
 var FavouriteArtsPage = function () {
   var getArtsByIdArray = useArtService().getArtsByIdArray;
   var dispatch = useDispatch();
-  var artsFavoriteCollectionList = useSelector(
-    // @ts-ignore
-    function (state) {
-      return state.favorite.artsFavoriteCollectionList;
-    }
-  );
-  var artsFavoriteCollectionListProcess = useSelector(
-    // @ts-ignore
-    function (state) {
-      return state.favorite.artsFavoriteCollectionListProcess;
-    }
-  );
-  // @ts-ignore
+  var artsFavoriteCollectionList = useSelector(function (state) {
+    return state.favorite.artsFavoriteCollectionList;
+  });
+  var artsFavoriteCollectionListProcess = useSelector(function (state) {
+    return state.favorite.artsFavoriteCollectionListProcess;
+  });
   var favoriteArtsIdList = useSelector(function (state) {
     return state.favorite.favoriteArtsIdList;
   });
@@ -57,10 +50,8 @@ var FavouriteArtsPage = function () {
     updateData();
   }, []);
   var updateData = function () {
-    // @ts-ignore
     getArtsByIdArray(favoriteArtsIdList).then(onDataLoaded);
   };
-  // @ts-ignore
   var onDataLoaded = function (data) {
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
     dispatch({ type: 'SET_FAVORITE_COLLECTION_LIST', payload: data });
@@ -73,7 +64,6 @@ var FavouriteArtsPage = function () {
       _jsx(ErrorBoundary, {
         children: _jsx(ArtCollection, {
           itemsNumber: 18,
-          // @ts-ignore
           process: artsFavoriteCollectionListProcess,
           artsList: artsFavoriteCollectionList,
         }),

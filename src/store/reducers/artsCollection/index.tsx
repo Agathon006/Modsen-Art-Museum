@@ -4,7 +4,7 @@ import {
   SetArtsCollectionListProcessAction,
 } from '../../actions/artsCollection/index.js';
 
-interface ArtsCollectionState {
+export interface ArtsCollectionState {
   artsCollectionList: any[];
   artsCollectionListProcess: 'loading' | 'confirmed' | 'error';
 }

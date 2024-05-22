@@ -4,8 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import Header from '../header/index.js';
 import Footer from '../footer/index.js';
 
-// @ts-ignore
-function AppLayout({ children }) {
+function AppLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const { id } = useParams();
 

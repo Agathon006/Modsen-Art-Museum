@@ -8,7 +8,7 @@ import {
   SetArtsGalleryAllPagesAction,
 } from '../../actions/artGallery/index.js';
 
-interface ArtsGalleryState {
+export interface ArtsGalleryState {
   artsGallerySearch: string;
   artsGallerySortOption: string;
   artsGalleryList: any[];

@@ -1,7 +1,6 @@
 import { jsx as _jsx } from 'react/jsx-runtime';
 // @ts-ignore
 import StyledArtCollection from './styled.js';
-// @ts-ignore
 var ArtCollection = function (_a) {
   var itemsNumber = _a.itemsNumber,
     process = _a.process,

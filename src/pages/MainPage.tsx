@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { RootState } from '../store/reducers/index.js';
 import ErrorBoundary from '../components/errorBoundary/ErrorBoundary';
 import useArtService from './../services/ArtService';
 import ArtCollection from '../components/artCollection/ArtCollection.js';
@@ -39,23 +40,23 @@ const MainPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
 
-  // @ts-ignore
-  const artsGallerySearch = useSelector(state => state.artsGallery.artsGallerySearch);
-  // @ts-ignore
-  const artsGallerySortOption = useSelector(state => state.artsGallery.artsGallerySortOption);
-  // @ts-ignore
-  const galleryArtsList = useSelector(state => state.artsGallery.artsGalleryList);
-  // @ts-ignore
-  const artsGalleryListProcess = useSelector(state => state.artsGallery.artsGalleryListProcess);
-  // @ts-ignore
-  const artsGalleryPage = useSelector(state => state.artsGallery.artsGalleryPage);
-  // @ts-ignore
-  const artsGalleryAllPages = useSelector(state => state.artsGallery.artsGalleryAllPages);
-  // @ts-ignore
-  const artsCollectionList = useSelector(state => state.artsCollection.artsCollectionList);
+  const artsGallerySearch = useSelector((state: RootState) => state.artsGallery.artsGallerySearch);
+  const artsGallerySortOption = useSelector(
+    (state: RootState) => state.artsGallery.artsGallerySortOption
+  );
+  const galleryArtsList = useSelector((state: RootState) => state.artsGallery.artsGalleryList);
+  const artsGalleryListProcess = useSelector(
+    (state: RootState) => state.artsGallery.artsGalleryListProcess
+  );
+  const artsGalleryPage = useSelector((state: RootState) => state.artsGallery.artsGalleryPage);
+  const artsGalleryAllPages = useSelector(
+    (state: RootState) => state.artsGallery.artsGalleryAllPages
+  );
+  const artsCollectionList = useSelector(
+    (state: RootState) => state.artsCollection.artsCollectionList
+  );
   const artsCollectionListProcess = useSelector(
-    // @ts-ignore
-    state => state.artsCollection.artsCollectionListProcess
+    (state: RootState) => state.artsCollection.artsCollectionListProcess
   );
 
   useEffect(() => {
@@ -67,8 +68,7 @@ const MainPage = () => {
     getCollectionArts().then(onArtCollectionLoaded);
   };
 
-  // @ts-ignore
-  const onArtCollectionLoaded = (ArtsCollectionList: IArtInfo[]) => {
+  const onArtCollectionLoaded = (ArtsCollectionList: any[]) => {
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST', payload: ArtsCollectionList });
     dispatch({ type: 'SET_ARTS_COLLECTION_LIST_PROCESS', payload: 'confirmed' });
   };
@@ -91,8 +91,7 @@ const MainPage = () => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'loading' });
   };
 
-  // @ts-ignore
-  const onArtGalleryLoaded = (ArtsGalleryList: IArtInfo[]) => {
+  const onArtGalleryLoaded = (ArtsGalleryList: any[]) => {
     dispatch({ type: 'SET_ARTS_GALLERY_LIST', payload: ArtsGalleryList });
     dispatch({ type: 'SET_ARTS_GALLERY_LIST_PROCESS', payload: 'confirmed' });
   };
@@ -100,7 +99,6 @@ const MainPage = () => {
   const debouncedSearch = async (query: string) => {
     const results = await getArtTitlesByQuery(query);
     setSelectedResultIndex(-1);
-    // @ts-ignore
     setSearchResults(results);
   };
 
@@ -242,7 +240,6 @@ const MainPage = () => {
       <ErrorBoundary>
         <ArtCollection
           itemsNumber={9}
-          // @ts-ignore
           process={artsCollectionListProcess}
           artsList={artsCollectionList}
         />

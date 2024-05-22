@@ -5,9 +5,9 @@ import {
   SetFavoriteArtsIdListAction,
 } from '../../actions/artsFavoriteCollection/index.js';
 
-interface FavoriteState {
+export interface FavoriteState {
   artsFavoriteCollectionList: any[];
-  artsFavoriteCollectionListProcess: 'loading' | 'success' | 'error';
+  artsFavoriteCollectionListProcess: 'loading' | 'confirmed' | 'error';
   favoriteArtsIdList: number[];
 }
 

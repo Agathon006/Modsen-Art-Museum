@@ -9,13 +9,10 @@ var Header = function () {
   var location = useLocation();
   var pathname = location.pathname;
   var dispatch = useDispatch();
-  // @ts-ignore
   var asideMode = useSelector(function (state) {
     return state.burgerMenuAside.asideMode;
   });
-  // @ts-ignore
   var handleClickOutside = function (event) {
-    // @ts-ignore
     if (wrapperRef.current === event.target) {
       switchAsideMode(false);
       document.body.style.overflow = 'auto';
