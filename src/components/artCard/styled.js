@@ -6,7 +6,7 @@ import { changeInStorage } from '@utils/localStorageHandler';
 import Bookmark from '@assets/bookmark.svg';
 import PlaceholderArtImage from '@assets/placeholderArt.svg';
 
-const Wrapper = styled.figure`
+export const Wrapper = styled.figure`
   position: relative;
   width: 387px;
   height: 514px;
@@ -17,7 +17,7 @@ const Wrapper = styled.figure`
   }
 `;
 
-const PhotoWrapper = styled.div`
+export const PhotoWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -36,13 +36,13 @@ const PhotoWrapper = styled.div`
   }
 `;
 
-const Photo = styled.img`
+export const Photo = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
 `;
 
-const Description = styled.figcaption`
+export const Description = styled.figcaption`
   position: absolute;
   bottom: 0;
   left: 26px;
@@ -60,14 +60,14 @@ const Description = styled.figcaption`
   }
 `;
 
-const DescriptionTextWrapper = styled.div`
+export const DescriptionTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 219px;
   height: 98px;
 `;
 
-const DescriptionTextArtName = styled.span`
+export const DescriptionTextArtName = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -81,7 +81,7 @@ const DescriptionTextArtName = styled.span`
   color: #393939;
 `;
 
-const DescriptionTextAuthorName = styled.span`
+export const DescriptionTextAuthorName = styled.span`
   margin-top: 1px;
   font-family: 'Lexend Deca';
   font-style: normal;
@@ -92,7 +92,7 @@ const DescriptionTextAuthorName = styled.span`
   color: #e0a449;
 `;
 
-const DescriptionTextVisibilityStatus = styled.span`
+export const DescriptionTextVisibilityStatus = styled.span`
   margin-top: 8px;
   font-family: 'Lexend Deca';
   font-style: normal;
@@ -103,7 +103,7 @@ const DescriptionTextVisibilityStatus = styled.span`
   color: #393939;
 `;
 
-const DescriptionTextFavoriteButton = styled.button`
+export const DescriptionTextFavoriteButton = styled.button`
   width: 59px;
   height: 59px;
   background-color: ${({ $favorite }) => ($favorite ? '#FBD7B24D' : '#f9f9f9')};
