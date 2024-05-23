@@ -8,6 +8,8 @@ import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
 import AppLayout from '@components/appLayout/AppLayout.js';
 
+//@ts-ignore
+import GlobalStyle from '@assets/GlobalStyle';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -21,6 +23,7 @@ const Wrapper = styled.div`
 const App = () => {
   return (
     <Provider store={store}>
+      <GlobalStyle />
       <Router>
         <Wrapper>
           <AppLayout>

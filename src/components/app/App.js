@@ -16,6 +16,8 @@ import MainPage from '@pages/MainPage.js';
 import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
 import AppLayout from '@components/appLayout/AppLayout.js';
+//@ts-ignore
+import GlobalStyle from '@assets/GlobalStyle';
 import styled from 'styled-components';
 var Wrapper = styled.div(
   templateObject_1 ||
@@ -29,21 +31,24 @@ var Wrapper = styled.div(
     ))
 );
 var App = function () {
-  return _jsx(Provider, {
+  return _jsxs(Provider, {
     store: store,
-    children: _jsx(Router, {
-      children: _jsx(Wrapper, {
-        children: _jsx(AppLayout, {
-          children: _jsxs(Routes, {
-            children: [
-              _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
-              _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
-              _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
-            ],
+    children: [
+      _jsx(GlobalStyle, {}),
+      _jsx(Router, {
+        children: _jsx(Wrapper, {
+          children: _jsx(AppLayout, {
+            children: _jsxs(Routes, {
+              children: [
+                _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
+                _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
+                _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
+              ],
+            }),
           }),
         }),
       }),
-    }),
+    ],
   });
 };
 export default App;
