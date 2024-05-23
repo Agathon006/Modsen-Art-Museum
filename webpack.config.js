@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
 	entry: './src/index.js',
-	mode: 'development',
+	mode: 'production',
 	output: {
 		path: path.resolve(__dirname, './build'),
 		filename: 'index_bundle.js',
@@ -55,7 +55,7 @@ module.exports = {
 					loader: 'file-loader',
 					options: {
 						name: '[name].[ext]',
-						publicPath: './src/assets/fonts',
+						publicPath: '/',
 					},
 				},
 			},

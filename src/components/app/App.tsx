@@ -7,6 +7,7 @@ import MainPage from '@pages/MainPage.js';
 import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
 import AppLayout from '@components/appLayout/AppLayout.js';
+import ErrorSkeleton from '@components/errorSkeleton/ErrorSkeleton.js';
 
 //@ts-ignore
 import GlobalStyle from './GlobalStyle.js';
@@ -31,6 +32,7 @@ const App = () => {
               <Route path="/" element={<MainPage />} />
               <Route path="/favorites" element={<FavouriteArtsPage />} />
               <Route path="/:id" element={<SingleArtPage />} />
+              <Route path="*" element={<ErrorSkeleton />} />
             </Routes>
           </AppLayout>
         </Wrapper>

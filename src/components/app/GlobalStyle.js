@@ -148,6 +148,16 @@ button {
     border: none;
     cursor: pointer;
 }
+
+@font-face {
+  font-family: 'Lexend Deca';
+  src: url(${LexendDeca}) format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url(${Inter}) format('truetype');
+}
 `;
 
 export default GlobalStyle;

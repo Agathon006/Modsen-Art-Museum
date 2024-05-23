@@ -16,6 +16,7 @@ import MainPage from '@pages/MainPage.js';
 import SingleArtPage from '@pages/singleArtPage/SingleArtPage.js';
 import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
 import AppLayout from '@components/appLayout/AppLayout.js';
+import ErrorSkeleton from '@components/errorSkeleton/ErrorSkeleton.js';
 //@ts-ignore
 import GlobalStyle from './GlobalStyle.js';
 import styled from 'styled-components';
@@ -43,6 +44,7 @@ var App = function () {
                 _jsx(Route, { path: '/', element: _jsx(MainPage, {}) }),
                 _jsx(Route, { path: '/favorites', element: _jsx(FavouriteArtsPage, {}) }),
                 _jsx(Route, { path: '/:id', element: _jsx(SingleArtPage, {}) }),
+                _jsx(Route, { path: '*', element: _jsx(ErrorSkeleton, {}) }),
               ],
             }),
           }),
