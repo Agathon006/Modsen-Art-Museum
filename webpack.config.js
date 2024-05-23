@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
 	entry: './src/index.js',
-	mode: 'production',
+	mode: 'development',
 	output: {
 		path: path.resolve(__dirname, './build'),
 		filename: 'index_bundle.js',
@@ -48,6 +48,16 @@ module.exports = {
 			{
 				test: /\.svg$/,
 				use: ['@svgr/webpack'],
+			},
+			{
+				test: /\.(ttf)$/,
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						publicPath: './src/assets/fonts',
+					},
+				},
 			},
 		],
 	},

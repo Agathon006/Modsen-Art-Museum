@@ -9,7 +9,7 @@ import FavouriteArtsPage from '@pages/favouriteArtsPage/FavouriteArtsPage.js';
 import AppLayout from '@components/appLayout/AppLayout.js';
 
 //@ts-ignore
-import GlobalStyle from '@assets/GlobalStyle';
+import GlobalStyle from './GlobalStyle.js';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

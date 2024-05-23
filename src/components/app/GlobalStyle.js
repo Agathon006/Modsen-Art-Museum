@@ -1,3 +1,10 @@
+import React from 'react';
+import { createGlobalStyle } from 'styled-components';
+
+import Inter from '@assets/fonts/Inter/Inter-Regular.ttf';
+import LexendDeca from '@assets/fonts/Lexend_Deca/LexendDeca-Regular.ttf';
+
+const GlobalStyle = createGlobalStyle`
 * {
     box-sizing: border-box;
     margin: 0;
@@ -141,3 +148,6 @@ button {
     border: none;
     cursor: pointer;
 }
+`;
+
+export default GlobalStyle;
