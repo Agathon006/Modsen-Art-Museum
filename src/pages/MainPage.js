@@ -174,15 +174,18 @@ var MainPage = function () {
     getArtTitlesByQuery = _a.getArtTitlesByQuery,
     getGalleryArts = _a.getGalleryArts,
     getCollectionArts = _a.getCollectionArts;
-  var _b = useState(true),
-    searchingMode = _b[0],
-    setSearchingMode = _b[1];
-  var _c = useState([]),
-    searchResults = _c[0],
-    setSearchResults = _c[1];
-  var _d = useState(-1),
-    selectedResultIndex = _d[0],
-    setSelectedResultIndex = _d[1];
+  var _b = useState(false),
+    isCooldown = _b[0],
+    setIsCooldown = _b[1];
+  var _c = useState(true),
+    searchingMode = _c[0],
+    setSearchingMode = _c[1];
+  var _d = useState([]),
+    searchResults = _d[0],
+    setSearchResults = _d[1];
+  var _e = useState(-1),
+    selectedResultIndex = _e[0],
+    setSelectedResultIndex = _e[1];
   var artsGallerySearch = useSelector(function (state) {
     return state.artsGallery.artsGallerySearch;
   });
@@ -246,11 +249,16 @@ var MainPage = function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            if (isCooldown) return [2 /*return*/];
+            setIsCooldown(true);
             return [4 /*yield*/, getArtTitlesByQuery(query)];
           case 1:
             results = _a.sent();
             setSelectedResultIndex(-1);
             setSearchResults(results);
+            setTimeout(function () {
+              setIsCooldown(false);
+            }, 3000);
             return [2 /*return*/];
         }
       });

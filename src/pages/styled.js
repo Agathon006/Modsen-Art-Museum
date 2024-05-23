@@ -181,8 +181,10 @@ export const MainPageSearchBar = ({
               value={values.searchQuery}
               component={SearchBarInput}
               onBlur={() => {
-                setSelectedResultIndex(-1);
-                setSearchResults([]);
+                setTimeout(() => {
+                  setSelectedResultIndex(-1);
+                  setSearchResults([]);
+                }, 100);
               }}
               onChange={e => {
                 setFieldValue('searchQuery', e.target.value);
@@ -220,14 +222,6 @@ export const MainPageSearchBar = ({
                 }
               }}
             />
-            <ErrorMessage
-              style={{ color: 'red', marginLeft: '5px' }}
-              name="searchQuery"
-              component="div"
-            />
-            <SearchButton type="submit" disabled={isSubmitting}>
-              <SearchIcon />
-            </SearchButton>
             {searchResults.length > 0 && values.searchQuery && searchingMode && (
               <BounceSearchesContainer>
                 {searchResults.map((title, index) => (
@@ -246,6 +240,14 @@ export const MainPageSearchBar = ({
                 ))}
               </BounceSearchesContainer>
             )}
+            <ErrorMessage
+              style={{ color: 'red', marginLeft: '5px' }}
+              name="searchQuery"
+              component="div"
+            />
+            <SearchButton type="submit" disabled={isSubmitting}>
+              <SearchIcon />
+            </SearchButton>
             <SortBarContainer>
               <SortBarTitle>Sort:</SortBarTitle>
               <SortBarOptionContainer>

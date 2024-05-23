@@ -36,6 +36,7 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { getArtTitlesByQuery, getGalleryArts, getCollectionArts } = useArtService();
 
+  const [isCooldown, setIsCooldown] = useState(false);
   const [searchingMode, setSearchingMode] = useState(true);
   const [searchResults, setSearchResults] = useState([]);
   const [selectedResultIndex, setSelectedResultIndex] = useState(-1);
@@ -97,9 +98,14 @@ const MainPage = () => {
   };
 
   const debouncedSearch = async (query: string) => {
+    if (isCooldown) return;
+    setIsCooldown(true);
     const results = await getArtTitlesByQuery(query);
     setSelectedResultIndex(-1);
     setSearchResults(results);
+    setTimeout(() => {
+      setIsCooldown(false);
+    }, 3000);
   };
 
   const compileNewPaginationNavigation = (artsGalleryPage: number, artsGalleryAllPages: number) => {
