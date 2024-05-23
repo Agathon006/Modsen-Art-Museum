@@ -20,7 +20,7 @@ describe('StyledArtCard', () => {
             id: '123',
             title: 'Test Art',
             artistName: 'Test Artist',
-            imageUrl: 'https://example.com/test-art.jpg',
+            imageUrl: 'https://example.com/test_art.jpg',
             isPublicDomain: true
         };
         const isFavorite = true;
