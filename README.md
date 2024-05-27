@@ -6,6 +6,6 @@ Test project for Modsen Company
 
 ## Try it yourself
 
-[link](https://modsen-art-museum-livid.vercel.app)
+[link]([https://modsen-art-museum-livid.vercel.app](https://ea-test-project.vercel.app))
 
-[![image](https://github.com/Agathon006/Modsen-Art-Museum/assets/64129058/1ec3b896-1429-47ec-bb8f-45fedfec0a73)](https://modsen-art-museum-livid.vercel.app)
+[![image](https://github.com/Agathon006/Modsen-Art-Museum/assets/64129058/2841e358-5594-469a-a27a-a8a9cfd57201)](https://modsen-art-museum-livid.vercel.app "Modsen Art Museum")
